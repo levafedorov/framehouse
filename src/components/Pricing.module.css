@@ -1,0 +1,131 @@
+.section {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr) auto;
+  gap: 40px;
+  align-items: center;
+  padding-bottom: 40px;
+  scroll-margin-top: 72px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.from {
+  font-size: 11px;
+}
+
+.price {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.note {
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .section {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "intro cta"
+      "cards cards";
+    gap: 18px 24px;
+    align-items: end;
+    padding-bottom: 44px;
+  }
+
+  .intro {
+    grid-area: intro;
+    gap: 6px;
+  }
+
+  .cards {
+    grid-area: cards;
+  }
+
+  .cta {
+    grid-area: cta;
+    height: 40px;
+  }
+
+  .card {
+    padding: 20px 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "cards"
+      "cta";
+    gap: 16px;
+    padding-bottom: 40px;
+    scroll-margin-top: 60px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name from"
+      "note price";
+    gap: 4px 16px;
+    align-items: center;
+    padding: 18px 20px;
+  }
+
+  .name {
+    grid-area: name;
+  }
+
+  .from {
+    grid-area: from;
+    text-align: right;
+  }
+
+  .note {
+    grid-area: note;
+  }
+
+  .price {
+    grid-area: price;
+    font-size: 24px;
+  }
+
+  .cta {
+    width: 100%;
+    height: 48px;
+  }
+}

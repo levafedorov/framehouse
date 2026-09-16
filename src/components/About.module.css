@@ -1,0 +1,174 @@
+.section {
+  scroll-margin-top: 72px;
+}
+
+.inner {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr) 300px;
+  gap: 40px;
+  align-items: center;
+  padding: 28px 0;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.point {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.point svg {
+  flex-shrink: 0;
+}
+
+.pointBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pointTitle {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.pointText {
+  font-size: 12px;
+}
+
+.contact {
+  border-left: 1px solid var(--line);
+  padding-left: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-margin-top: 72px;
+}
+
+.contactTitle {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.contactText {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.contactBtn {
+  align-self: flex-start;
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 300px minmax(0, 1fr);
+    grid-template-areas:
+      "intro points"
+      "contact contact";
+    gap: 28px 40px;
+    align-items: start;
+    padding: 28px 0 32px;
+  }
+
+  .intro {
+    grid-area: intro;
+  }
+
+  .points {
+    grid-area: points;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .contact {
+    grid-area: contact;
+    border-left: 0;
+    padding: 24px 28px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "title btn"
+      "text btn";
+    gap: 6px 24px;
+    align-items: center;
+  }
+
+  .contactTitle {
+    grid-area: title;
+  }
+
+  .contactText {
+    grid-area: text;
+    font-size: 13px;
+  }
+
+  .contactBtn {
+    grid-area: btn;
+    align-self: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    scroll-margin-top: 60px;
+  }
+
+  .inner {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "points"
+      "contact";
+    gap: 22px;
+    padding: 28px 0;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .points {
+    gap: 16px;
+  }
+
+  .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 22px 20px;
+  }
+
+  .contactBtn {
+    width: 100%;
+    align-self: stretch;
+  }
+}

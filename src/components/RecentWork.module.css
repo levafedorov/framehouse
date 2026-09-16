@@ -1,0 +1,145 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 8px;
+  padding-bottom: 48px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.headRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding: 6px 0;
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.arrow:hover {
+  background: var(--surface-2);
+}
+
+.arrow:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  column-gap: 12px;
+}
+
+.slide {
+  min-width: 0;
+}
+
+.dots {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding-bottom: 44px;
+  }
+
+  .track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* bleed to the right edge so the last card can peek */
+    margin-right: calc(-1 * var(--gutter));
+    padding-right: var(--gutter);
+    scroll-padding-right: var(--gutter);
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slide {
+    flex: 0 0 240px;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    gap: 16px;
+    padding-bottom: 40px;
+  }
+
+  .track {
+    gap: 10px;
+    column-gap: 10px;
+  }
+
+  .slide {
+    flex-basis: 270px;
+  }
+
+  .viewAll {
+    font-size: 13px;
+  }
+
+  .arrows {
+    display: none;
+  }
+
+  .dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    background: #cfcfcf;
+    transition:
+      width 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .dotOn {
+    width: 16px;
+    background: var(--fg);
+  }
+}
