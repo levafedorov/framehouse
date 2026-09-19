@@ -19,9 +19,9 @@ export default function Services() {
       </div>
 
       <ul className={styles.grid}>
-        {services.map((s, i) => (
+        {services.map((s) => (
           <li key={s.id} className={styles.cell}>
-            <ServiceCard service={s} index={i} />
+            <ServiceCard service={s} />
           </li>
         ))}
       </ul>

@@ -18,15 +18,10 @@ const icon = {
 /**
  * A coloured tile — the same visual as the category tiles in the reference —
  * carrying only what a visitor needs to decide to click: a frame from real
- * work (or the service icon), the name, the result, the price and the lead time.
+ * work (or the service icon), the name top-left, the result, the price and
+ * the lead time.
  */
-export default function ServiceCard({
-  service,
-  index,
-}: {
-  service: Service;
-  index: number;
-}) {
+export default function ServiceCard({ service }: { service: Service }) {
   const Icon = icon[service.id];
   return (
     <article
@@ -47,17 +42,17 @@ export default function ServiceCard({
         <Icon size={150} className={styles.icon} />
       )}
 
-      <span className={`eyebrow ${styles.index}`}>
-        {String(index + 1).padStart(2, "0")}
-      </span>
-      {service.bundle && (
-        <span className={`eyebrow ${styles.badge}`}>
-          Součást balíčku
-          <span className={styles.badgeName}>{bundleTitle(service.bundle)}</span>
-        </span>
-      )}
-
-      <h3 className={`eyebrow ${styles.label}`}>{service.title}</h3>
+      <div className={styles.top}>
+        <h3 className={`eyebrow ${styles.name}`}>{service.title}</h3>
+        {service.bundle && (
+          <span className={`eyebrow ${styles.badge}`}>
+            Součást balíčku
+            <span className={styles.badgeName}>
+              {bundleTitle(service.bundle)}
+            </span>
+          </span>
+        )}
+      </div>
 
       <div className={styles.meta}>
         <p className={styles.result}>{service.result}</p>
