@@ -37,8 +37,7 @@ export const services: Service[] = [
     result: "Krátké video pro Instagram a TikTok, které si lidé dokoukají.",
     from: "od 35 000 Kč",
     days: "od 10 dnů",
-    image: "/media/bohemia-bowl.jpg",
-    tone: "brown",
+    tone: "blue",
   },
   {
     id: "logo",
@@ -63,7 +62,7 @@ export const services: Service[] = [
     result: "Sada ikon ve stylu značky pro web i sociální sítě.",
     from: "od 8 000 Kč",
     days: "od 5 dnů",
-    tone: "blue",
+    tone: "sage",
     bundle: "znacka-v-pohybu",
   },
   {
@@ -72,7 +71,7 @@ export const services: Service[] = [
     result: "Stránka, která přivede poptávky — analytiku nastavíme zdarma.",
     from: "od 45 000 Kč",
     days: "od 21 dnů",
-    tone: "sage",
+    tone: "olive",
   },
   {
     id: "eshop",
@@ -80,7 +79,7 @@ export const services: Service[] = [
     result: "Shoptet nebo Upgates v barvách vaší značky.",
     from: "od 25 000 Kč",
     days: "od 14 dnů",
-    tone: "olive",
+    tone: "blue",
   },
   {
     id: "social",
@@ -88,7 +87,6 @@ export const services: Service[] = [
     result: "Avatar, cover a šablony postů, které zvládnete sami.",
     from: "od 6 000 Kč",
     days: "od 5 dnů",
-    image: "/media/akinu-box.jpg",
     tone: "rose",
     bundle: "nova-znacka",
   },
@@ -98,7 +96,7 @@ export const services: Service[] = [
     result: "Vizitky, hlavička a polep — včetně tiskových dat.",
     from: "od 5 000 Kč",
     days: "od 5 dnů",
-    tone: "blue",
+    tone: "brown",
     bundle: "novy-kabat",
   },
 ];
