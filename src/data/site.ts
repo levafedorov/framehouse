@@ -19,11 +19,11 @@ export const site = {
 export type SocialId = "instagram" | "linkedin" | "youtube" | "tiktok";
 
 export const nav = [
-  { label: "Práce", href: "#work" },
-  { label: "Služby", href: "#services" },
-  { label: "Balíčky", href: "#bundles" },
-  { label: "Jak pracujeme", href: "#about" },
-  { label: "Kontakt", href: "#contact" },
+  { label: "Práce", href: "/#work" },
+  { label: "Služby", href: "/#services" },
+  { label: "Balíčky", href: "/#bundles" },
+  { label: "Jak pracujeme", href: "/jak-pracujeme" },
+  { label: "Kontakt", href: "/#contact" },
 ];
 
 /** The four coloured tiles under the hero — shortcuts into the services grid */
@@ -38,26 +38,26 @@ export const footerColumns = [
   {
     title: "Služby",
     links: [
-      { label: "Videoreklamy", href: "#service-video" },
-      { label: "Loga a firemní styl", href: "#service-logo" },
-      { label: "Ikony", href: "#service-icons" },
-      { label: "Weby a e-shopy", href: "#service-web" },
-      { label: "Sociální sítě a tisk", href: "#service-social" },
+      { label: "Videoreklamy", href: "/#service-video" },
+      { label: "Loga a firemní styl", href: "/#service-logo" },
+      { label: "Ikony", href: "/#service-icons" },
+      { label: "Weby a e-shopy", href: "/#service-web" },
+      { label: "Sociální sítě a tisk", href: "/#service-social" },
     ],
   },
   {
     title: "Balíčky",
     links: [
-      { label: "Nová značka", href: "#bundles" },
-      { label: "Nový kabát", href: "#bundles" },
-      { label: "Značka v pohybu", href: "#bundles" },
+      { label: "Nová značka", href: "/#bundles" },
+      { label: "Nový kabát", href: "/#bundles" },
+      { label: "Značka v pohybu", href: "/#bundles" },
     ],
   },
   {
     title: "Studio",
     links: [
-      { label: "Vybrané práce", href: "#work" },
-      { label: "Jak pracujeme", href: "#about" },
+      { label: "Vybrané práce", href: "/#work" },
+      { label: "Jak pracujeme", href: "/jak-pracujeme" },
       { label: "E-mail", href: "mailto:hello@framehouse.cz" },
     ],
   },

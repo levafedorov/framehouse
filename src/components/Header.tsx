@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import { ArrowRight, ChevronLeft, ChevronRight, Close, Menu } from "./Icons";
@@ -30,15 +31,15 @@ export default function Header() {
 
       <header className={`shell ${styles.header}`}>
         <div className={styles.bar}>
-          <a href="#top" className={`serif ${styles.logo}`}>
+          <Link href="/" className={`serif ${styles.logo}`}>
             {site.name}
-          </a>
+          </Link>
 
           <nav className={styles.nav} aria-label="Hlavní">
             {nav.map((item) => (
-              <a key={item.href} href={item.href} className={styles.link}>
+              <Link key={item.href} href={item.href} className={styles.link}>
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -71,7 +72,7 @@ export default function Header() {
         >
           <nav className={styles.mobileNav} aria-label="Mobilní">
             {nav.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className={`serif ${styles.mobileLink}`}
@@ -79,7 +80,7 @@ export default function Header() {
               >
                 {item.label}
                 <ArrowRight />
-              </a>
+              </Link>
             ))}
             <Button
               href={`mailto:${site.contactEmail}`}

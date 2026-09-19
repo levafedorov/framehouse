@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ContactForm from "./ContactForm";
 import { InstagramIcon, LinkedInIcon, TikTokIcon, YouTubeIcon } from "./Icons";
 import { footerColumns, site } from "@/data/site";
@@ -34,9 +35,9 @@ export default function Footer() {
                 <ul className={styles.links}>
                   {col.links.map((l) => (
                     <li key={l.label}>
-                      <a href={l.href} className={styles.link}>
+                      <Link href={l.href} className={styles.link}>
                         {l.label}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
