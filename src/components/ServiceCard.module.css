@@ -1,0 +1,170 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  scroll-margin-top: 80px;
+  transition: transform 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f3f1ea;
+}
+
+.blue {
+  background: var(--tile-blue);
+}
+
+.brown {
+  background: var(--tile-brown);
+}
+
+.rose {
+  background: var(--tile-rose);
+}
+
+.sage {
+  background: var(--tile-sage);
+}
+
+.olive {
+  background: var(--tile-olive);
+}
+
+.badge {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 2;
+  height: 26px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--pill);
+  background: #fff;
+  color: var(--fg);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.img {
+  object-fit: cover;
+  object-position: 50% 40%;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .img {
+  transform: scale(1.03);
+}
+
+.icon {
+  stroke-width: 0.9;
+  opacity: 0.55;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .icon {
+  transform: scale(1.06) rotate(-3deg);
+}
+
+.meta {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 16px;
+  flex: 1;
+}
+
+.metaText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.name {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.result {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.from {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.days {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .badge {
+    font-size: 9px;
+    padding: 0 10px;
+    left: 8px;
+    top: 8px;
+  }
+
+  .icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 12px 14px;
+  }
+
+  .pricing {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .img,
+  .icon {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .card:hover .img,
+  .card:hover .icon {
+    transform: none;
+  }
+}

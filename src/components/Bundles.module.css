@@ -1,7 +1,26 @@
 .section {
-  padding-top: 16px;
+  padding-top: 26px;
   padding-bottom: var(--gap);
   scroll-margin-top: 80px;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 4px 16px;
+}
+
+.heading {
+  font-size: 12px;
+  font-weight: 600;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid var(--fg);
+}
+
+.hint {
+  font-size: 13px;
 }
 
 .grid {
@@ -12,7 +31,7 @@
 
 .tile {
   position: relative;
-  height: 520px;
+  min-height: 560px;
   border-radius: var(--radius);
   overflow: hidden;
   color: #fff;
@@ -27,10 +46,10 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.35)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.4)),
     radial-gradient(
-      60% 40% at 50% 55%,
-      rgba(0, 0, 0, 0.35),
+      70% 55% at 50% 50%,
+      rgba(0, 0, 0, 0.3),
       rgba(0, 0, 0, 0) 100%
     );
   pointer-events: none;
@@ -52,16 +71,16 @@
 }
 
 .center {
-  position: absolute;
-  inset: 0;
+  position: relative;
   z-index: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   text-align: center;
-  padding: 0 24px 40px;
+  padding: 24px 12px 28px;
   text-shadow: 0 1px 16px rgba(0, 0, 0, 0.3);
 }
 
@@ -70,13 +89,43 @@
   line-height: 1;
 }
 
-.from {
-  font-size: 12px;
+.audience {
+  font-size: 14px;
+  max-width: 30ch;
 }
 
-.note {
+.includes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   font-size: 13px;
-  opacity: 0.85;
+  opacity: 0.9;
+  max-width: 34ch;
+}
+
+.includes li::before {
+  content: "✓";
+  margin-right: 8px;
+  opacity: 0.8;
+}
+
+.from {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.recommended {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  padding-bottom: 2px;
+  transition: border-color 0.15s ease;
+}
+
+.recommended:hover {
+  border-color: #fff;
 }
 
 .actions {
@@ -86,17 +135,13 @@
   gap: 8px;
 }
 
-.actions a {
-  flex: 1;
-}
-
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
   }
 
   .tile {
-    height: 380px;
+    min-height: 460px;
   }
 
   .title {
@@ -105,8 +150,18 @@
 }
 
 @media (max-width: 600px) {
+  .section {
+    padding-top: 20px;
+  }
+
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
   .tile {
-    height: 340px;
+    min-height: 420px;
     padding: 14px;
   }
 

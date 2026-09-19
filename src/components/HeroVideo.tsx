@@ -40,7 +40,7 @@ export default function HeroVideo({
         loop
         playsInline
         preload="metadata"
-        aria-label={`Videoreklama ${project.client}`}
+        aria-label={`Videoreklama ${project.name}`}
       />
       <button
         type="button"

@@ -1,7 +1,8 @@
 export const site = {
   name: "Framehouse",
-  tagline: "Krátká videa. Skutečné výsledky.",
-  description: "Tvoříme videoreklamy, ikony, loga a weby pro malé firmy.",
+  tagline: "Video, logo a web pro malé firmy.",
+  description:
+    "Videoreklamy, loga, firemní styl, ikony a weby pro malé firmy. Ceny od, jasný postup, hotovo v týdnech.",
   announcement: "Ozveme se Vám do jednoho pracovního dne",
   // TODO: replace with the real studio address
   contactEmail: "hello@framehouse.cz",
@@ -20,64 +21,44 @@ export type SocialId = "instagram" | "linkedin" | "youtube" | "tiktok";
 export const nav = [
   { label: "Práce", href: "#work" },
   { label: "Služby", href: "#services" },
-  { label: "Ceník", href: "#pricing" },
-  { label: "O nás", href: "#about" },
+  { label: "Balíčky", href: "#bundles" },
+  { label: "Jak pracujeme", href: "#about" },
+  { label: "Kontakt", href: "#contact" },
 ];
 
-export const services = [
+/** The four coloured tiles under the hero — shortcuts into the services grid */
+export const serviceTiles = [
   { id: "video", label: "Videoreklamy", tone: "blue", shape: "square" },
   { id: "logo", label: "Loga", tone: "brown", shape: "oval" },
   { id: "icons", label: "Ikony", tone: "rose", shape: "square" },
-  { id: "website", label: "Weby", tone: "sage", shape: "square" },
-] as const;
-
-export const pricing = [
-  {
-    id: "video",
-    title: "Videoreklama",
-    from: "od 35 000 Kč",
-    note: "Koncept, produkce, střih.",
-    image: "/media/bohemia-bowl.jpg",
-    tone: "dark",
-  },
-  {
-    id: "logo",
-    title: "Logo a ikony",
-    from: "od 12 000 Kč",
-    note: "Čisté, škálovatelné, Vaše.",
-    image: "/media/akinu-box.jpg",
-    tone: "dark",
-  },
-  {
-    id: "website",
-    title: "Web",
-    from: "od 45 000 Kč",
-    note: "Moderní, mobilní, rychlý.",
-    image: null,
-    tone: "sage",
-  },
+  { id: "web", label: "Weby", tone: "sage", shape: "square" },
 ] as const;
 
 export const footerColumns = [
   {
     title: "Služby",
     links: [
-      { label: "Videoreklamy", href: "#services" },
-      { label: "Loga", href: "#services" },
-      { label: "Ikony", href: "#services" },
-      { label: "Weby", href: "#services" },
+      { label: "Videoreklamy", href: "#service-video" },
+      { label: "Loga a firemní styl", href: "#service-logo" },
+      { label: "Ikony", href: "#service-icons" },
+      { label: "Weby a e-shopy", href: "#service-web" },
+      { label: "Sociální sítě a tisk", href: "#service-social" },
+    ],
+  },
+  {
+    title: "Balíčky",
+    links: [
+      { label: "Nová značka", href: "#bundles" },
+      { label: "Nový kabát", href: "#bundles" },
+      { label: "Značka v pohybu", href: "#bundles" },
     ],
   },
   {
     title: "Studio",
     links: [
-      { label: "Naše práce", href: "#work" },
-      { label: "Ceník", href: "#pricing" },
-      { label: "O nás", href: "#about" },
+      { label: "Vybrané práce", href: "#work" },
+      { label: "Jak pracujeme", href: "#about" },
+      { label: "E-mail", href: "mailto:hello@framehouse.cz" },
     ],
-  },
-  {
-    title: "Kontakt",
-    links: [{ label: "E-mail", href: "mailto:hello@framehouse.cz" }],
   },
 ];

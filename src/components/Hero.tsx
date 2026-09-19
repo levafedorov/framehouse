@@ -3,6 +3,7 @@ import Button from "./Button";
 import HeroVideo from "./HeroVideo";
 import { ArrowRight } from "./Icons";
 import { heroProject } from "@/data/projects";
+import { site } from "@/data/site";
 import styles from "./Hero.module.css";
 
 const strip = ["Video", "Logo", "Ikony", "Web"];
@@ -45,17 +46,15 @@ export default function Hero() {
           />
           <div className={styles.copy}>
             <p className={`eyebrow ${styles.eyebrow}`}>
-              Nová videoreklama · {heroProject.client}
+              Nová videoreklama · {heroProject.name}
             </p>
-            <h1 className={`serif ${styles.title}`}>
-              Malá značka. Velký dojem.
-            </h1>
+            <h1 className={`serif ${styles.title}`}>{site.tagline}</h1>
             <div className={styles.actions}>
               <Button href="#work" variant="light" size="sm">
                 Naše práce
               </Button>
-              <Button href="#pricing" variant="light" size="sm">
-                Ceník
+              <Button href="#services" variant="light" size="sm">
+                Služby a ceny
               </Button>
             </div>
           </div>

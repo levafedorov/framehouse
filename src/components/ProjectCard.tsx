@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import type { Project } from "@/data/projects";
+import { kindLabel, type Project } from "@/data/projects";
 import styles from "./ProjectCard.module.css";
 
 export default function ProjectCard({ project }: { project: Project }) {
@@ -65,10 +65,10 @@ export default function ProjectCard({ project }: { project: Project }) {
 
       <div className={styles.meta}>
         <div className={styles.metaText}>
-          <h3 className={`eyebrow ${styles.name}`}>{project.client}</h3>
-          <p className={`muted ${styles.kind}`}>{project.kind}</p>
+          <h3 className={`eyebrow ${styles.name}`}>{project.name}</h3>
+          <p className={`muted ${styles.kind}`}>{project.service}</p>
         </div>
-        <span className={`muted ${styles.tag}`}>{project.year}</span>
+        <span className={`muted ${styles.tag}`}>{kindLabel[project.kind]}</span>
       </div>
     </article>
   );

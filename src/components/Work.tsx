@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import ProjectCard from "./ProjectCard";
 import { ChevronLeft, ChevronRight } from "./Icons";
 import { projects } from "@/data/projects";
-import styles from "./RecentWork.module.css";
+import styles from "./Work.module.css";
 
-export default function RecentWork() {
+export default function Work() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [canScroll, setCanScroll] = useState(false);
 
@@ -36,7 +36,7 @@ export default function RecentWork() {
     >
       <div className={styles.head}>
         <h2 id="work-title" className={`eyebrow ${styles.title}`}>
-          Poslední práce
+          Vybrané práce týmu
         </h2>
         <div className={styles.arrows}>
           <button

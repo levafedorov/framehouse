@@ -1,23 +1,20 @@
 import { IconsIcon, LogoIcon, VideoIcon, WebsiteIcon } from "./Icons";
-import { services } from "@/data/site";
+import { serviceAnchor } from "@/data/services";
+import { serviceTiles } from "@/data/site";
 import styles from "./ServiceTiles.module.css";
 
 const icon = {
   video: VideoIcon,
   icons: IconsIcon,
   logo: LogoIcon,
-  website: WebsiteIcon,
+  web: WebsiteIcon,
 } as const;
 
 export default function ServiceTiles() {
   return (
-    <section
-      className={`shell ${styles.section}`}
-      id="services"
-      aria-label="Služby"
-    >
+    <section className={`shell ${styles.section}`} aria-label="Co děláme">
       <ul className={styles.grid}>
-        {services.map((s, i) => {
+        {serviceTiles.map((s, i) => {
           const Icon = icon[s.id];
           return (
             <li
@@ -26,7 +23,7 @@ export default function ServiceTiles() {
                 s.shape === "oval" ? styles.oval : ""
               }`}
             >
-              <a href="#work" className={styles.link}>
+              <a href={`#${serviceAnchor(s.id)}`} className={styles.link}>
                 <span className={`eyebrow ${styles.index}`}>0{i + 1}</span>
                 <Icon size={150} className={styles.icon} />
                 <span className={`eyebrow ${styles.label}`}>{s.label}</span>
