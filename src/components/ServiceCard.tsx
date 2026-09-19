@@ -45,12 +45,12 @@ export default function ServiceCard({ service }: { service: Service }) {
       <div className={styles.top}>
         <h3 className={`eyebrow ${styles.name}`}>{service.title}</h3>
         {service.bundle && (
-          <span className={`eyebrow ${styles.badge}`}>
-            Součást balíčku
+          <p className={`eyebrow ${styles.badge}`}>
+            Součást balíčku{" "}
             <span className={styles.badgeName}>
               {bundleTitle(service.bundle)}
             </span>
-          </span>
+          </p>
         )}
       </div>
 

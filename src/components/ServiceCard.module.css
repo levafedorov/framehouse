@@ -73,7 +73,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 4px;
 }
 
 .name {
@@ -83,21 +83,12 @@
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
 }
 
+/* plain line under the name, no pill */
 .badge {
-  height: 26px;
-  padding: 0 12px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: var(--pill);
-  background: #fff;
-  color: var(--fg);
   font-size: 10px;
-  white-space: nowrap;
-}
-
-/* a flex item trims a leading space, so the gap is a margin */
-.badgeName {
-  margin-left: 0.4em;
+  font-weight: 500;
+  opacity: 0.8;
+  line-height: 1.4;
 }
 
 .meta {
@@ -171,7 +162,7 @@
     left: 12px;
     right: 12px;
     top: 12px;
-    gap: 6px;
+    gap: 3px;
   }
 
   .name {
@@ -179,8 +170,6 @@
   }
 
   .badge {
-    height: 22px;
-    padding: 0 9px;
     font-size: 9px;
     letter-spacing: 0.1em;
   }
