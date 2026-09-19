@@ -16,41 +16,55 @@ const icon = {
 } as const;
 
 /**
- * Only what a visitor needs to decide to click: a frame from real work,
- * the name, the result, the price and the lead time. No "what's included".
+ * A coloured tile — the same visual as the category tiles in the reference —
+ * carrying only what a visitor needs to decide to click: a frame from real
+ * work (or the service icon), the name, the result, the price and the lead time.
  */
-export default function ServiceCard({ service }: { service: Service }) {
+export default function ServiceCard({
+  service,
+  index,
+}: {
+  service: Service;
+  index: number;
+}) {
   const Icon = icon[service.id];
   return (
-    <article className={styles.card} id={serviceAnchor(service.id)}>
-      <div className={`${styles.media} ${styles[service.tone]}`}>
-        {service.bundle && (
-          <span className={`eyebrow ${styles.badge}`}>
-            Součást balíčku {bundleTitle(service.bundle)}
-          </span>
-        )}
-        {service.image ? (
-          <Image
-            src={service.image}
-            alt=""
-            fill
-            sizes="(max-width: 600px) 50vw, (max-width: 900px) 46vw, 25vw"
-            className={styles.img}
-          />
-        ) : (
-          <Icon size={120} className={styles.icon} />
-        )}
-      </div>
+    <article
+      className={`${styles.tile} ${styles[service.tone]} ${
+        service.image ? styles.photo : ""
+      }`}
+      id={serviceAnchor(service.id)}
+    >
+      {service.image ? (
+        <Image
+          src={service.image}
+          alt=""
+          fill
+          sizes="(max-width: 600px) 50vw, (max-width: 900px) 46vw, 25vw"
+          className={styles.img}
+        />
+      ) : (
+        <Icon size={150} className={styles.icon} />
+      )}
+
+      <span className={`eyebrow ${styles.index}`}>
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      {service.bundle && (
+        <span className={`eyebrow ${styles.badge}`}>
+          Součást balíčku
+          <span className={styles.badgeName}>{bundleTitle(service.bundle)}</span>
+        </span>
+      )}
+
+      <h3 className={`eyebrow ${styles.label}`}>{service.title}</h3>
 
       <div className={styles.meta}>
-        <div className={styles.metaText}>
-          <h3 className={`eyebrow ${styles.name}`}>{service.title}</h3>
-          <p className={`muted ${styles.result}`}>{service.result}</p>
-        </div>
-        <div className={styles.pricing}>
+        <p className={styles.result}>{service.result}</p>
+        <p className={styles.pricing}>
           <span className={styles.from}>{service.from}</span>
-          <span className={`muted ${styles.days}`}>{service.days}</span>
-        </div>
+          <span className={styles.days}>{service.days}</span>
+        </p>
       </div>
     </article>
   );

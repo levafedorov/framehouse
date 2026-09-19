@@ -26,14 +26,6 @@ export const nav = [
   { label: "Kontakt", href: "/#contact" },
 ];
 
-/** The four coloured tiles under the hero — shortcuts into the services grid */
-export const serviceTiles = [
-  { id: "video", label: "Videoreklamy", tone: "blue", shape: "square" },
-  { id: "logo", label: "Loga", tone: "brown", shape: "oval" },
-  { id: "icons", label: "Ikony", tone: "rose", shape: "square" },
-  { id: "web", label: "Weby", tone: "sage", shape: "square" },
-] as const;
-
 export const footerColumns = [
   {
     title: "Služby",

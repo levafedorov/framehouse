@@ -3,13 +3,11 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
-import ServiceTiles from "@/components/ServiceTiles";
 import Work from "@/components/Work";
 
 /**
- * Page order follows the plan in issue #21:
- * hero → proof (work) → services with prices → bundles → contact.
- * "How we work" lives on its own page: /jak-pracujeme.
+ * hero → services with prices (the coloured tile band) → proof (work) →
+ * bundles → contact. "How we work" lives on its own page: /jak-pracujeme.
  */
 export default function Home() {
   return (
@@ -17,9 +15,8 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <ServiceTiles />
-        <Work />
         <Services />
+        <Work />
         <Bundles />
       </main>
       <Footer />

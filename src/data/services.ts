@@ -68,7 +68,7 @@ export const services: Service[] = [
   },
   {
     id: "web",
-    title: "Web vizitka a landing page",
+    title: "Web a landing page",
     result: "Stránka, která přivede poptávky — analytiku nastavíme zdarma.",
     from: "od 45 000 Kč",
     days: "od 21 dnů",
