@@ -1,59 +1,66 @@
+import Image from "next/image";
 import Button from "./Button";
 import HeroVideo from "./HeroVideo";
-import {
-  ArrowRight,
-  IconsIcon,
-  LogoIcon,
-  VideoIcon,
-  WebsiteIcon,
-} from "./Icons";
-import { services, site } from "@/data/site";
+import { ArrowRight } from "./Icons";
 import { heroProject } from "@/data/projects";
 import styles from "./Hero.module.css";
 
-const serviceIcon = {
-  video: VideoIcon,
-  icons: IconsIcon,
-  logo: LogoIcon,
-  website: WebsiteIcon,
-} as const;
+const strip = ["Video", "Logo", "Ikony", "Web"];
 
 export default function Hero() {
   return (
-    <section className={`container ${styles.hero}`} id="top">
-      <div className={styles.copy}>
-        <div className={styles.copyTop}>
-          <h1 className={styles.title}>
-            Krátká videa.
-            <br />
-            Skutečné výsledky.
-          </h1>
-          <p className={`muted ${styles.lead}`}>{site.description}</p>
-          <div className={styles.actions}>
-            <Button href="#work">
-              Naše práce
-              <ArrowRight />
-            </Button>
-            <Button href="#pricing" variant="light">
-              Zobrazit ceník
-            </Button>
+    <section className={`shell ${styles.section}`} id="top">
+      <div className={styles.card}>
+        <div className={styles.left}>
+          <Image
+            src="/media/bohemia-run.jpg"
+            alt="Pes běží ranní alejí — záběr z videoreklamy pro Bohemia Pet Food"
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 50vw"
+            className={styles.img}
+          />
+          <p className={`serif ${styles.note}`}>
+            <em>Vzniklo bez kamery.</em>
+            <ArrowRight size={16} />
+          </p>
+        </div>
+
+        <div className={styles.strip} aria-hidden>
+          <div className={styles.stripTrack}>
+            {Array.from({ length: 3 }).flatMap((_, r) =>
+              strip.map((w) => (
+                <span key={`${r}-${w}`} className={styles.stripWord}>
+                  {w}
+                </span>
+              )),
+            )}
           </div>
         </div>
 
-        <ul className={styles.services}>
-          {services.map((s) => {
-            const Icon = serviceIcon[s.id];
-            return (
-              <li key={s.id} className={styles.service}>
-                <Icon />
-                {s.label}
-              </li>
-            );
-          })}
-        </ul>
+        <div className={styles.right}>
+          <HeroVideo
+            project={heroProject}
+            poster="/media/bohemia-closeup.jpg"
+          />
+          <div className={styles.copy}>
+            <p className={`eyebrow ${styles.eyebrow}`}>
+              Nová videoreklama · {heroProject.client}
+            </p>
+            <h1 className={`serif ${styles.title}`}>
+              Malá značka. Velký dojem.
+            </h1>
+            <div className={styles.actions}>
+              <Button href="#work" variant="light" size="sm">
+                Naše práce
+              </Button>
+              <Button href="#pricing" variant="light" size="sm">
+                Ceník
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <HeroVideo project={heroProject} />
     </section>
   );
 }

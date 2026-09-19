@@ -1,65 +1,56 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ArrowRight, Pause, Play } from "./Icons";
 import type { Project } from "@/data/projects";
 import styles from "./HeroVideo.module.css";
 
-export default function HeroVideo({ project }: { project: Project }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
+export default function HeroVideo({
+  project,
+  poster,
+}: {
+  project: Project;
+  poster: string;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [sound, setSound] = useState(false);
 
-  const toggle = () => {
-    const v = videoRef.current;
+  const toggleSound = () => {
+    const v = ref.current;
     if (!v) return;
-    if (v.paused) {
-      void v.play();
+    if (sound) {
+      v.muted = true;
+      setSound(false);
     } else {
-      v.pause();
+      v.muted = false;
+      v.currentTime = 0;
+      void v.play().catch(() => {});
+      setSound(true);
     }
   };
 
   return (
-    <div
-      className={styles.frame}
-      style={{ backgroundImage: `url(${project.poster})` }}
-    >
-      <div className={styles.stage}>
-        <video
-          ref={videoRef}
-          className={styles.video}
-          src={project.video}
-          poster={project.poster}
-          playsInline
-          preload="metadata"
-          onPlay={() => setPlaying(true)}
-          onPause={() => setPlaying(false)}
-          onEnded={() => setPlaying(false)}
-          onClick={toggle}
-        />
-        <button
-          type="button"
-          className={`${styles.playBtn} ${playing ? styles.playBtnHidden : ""}`}
-          onClick={toggle}
-          aria-label={playing ? "Pozastavit video" : "Přehrát video"}
-        >
-          {playing ? <Pause size={22} /> : <Play size={24} />}
-        </button>
-      </div>
-
-      <div className={styles.caption}>
-        <p className={styles.headline}>
-          {(project.headline ?? [project.client]).map((line, i) => (
-            <span key={i} className={styles.line}>
-              {line}
-            </span>
-          ))}
-        </p>
-        <a href="#work" className={styles.case}>
-          Zobrazit projekt
-          <ArrowRight />
-        </a>
-      </div>
+    <div className={styles.wrap}>
+      <video
+        ref={ref}
+        className={styles.video}
+        src={project.video}
+        poster={poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={`Videoreklama ${project.client}`}
+      />
+      <button
+        type="button"
+        className={`eyebrow ${styles.sound}`}
+        onClick={toggleSound}
+        aria-pressed={sound}
+      >
+        <span className={styles.dot} />
+        {sound ? "Ztlumit" : "Pustit se zvukem"}
+      </button>
     </div>
   );
 }

@@ -4,14 +4,18 @@
   justify-content: center;
   gap: 8px;
   height: 44px;
-  padding: 0 20px;
-  border-radius: var(--radius);
-  font-size: 14px;
-  font-weight: 500;
+  padding: 0 22px;
+  border-radius: var(--pill);
+  border: 1px solid transparent;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   white-space: nowrap;
   transition:
     background-color 0.15s ease,
     color 0.15s ease,
+    border-color 0.15s ease,
     transform 0.15s ease;
 }
 
@@ -20,31 +24,48 @@
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--fg);
-  outline-offset: 2px;
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
 
+/* solid dark */
 .dark {
   background: var(--fg);
   color: #fff;
 }
 
 .dark:hover {
-  background: #2a2a2a;
+  background: #333;
 }
 
+/* solid white (on photos) */
 .light {
-  background: var(--surface-2);
+  background: #fff;
   color: var(--fg);
 }
 
 .light:hover {
-  background: #e6e6e6;
+  background: #eae7df;
+}
+
+/* transparent with white border (on photos) */
+.outline {
+  background: rgba(0, 0, 0, 0.18);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.outline:hover {
+  background: #fff;
+  color: var(--fg);
 }
 
 .sm {
-  height: 40px;
+  height: 36px;
   padding: 0 16px;
+  font-size: 10px;
 }
 
 .block {
@@ -53,13 +74,10 @@
 
 @media (max-width: 600px) {
   .btn {
-    height: 48px;
-    font-size: 15px;
+    height: 46px;
   }
 
   .sm {
-    height: 40px;
-    font-size: 13px;
-    padding: 0 14px;
+    height: 36px;
   }
 }

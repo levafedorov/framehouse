@@ -15,11 +15,7 @@ export default function ProjectCard({ project }: { project: Project }) {
     void v.play().catch(() => {});
   };
 
-  const stop = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.pause();
-  };
+  const stop = () => videoRef.current?.pause();
 
   return (
     <article
@@ -31,13 +27,16 @@ export default function ProjectCard({ project }: { project: Project }) {
       tabIndex={0}
     >
       <div className={styles.media}>
+        {project.isNew && (
+          <span className={`eyebrow ${styles.badge}`}>Nové</span>
+        )}
         {project.video && project.poster ? (
           <>
             <Image
               src={project.poster}
               alt=""
               fill
-              sizes="(max-width: 600px) 270px, (max-width: 900px) 240px, 25vw"
+              sizes="(max-width: 600px) 78vw, (max-width: 900px) 46vw, 25vw"
               className={styles.poster}
             />
             <video
@@ -56,15 +55,21 @@ export default function ProjectCard({ project }: { project: Project }) {
             <Image
               src={project.logo}
               alt=""
-              width={120}
-              height={120}
+              width={140}
+              height={140}
               className={styles.tileLogo}
             />
           </div>
         )}
       </div>
-      <h3 className={styles.name}>{project.client}</h3>
-      <p className={`muted ${styles.kind}`}>{project.kind}</p>
+
+      <div className={styles.meta}>
+        <div className={styles.metaText}>
+          <h3 className={`eyebrow ${styles.name}`}>{project.client}</h3>
+          <p className={`muted ${styles.kind}`}>{project.kind}</p>
+        </div>
+        <span className={`muted ${styles.tag}`}>{project.year}</span>
+      </div>
     </article>
   );
 }

@@ -1,145 +1,191 @@
-.hero {
+.section {
+  padding-bottom: var(--gap);
+}
+
+.card {
+  position: relative;
   display: grid;
-  grid-template-columns: 460px minmax(0, 1fr);
-  gap: 56px;
-  align-items: stretch;
-  padding-top: 8px;
-  padding-bottom: 48px;
+  grid-template-columns: 1fr 44px 1.25fr;
+  height: 600px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--tile-brown);
+}
+
+.left,
+.right {
+  position: relative;
+  overflow: hidden;
+}
+
+.img {
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+.note {
+  position: absolute;
+  left: 28px;
+  top: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 22px;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+}
+
+.note svg {
+  transform: rotate(35deg);
+}
+
+/* vertical text strip between the two panels */
+.strip {
+  position: relative;
+  overflow: hidden;
+  background: var(--tile-olive);
+  color: #f3f1ea;
+}
+
+.stripTrack {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  transform: translateX(-50%);
+  padding-top: 10px;
+}
+
+.stripWord {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stripWord::after {
+  content: "·";
+  display: block;
+  margin-top: 14px;
+  opacity: 0.6;
 }
 
 .copy {
+  position: absolute;
+  right: 32px;
+  bottom: 28px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 24px;
+  align-items: flex-end;
+  gap: 12px;
+  color: #fff;
+  text-align: right;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.4);
+  max-width: 460px;
 }
 
-.copyTop {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.eyebrow {
+  opacity: 0.9;
 }
 
 .title {
-  font-size: 48px;
-  line-height: 1.02;
-  font-weight: 500;
-  letter-spacing: -1.5px;
-}
-
-.lead {
-  font-size: 18px;
-  line-height: 1.4;
-  max-width: 380px;
+  font-size: 40px;
+  line-height: 1.05;
 }
 
 .actions {
   display: flex;
-  gap: 10px;
-}
-
-.services {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 32px;
-  font-size: 13px;
-  color: #444;
-}
-
-.service {
-  display: flex;
-  align-items: center;
   gap: 8px;
+  margin-top: 6px;
+}
+
+.actions a {
+  text-shadow: none;
 }
 
 @media (max-width: 900px) {
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding-top: 16px;
-    padding-bottom: 44px;
-  }
-
-  .copy {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 32px;
-    align-items: end;
-  }
-
-  .copyTop {
-    display: contents;
+  .card {
+    grid-template-columns: 1fr 38px 1fr;
+    height: 520px;
   }
 
   .title {
-    font-size: 46px;
-    letter-spacing: -1.2px;
-    grid-column: 1;
-    grid-row: 1;
+    font-size: 32px;
   }
 
-  .lead {
-    font-size: 17px;
-    grid-column: 1;
-    grid-row: 2;
-    max-width: none;
+  .note {
+    font-size: 19px;
+    left: 20px;
+    top: 20px;
   }
 
-  .actions {
-    grid-column: 2;
-    grid-row: 1;
-    align-self: end;
-  }
-
-  .services {
-    grid-column: 2;
-    grid-row: 2;
-    flex-wrap: wrap;
-    gap: 12px 22px;
+  .copy {
+    right: 20px;
+    bottom: 20px;
+    max-width: 300px;
   }
 }
 
 @media (max-width: 600px) {
-  .hero {
-    padding-top: 20px;
-    padding-bottom: 40px;
-    gap: 28px;
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: 30px 1fr;
+    height: 620px;
+  }
+
+  .left {
+    display: none;
+  }
+
+  .strip {
+    order: -1;
+  }
+
+  .stripTrack {
+    flex-direction: row;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 0 0 14px;
+    gap: 22px;
+  }
+
+  .stripWord {
+    writing-mode: horizontal-tb;
+    transform: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .stripWord::after {
+    margin: 0;
   }
 
   .copy {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 20px;
-  }
-
-  .copyTop {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    align-items: flex-start;
+    text-align: left;
+    max-width: none;
   }
 
   .title {
-    font-size: 40px;
-    line-height: 1.05;
-    letter-spacing: -1.2px;
+    font-size: 34px;
   }
 
-  .lead {
-    font-size: 16px;
-    line-height: 1.45;
+  .actions a {
+    flex: 1;
   }
 
   .actions {
-    flex-direction: column;
-    align-self: stretch;
-  }
-
-  .services {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    width: 100%;
   }
 }

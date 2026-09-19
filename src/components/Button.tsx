@@ -1,7 +1,7 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 import styles from "./Button.module.css";
 
-type Variant = "dark" | "light";
+type Variant = "dark" | "light" | "outline";
 type Size = "md" | "sm";
 
 type Common = {

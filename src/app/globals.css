@@ -1,27 +1,36 @@
 :root {
-  --bg: #ffffff;
-  --fg: #111111;
-  --muted: #6f6f6f;
-  --line: #e6e6e6;
-  --surface: #f4f4f4;
-  --surface-2: #f1f1f1;
-  --radius: 4px;
-  --radius-lg: 6px;
-  --gutter: 64px;
-  --font-sans:
-    var(--font-geist-sans), -apple-system, "Helvetica Neue", "Segoe UI",
-    sans-serif;
-}
+  --bg: #f3f1ea;
+  --card: #ffffff;
+  --fg: #1c1c1c;
+  --muted: #6b6b66;
+  --line: #e4e1d8;
+  --dark: #1a1a1a;
+  --dark-fg: #f3f1ea;
 
-@media (max-width: 900px) {
-  :root {
-    --gutter: 40px;
-  }
+  /* tile palette */
+  --tile-blue: #6f8ea3;
+  --tile-brown: #4b3f39;
+  --tile-rose: #a17c78;
+  --tile-sage: #8d9b90;
+  --tile-olive: #6b7a52;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --pill: 999px;
+  --gap: 10px;
+  --edge: 10px;
+
+  --font-sans:
+    "DM Sans Variable", "DM Sans", -apple-system, "Helvetica Neue", "Segoe UI",
+    sans-serif;
+  --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
 }
 
 @media (max-width: 600px) {
   :root {
-    --gutter: 16px;
+    --gap: 8px;
+    --edge: 8px;
+    --radius: 12px;
   }
 }
 
@@ -41,7 +50,7 @@ body {
   color: var(--fg);
   font-family: var(--font-sans);
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -58,9 +67,13 @@ video {
   max-width: 100%;
 }
 
-button {
+button,
+input {
   font: inherit;
   color: inherit;
+}
+
+button {
   background: none;
   border: 0;
   padding: 0;
@@ -70,35 +83,34 @@ button {
 h1,
 h2,
 h3,
-p {
+p,
+ul {
   margin: 0;
 }
 
-.container {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
+ul {
+  padding: 0;
+  list-style: none;
 }
 
-.section-title {
-  font-size: 26px;
+/* edge-to-edge shell: cards sit inside a thin gutter */
+.shell {
+  padding-left: var(--edge);
+  padding-right: var(--edge);
+}
+
+/* small tracked uppercase label used across the page */
+.eyebrow {
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: -0.5px;
-  line-height: 1.15;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-@media (max-width: 900px) {
-  .section-title {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 600px) {
-  .section-title {
-    font-size: 22px;
-  }
+.serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 .muted {

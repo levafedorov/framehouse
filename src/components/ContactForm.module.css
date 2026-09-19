@@ -1,0 +1,42 @@
+.form {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 6px 0 18px;
+  border-radius: var(--pill);
+  background: #fff;
+  color: var(--fg);
+  max-width: 340px;
+}
+
+.form:focus-within {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  font-size: 13px;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--muted);
+}
+
+.submit {
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--pill);
+  font-size: 10px;
+  font-weight: 600;
+  transition: background-color 0.15s ease;
+}
+
+.submit:hover {
+  background: #f3f1ea;
+}

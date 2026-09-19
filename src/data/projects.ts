@@ -28,11 +28,15 @@ export type Project = {
   poster?: string;
   /** Short caption for the hero */
   headline?: string[];
+  /** Shows the "Nové" badge */
+  isNew?: boolean;
+  year: string;
 };
 
 export const projects: Project[] = [
   {
     slug: "bohemia-pet-food",
+    year: "2026",
     client: "Bohemia Pet Food",
     kind: "Videoreklama",
     category: "video",
@@ -41,19 +45,22 @@ export const projects: Project[] = [
     video: "/media/bohemia.mp4",
     poster: "/media/bohemia-poster.jpg",
     headline: ["Malá značka krmiv.", "Velká budoucnost."],
+    isNew: true,
   },
   {
     slug: "akinu",
+    year: "2026",
     client: "Akinu",
     kind: "Videoreklama",
     category: "video",
     logo: "/media/logo-akinu.jpg",
     logoShape: "square",
     video: "/media/akinu.mp4",
-    poster: "/media/akinu-poster.jpg",
+    poster: "/media/akinu-puppy.jpg",
   },
   {
     slug: "dogfitness",
+    year: "2026",
     client: "Dogfitness.cz",
     kind: "Animace loga",
     category: "logo",
@@ -64,6 +71,7 @@ export const projects: Project[] = [
   },
   {
     slug: "aromatica",
+    year: "2026",
     client: "Aromatica",
     kind: "Ikony pro Instagram",
     category: "icons",

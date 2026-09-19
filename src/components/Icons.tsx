@@ -153,3 +153,54 @@ export function ShieldIcon({ size = 24, ...rest }: Props) {
     </svg>
   );
 }
+
+/* Social */
+
+export function InstagramIcon({ size = 18, ...rest }: Props) {
+  return (
+    <svg {...base(size, rest)}>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.3" cy="6.7" r="0.8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function LinkedInIcon({ size = 18, ...rest }: Props) {
+  return (
+    <svg {...base(size, rest)}>
+      <rect x="3" y="3" width="18" height="18" rx="3" />
+      <path d="M8 10v7" />
+      <circle cx="8" cy="7" r="0.9" fill="currentColor" stroke="none" />
+      <path d="M12 17v-4a2.5 2.5 0 0 1 5 0v4" />
+      <path d="M12 10v7" />
+    </svg>
+  );
+}
+
+export function YouTubeIcon({ size = 18, ...rest }: Props) {
+  return (
+    <svg {...base(size, rest)}>
+      <rect x="2.5" y="6" width="19" height="12" rx="4" />
+      <path d="M10 9.5v5l4.5-2.5z" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function TikTokIcon({ size = 18, ...rest }: Props) {
+  return (
+    <svg {...base(size, rest)}>
+      <path d="M13 4v10.5a3.5 3.5 0 1 1-3.5-3.5" />
+      <path d="M13 4c.5 2.6 2.2 4 4.5 4.2" />
+    </svg>
+  );
+}
+
+export function ArrowUpRight({ size = 14, ...rest }: Props) {
+  return (
+    <svg {...base(size, rest)} strokeWidth={2}>
+      <path d="M7 17L17 7" />
+      <path d="M8 7h9v9" />
+    </svg>
+  );
+}

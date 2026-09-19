@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Button from "./Button";
-import { ArrowRight, Close, Menu } from "./Icons";
+import { ArrowRight, ChevronLeft, ChevronRight, Close, Menu } from "./Icons";
 import { nav, site } from "@/data/site";
 import styles from "./Header.module.css";
 
@@ -21,12 +21,19 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className={styles.header}>
-      <div className={`container ${styles.inner}`}>
-        <div className={styles.left}>
-          <a href="#top" className={styles.logo}>
+    <>
+      <div className={styles.announce} role="note">
+        <ChevronLeft size={12} className={styles.announceChevron} />
+        <span>{site.announcement}</span>
+        <ChevronRight size={12} className={styles.announceChevron} />
+      </div>
+
+      <header className={`shell ${styles.header}`}>
+        <div className={styles.bar}>
+          <a href="#top" className={`serif ${styles.logo}`}>
             {site.name}
           </a>
+
           <nav className={styles.nav} aria-label="Hlavní">
             {nav.map((item) => (
               <a key={item.href} href={item.href} className={styles.link}>
@@ -34,49 +41,56 @@ export default function Header() {
               </a>
             ))}
           </nav>
-        </div>
 
-        <div className={styles.right}>
-          <Button
-            href={`mailto:${site.contactEmail}`}
-            size="sm"
-            className={styles.cta}
-          >
-            Napište nám
-            <ArrowRight className={styles.ctaArrow} />
-          </Button>
-          <button
-            type="button"
-            className={styles.burger}
-            aria-label={open ? "Zavřít menu" : "Otevřít menu"}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <Close /> : <Menu />}
-          </button>
-        </div>
-      </div>
-
-      <div
-        id="mobile-menu"
-        className={`${styles.mobile} ${open ? styles.mobileOpen : ""}`}
-        hidden={!open}
-      >
-        <nav className={`container ${styles.mobileNav}`} aria-label="Mobilní">
-          {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={styles.mobileLink}
-              onClick={() => setOpen(false)}
+          <div className={styles.right}>
+            <Button
+              href={`mailto:${site.contactEmail}`}
+              size="sm"
+              className={styles.cta}
             >
-              {item.label}
-              <ArrowRight />
-            </a>
-          ))}
-        </nav>
-      </div>
-    </header>
+              Napište nám
+              <ArrowRight size={12} className={styles.ctaArrow} />
+            </Button>
+            <button
+              type="button"
+              className={styles.burger}
+              aria-label={open ? "Zavřít menu" : "Otevřít menu"}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <Close size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="mobile-menu"
+          className={`${styles.mobile} ${open ? styles.mobileOpen : ""}`}
+          hidden={!open}
+        >
+          <nav className={styles.mobileNav} aria-label="Mobilní">
+            {nav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`serif ${styles.mobileLink}`}
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+                <ArrowRight />
+              </a>
+            ))}
+            <Button
+              href={`mailto:${site.contactEmail}`}
+              block
+              className={styles.mobileCta}
+            >
+              Napište nám
+            </Button>
+          </nav>
+        </div>
+      </header>
+    </>
   );
 }
