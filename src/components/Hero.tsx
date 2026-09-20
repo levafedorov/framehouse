@@ -13,11 +13,12 @@ export default function Hero() {
     <section className={`shell ${styles.section}`} id="top">
       <div className={styles.card}>
         <div className={styles.left}>
+          {/* hidden on phones (see .left in the CSS), so it must not be
+              preloaded — lazy images inside display:none are never fetched */}
           <Image
             src="/media/bohemia-run.jpg"
             alt="Pes běží ranní alejí — záběr z videoreklamy pro Bohemia Pet Food"
             fill
-            priority
             sizes="(max-width: 900px) 100vw, 50vw"
             className={styles.img}
           />
@@ -40,10 +41,7 @@ export default function Hero() {
         </div>
 
         <div className={styles.right}>
-          <HeroVideo
-            project={heroProject}
-            poster="/media/bohemia-closeup.jpg"
-          />
+          <HeroVideo project={heroProject} poster="/media/bohemia-hero.jpg" />
           <div className={styles.copy}>
             <p className={`eyebrow ${styles.eyebrow}`}>
               Nová videoreklama · {heroProject.name}

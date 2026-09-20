@@ -3,18 +3,26 @@
   inset: 0;
 }
 
+/* poster first, video paints over it once it has frames */
+.poster {
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
 .video {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 30%;
-  background: #2a2420;
 }
 
 .wrap::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0) 45%,
@@ -27,7 +35,7 @@
   position: absolute;
   left: 24px;
   top: 24px;
-  z-index: 1;
+  z-index: 3;
   display: inline-flex;
   align-items: center;
   gap: 8px;

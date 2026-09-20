@@ -39,6 +39,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             alt=""
             fill
             sizes="(max-width: 600px) 72vw, (max-width: 900px) 46vw, 22vw"
+            quality={70}
             className={styles.poster}
           />
           <video

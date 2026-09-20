@@ -50,6 +50,7 @@ export type Project = {
   logoShape?: "square" | "wide";
   /** 9:16 video, optional */
   video?: string;
+  /** 3:2 landscape crop for the work card, public/media/*-card.jpg */
   poster?: string;
   /** Shows the "Nové" badge */
   isNew?: boolean;
@@ -67,7 +68,7 @@ const all: Project[] = [
     logo: "/media/logo-bohemia.png",
     logoShape: "square",
     video: "/media/bohemia.mp4",
-    poster: "/media/bohemia-poster.jpg",
+    poster: "/media/bohemia-card.jpg",
     isNew: true,
   },
   {
@@ -80,7 +81,7 @@ const all: Project[] = [
     logo: "/media/logo-akinu.jpg",
     logoShape: "square",
     video: "/media/akinu.mp4",
-    poster: "/media/akinu-puppy.jpg",
+    poster: "/media/akinu-card.jpg",
   },
   {
     slug: "dogfitness",
@@ -92,7 +93,7 @@ const all: Project[] = [
     logo: "/media/logo-dogfitness.png",
     logoShape: "wide",
     video: "/media/dogfitness.mp4",
-    poster: "/media/dogfitness-poster.jpg",
+    poster: "/media/dogfitness-card.jpg",
   },
   {
     slug: "aromatica",
@@ -107,20 +108,10 @@ const all: Project[] = [
   // TODO: add the TopDesigner.cz logo concepts (issue #19) as kind: "concept"
 ];
 
-// TODO: remove — duplicates so the horizontal strips can be tested
-const testDuplicates: Project[] = all.flatMap((p) =>
-  [1, 2, 3].map((i) => ({
-    ...p,
-    slug: `${p.slug}-dup-${i}`,
-    kind: (i === 1 ? "realized" : "concept") as ProjectKind,
-    isNew: false,
-  })),
-);
-
 const kindOrder: ProjectKind[] = ["client", "realized", "concept"];
 
 /** Real client work first, then realised concepts, then concepts */
-export const projects: Project[] = [...all, ...testDuplicates].sort(
+export const projects: Project[] = [...all].sort(
   (a, b) => kindOrder.indexOf(a.kind) - kindOrder.indexOf(b.kind),
 );
 
