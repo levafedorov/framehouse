@@ -1,0 +1,396 @@
+/* ------------------------------------------------------------------ */
+/* intro: a coloured card in the service's tone, like /jak-pracujeme   */
+/* ------------------------------------------------------------------ */
+
+.intro {
+  padding-bottom: 0;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 300px;
+  padding: 32px 32px 36px;
+  border-radius: var(--radius);
+  color: #f3f1ea;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.blue {
+  background: var(--tile-blue);
+}
+
+.brown {
+  background: var(--tile-brown);
+}
+
+.rose {
+  background: var(--tile-rose);
+}
+
+.sage {
+  background: var(--tile-sage);
+}
+
+.olive {
+  background: var(--tile-olive);
+}
+
+/* the tile's white line-art pictogram, top-right, dimmed like on the tile */
+.pictogram {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  width: 150px;
+  height: 150px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  opacity: 0.85;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.back:hover {
+  border-color: currentColor;
+}
+
+.title {
+  font-size: 46px;
+  line-height: 1.05;
+  max-width: 16ch;
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.4;
+  max-width: 40ch;
+  opacity: 0.94;
+}
+
+.meta {
+  opacity: 0.85;
+}
+
+/* ------------------------------------------------------------------ */
+/* examples: the same landscape cards as the work section              */
+/* ------------------------------------------------------------------ */
+
+.examples {
+  padding-top: 26px;
+  padding-bottom: 8px;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 4px 16px;
+}
+
+.heading {
+  font-size: 12px;
+  font-weight: 600;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid var(--fg);
+}
+
+.hint {
+  font-size: 13px;
+}
+
+.examplesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.example {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.exampleName {
+  font-size: 13px;
+  padding: 0 4px;
+}
+
+.exampleClient {
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ */
+/* details: white cards on a six-column grid                           */
+/* ------------------------------------------------------------------ */
+
+.details {
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.box {
+  min-width: 0;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.wide {
+  grid-column: span 3;
+}
+
+.narrow {
+  grid-column: span 2;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 44ch;
+}
+
+.fine {
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: 44ch;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.big {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 52ch;
+}
+
+.list li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.list li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.checks li::before {
+  content: "✓";
+}
+
+.dashes li::before {
+  content: "–";
+  color: var(--muted);
+}
+
+.steps {
+  counter-reset: step;
+  list-style: none; /* globals reset ul only; the circled counter numbers instead */
+  padding-left: 0;
+}
+
+.steps li {
+  padding-left: 26px;
+}
+
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--fg);
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 1px;
+}
+
+.bundleFrom {
+  font-size: 11px;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  margin-top: auto;
+  border-bottom: 1px solid var(--fg);
+  padding-bottom: 2px;
+  transition: opacity 0.15s ease;
+}
+
+.more:hover {
+  opacity: 0.7;
+}
+
+/* the offer: one coloured card in the same tone as the intro */
+.cta {
+  grid-column: span 4;
+  color: #f3f1ea;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.ctaFull {
+  grid-column: span 6;
+}
+
+.ctaTitle {
+  font-size: 32px;
+  line-height: 1.1;
+  max-width: 22ch;
+}
+
+.ctaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ctaHint {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.ctaMail {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .title {
+    font-size: 38px;
+  }
+
+  .pictogram {
+    width: 110px;
+    height: 110px;
+    top: 22px;
+    right: 22px;
+  }
+
+  .examplesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wide,
+  .narrow,
+  .cta,
+  .ctaFull {
+    grid-column: auto;
+  }
+
+  .ctaTitle {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    min-height: 240px;
+    padding: 22px 20px 24px;
+  }
+
+  .pictogram {
+    display: none;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-bottom: 12px;
+  }
+
+  .examplesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .box {
+    padding: 20px 18px 22px;
+  }
+
+  .big {
+    font-size: 30px;
+  }
+
+  .ctaTitle {
+    font-size: 26px;
+  }
+}
+
+/* the CTA box carries the service tone; .box's white background is
+   declared earlier, so the tone needs the extra specificity */
+.box.blue {
+  background: var(--tile-blue);
+}
+
+.box.brown {
+  background: var(--tile-brown);
+}
+
+.box.rose {
+  background: var(--tile-rose);
+}
+
+.box.sage {
+  background: var(--tile-sage);
+}
+
+.box.olive {
+  background: var(--tile-olive);
+}

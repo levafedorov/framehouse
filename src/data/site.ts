@@ -30,11 +30,11 @@ export const footerColumns = [
   {
     title: "Služby",
     links: [
-      { label: "Videoreklamy", href: "/#service-video" },
-      { label: "Loga a firemní styl", href: "/#service-logo" },
-      { label: "Ikony", href: "/#service-icons" },
-      { label: "Weby a e-shopy", href: "/#service-web" },
-      { label: "Sociální sítě a tisk", href: "/#service-social" },
+      { label: "Videoreklamy", href: "/sluzby/video" },
+      { label: "Loga a firemní styl", href: "/sluzby/logo" },
+      { label: "Ikony", href: "/sluzby/icons" },
+      { label: "Weby a e-shopy", href: "/sluzby/web" },
+      { label: "Sociální sítě a tisk", href: "/sluzby/social" },
     ],
   },
   {
