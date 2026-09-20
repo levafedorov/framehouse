@@ -48,7 +48,7 @@ export type Project = {
   logo: string;
   /** How the logo should sit inside a light tile */
   logoShape?: "square" | "wide";
-  /** 9:16 video, optional */
+  /** short loop, optional (the hero one is a 3:4 crop, ~1 MB) */
   video?: string;
   /** 3:2 landscape crop for the work card, public/media/*-card.jpg */
   poster?: string;
@@ -67,7 +67,7 @@ const all: Project[] = [
     kind: "client",
     logo: "/media/logo-bohemia.png",
     logoShape: "square",
-    video: "/media/bohemia.mp4",
+    video: "/media/bohemia-hero.mp4",
     poster: "/media/bohemia-card.jpg",
     isNew: true,
   },

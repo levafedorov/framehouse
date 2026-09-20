@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Project } from "@/data/projects";
 import styles from "./HeroVideo.module.css";
 
@@ -9,6 +9,10 @@ import styles from "./HeroVideo.module.css";
  * The hero's LCP element. The poster is a next/image with priority (crop of
  * the visible frame, served as AVIF/WebP); the video sits on top and takes
  * over once it plays.
+ *
+ * The video is not autoplayed by markup: on phones it would compete with
+ * the poster, fonts and JS for the connection. It starts from an effect —
+ * right away on desktop, after the load event on phones.
  */
 export default function HeroVideo({
   project,
@@ -20,6 +24,24 @@ export default function HeroVideo({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [sound, setSound] = useState(false);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const start = () => {
+      v.preload = "auto";
+      void v.play().catch(() => {});
+    };
+    const desktop = window.matchMedia("(min-width: 901px)").matches;
+    if (desktop || document.readyState === "complete") {
+      start();
+      return;
+    }
+    window.addEventListener("load", start, { once: true });
+    return () => window.removeEventListener("load", start);
+  }, []);
 
   const toggleSound = () => {
     const v = ref.current;
@@ -50,11 +72,10 @@ export default function HeroVideo({
         ref={ref}
         className={styles.video}
         src={project.video}
-        autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="none"
         aria-label={`Videoreklama ${project.name}`}
       />
       <button
