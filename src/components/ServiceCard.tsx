@@ -27,7 +27,7 @@ export default function ServiceCard({ service }: { service: Service }) {
     <article
       className={`${styles.tile} ${styles[service.tone]} ${
         service.image ? styles.photo : ""
-      }`}
+      } ${service.shape === "oval" ? styles.oval : ""}`}
       id={serviceAnchor(service.id)}
     >
       {service.image ? (

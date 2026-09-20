@@ -24,6 +24,8 @@ export type Service = {
   /** A real frame from a project; falls back to a coloured tile */
   image?: string;
   tone: Tone;
+  /** Oval tile on desktop, like the accent tile in the reference */
+  shape?: "oval";
   /** Set when the service is part of a bundle */
   bundle?: BundleId;
 };
@@ -46,6 +48,7 @@ export const services: Service[] = [
     from: "od 12 000 Kč",
     days: "od 7 dnů",
     tone: "brown",
+    shape: "oval",
   },
   {
     id: "identity",
@@ -88,6 +91,7 @@ export const services: Service[] = [
     from: "od 6 000 Kč",
     days: "od 5 dnů",
     tone: "rose",
+    shape: "oval",
     bundle: "nova-znacka",
   },
   {
