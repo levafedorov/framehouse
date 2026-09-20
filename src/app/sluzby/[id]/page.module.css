@@ -220,6 +220,8 @@
 
 .steps {
   counter-reset: step;
+  list-style: none; /* globals reset ul only; the circled counter numbers instead */
+  padding-left: 0;
 }
 
 .steps li {
@@ -369,4 +371,26 @@
   .ctaTitle {
     font-size: 26px;
   }
+}
+
+/* the CTA box carries the service tone; .box's white background is
+   declared earlier, so the tone needs the extra specificity */
+.box.blue {
+  background: var(--tile-blue);
+}
+
+.box.brown {
+  background: var(--tile-brown);
+}
+
+.box.rose {
+  background: var(--tile-rose);
+}
+
+.box.sage {
+  background: var(--tile-sage);
+}
+
+.box.olive {
+  background: var(--tile-olive);
 }
