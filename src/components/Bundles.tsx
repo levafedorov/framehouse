@@ -1,8 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import Button from "./Button";
 import { ArrowRight } from "./Icons";
 import { bundles } from "@/data/bundles";
-import { serviceAnchor } from "@/data/services";
+import { servicePath } from "@/data/services";
 import { site } from "@/data/site";
 import styles from "./Bundles.module.css";
 
@@ -50,13 +51,13 @@ export default function Bundles() {
                 {b.from} · {b.term}
               </p>
               {b.recommended && (
-                <a
-                  href={`#${serviceAnchor(b.recommended.service)}`}
+                <Link
+                  href={servicePath(b.recommended.service)}
                   className={styles.recommended}
                 >
                   Doporučujeme k tomu: {b.recommended.label}
                   <ArrowRight size={12} />
-                </a>
+                </Link>
               )}
               <Button
                 href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(`Balíček ${b.title}`)}`}

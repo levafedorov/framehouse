@@ -1,12 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import { bundleTitle } from "@/data/bundles";
-import { serviceAnchor, type Service } from "@/data/services";
+import { serviceAnchor, servicePath, type Service } from "@/data/services";
 import styles from "./ServiceCard.module.css";
 
 /**
  * One service, carrying only what a visitor needs to decide to click: the
  * pictogram (or a frame from real work), the name, the result, the price and
- * the lead time.
+ * the lead time. The whole tile is one link to the service's page.
  *
  * Desktop: a square coloured tile in the style of the reference category
  * tiles — pictogram, name and price stacked in the centre, bundle note
@@ -17,7 +18,8 @@ import styles from "./ServiceCard.module.css";
  */
 export default function ServiceCard({ service }: { service: Service }) {
   return (
-    <article
+    <Link
+      href={servicePath(service.id)}
       className={`${styles.tile} ${styles[service.tone]} ${
         service.shape === "oval" ? styles.oval : ""
       }`}
@@ -57,6 +59,6 @@ export default function ServiceCard({ service }: { service: Service }) {
 
       <p className={styles.result}>{service.result}</p>
       <span className={styles.days}>{service.days}</span>
-    </article>
+    </Link>
   );
 }

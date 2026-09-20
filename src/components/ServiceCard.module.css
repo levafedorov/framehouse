@@ -2,9 +2,21 @@
 /* shared                                                              */
 /* ------------------------------------------------------------------ */
 
+/* the whole tile is one link to /sluzby/<id> */
 .tile {
+  display: block;
   position: relative;
   scroll-margin-top: 80px;
+  transition: transform 0.15s ease;
+}
+
+.tile:hover {
+  transform: translateY(-2px);
+}
+
+.tile:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
 }
 
 .media {
