@@ -54,15 +54,21 @@
   max-width: 36ch;
 }
 
-/* three landscape cards, the work fills each one */
+/* three landscape cards in view, the rest scroll sideways with snap */
 .strip {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
   gap: 6px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
 }
 
 .cell {
+  flex: 0 0 calc((100% - 12px) / 3);
   min-width: 0;
+  scroll-snap-align: start;
 }
 
 @media (max-width: 900px) {
@@ -89,12 +95,10 @@
     padding: 2px 4px;
   }
 
-  /* cards scroll sideways, edge to edge */
+  /* edge to edge, no scrollbar on touch */
   .strip {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    padding-bottom: 0;
     margin-right: calc(-1 * var(--edge));
     padding-right: var(--edge);
     scroll-padding-right: var(--edge);
@@ -105,8 +109,7 @@
   }
 
   .cell {
-    flex: 0 0 46%;
-    scroll-snap-align: start;
+    flex-basis: 46%;
   }
 }
 

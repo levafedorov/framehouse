@@ -107,10 +107,20 @@ const all: Project[] = [
   // TODO: add the TopDesigner.cz logo concepts (issue #19) as kind: "concept"
 ];
 
+// TODO: remove — duplicates so the horizontal strips can be tested
+const testDuplicates: Project[] = all.flatMap((p) =>
+  [1, 2, 3].map((i) => ({
+    ...p,
+    slug: `${p.slug}-dup-${i}`,
+    kind: (i === 1 ? "realized" : "concept") as ProjectKind,
+    isNew: false,
+  })),
+);
+
 const kindOrder: ProjectKind[] = ["client", "realized", "concept"];
 
 /** Real client work first, then realised concepts, then concepts */
-export const projects: Project[] = [...all].sort(
+export const projects: Project[] = [...all, ...testDuplicates].sort(
   (a, b) => kindOrder.indexOf(a.kind) - kindOrder.indexOf(b.kind),
 );
 
