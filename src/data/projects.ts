@@ -1,22 +1,47 @@
 export type Category = "video" | "logo" | "icons" | "website";
 
-/** Real client work vs. a concept (e.g. a competition entry) */
-export type ProjectKind = "client" | "concept";
+/** Rows of the work section, in display order */
+export const categories: { id: Category; label: string; blurb: string }[] = [
+  {
+    id: "video",
+    label: "Videoreklamy",
+    blurb: "Krátká videa pro sítě a web — vznikají bez kamery, z fotek a briefu.",
+  },
+  {
+    id: "logo",
+    label: "Loga a identita",
+    blurb: "Značky, které fungují na vizitce, na ceduli i v animaci.",
+  },
+  {
+    id: "icons",
+    label: "Ikony",
+    blurb: "Sady ikon ve stylu značky pro web a sociální sítě.",
+  },
+  {
+    id: "website",
+    label: "Weby",
+    blurb: "Vizitky a landing pages ve firemním stylu, s analytikou v ceně.",
+  },
+];
+
+/** Client work, a realised concept, or a concept (e.g. a competition entry) */
+export type ProjectKind = "client" | "realized" | "concept";
 
 export const kindLabel: Record<ProjectKind, string> = {
   client: "Klient",
+  realized: "Realizace",
   concept: "Koncept",
 };
 
 export type Project = {
   slug: string;
   /**
-   * Card caption. Client work: the client name.
+   * Client work: the client name.
    * Concepts: the industry instead of the name — the name stays only
    * in the pixels of the image, never in text, alt or file names.
    */
   name: string;
-  /** What we made, shown under the name */
+  /** What we made */
   service: string;
   category: Category;
   kind: ProjectKind;
@@ -82,10 +107,16 @@ const all: Project[] = [
   // TODO: add the TopDesigner.cz logo concepts (issue #19) as kind: "concept"
 ];
 
-/** One shared grid: real client work first, concepts after */
-export const projects: Project[] = [
-  ...all.filter((p) => p.kind === "client"),
-  ...all.filter((p) => p.kind === "concept"),
-];
+const kindOrder: ProjectKind[] = ["client", "realized", "concept"];
+
+/** Real client work first, then realised concepts, then concepts */
+export const projects: Project[] = [...all].sort(
+  (a, b) => kindOrder.indexOf(a.kind) - kindOrder.indexOf(b.kind),
+);
+
+/** Only the rows that have something to show */
+export const workRows = categories
+  .map((c) => ({ ...c, items: projects.filter((p) => p.category === c.id) }))
+  .filter((row) => row.items.length > 0);
 
 export const heroProject = projects[0];

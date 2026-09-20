@@ -1,69 +1,96 @@
 .section {
-  padding-top: 26px;
-  padding-bottom: var(--gap);
+  padding-top: 40px;
+  padding-bottom: 26px;
   scroll-margin-top: 80px;
 }
 
+/* heading sits over the media column, like the reference */
 .head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 4px 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  padding: 0 4px 22px;
 }
 
 .title {
-  font-size: 12px;
-  font-weight: 600;
-  padding-bottom: 3px;
-  border-bottom: 1.5px solid var(--fg);
+  grid-column: 2;
+  font-size: 40px;
+  line-height: 1.08;
+  max-width: 20ch;
 }
 
-.arrows {
+.title em {
+  font-style: italic;
+}
+
+.rows {
+  border-top: 1px solid var(--line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: var(--gap);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* label at the top, blurb pinned to the bottom of the row */
+.aside {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 4px 16px 4px 4px;
+}
+
+.category {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.blurb {
+  font-size: 13px;
+  line-height: 1.45;
+  max-width: 36ch;
+}
+
+/* three landscape cards, the work fills each one */
+.strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
 }
 
-.arrow {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--fg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    opacity 0.15s ease;
-}
-
-.arrow:hover:not(:disabled) {
-  background: var(--fg);
-  color: #fff;
-}
-
-.arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.arrow:focus-visible {
-  outline: 2px solid var(--fg);
-  outline-offset: 2px;
-}
-
-.track {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--gap);
-}
-
-.slide {
+.cell {
   min-width: 0;
 }
 
 @media (max-width: 900px) {
-  .track {
+  .section {
+    padding-top: 30px;
+  }
+
+  .head {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    grid-column: 1;
+    font-size: 32px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .aside {
+    gap: 6px;
+    padding: 2px 4px;
+  }
+
+  /* cards scroll sideways, edge to edge */
+  .strip {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -73,22 +100,22 @@
     scroll-padding-right: var(--edge);
   }
 
-  .track::-webkit-scrollbar {
+  .strip::-webkit-scrollbar {
     display: none;
   }
 
-  .slide {
+  .cell {
     flex: 0 0 46%;
     scroll-snap-align: start;
   }
 }
 
 @media (max-width: 600px) {
-  .section {
-    padding-top: 20px;
+  .title {
+    font-size: 28px;
   }
 
-  .slide {
-    flex-basis: 78%;
+  .cell {
+    flex-basis: 72%;
   }
 }

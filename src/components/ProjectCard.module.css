@@ -1,42 +1,15 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  background: var(--card);
-  border-radius: var(--radius);
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-sm);
   overflow: hidden;
+  background: #ece9e1;
   outline: none;
-  transition: transform 0.25s ease;
-}
-
-.card:hover {
-  transform: translateY(-2px);
 }
 
 .card:focus-visible {
   outline: 2px solid var(--fg);
   outline-offset: 2px;
-}
-
-.media {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  background: #ece9e1;
-  overflow: hidden;
-}
-
-.badge {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  z-index: 2;
-  height: 26px;
-  padding: 0 12px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: var(--pill);
-  background: var(--fg);
-  color: #fff;
-  font-size: 10px;
 }
 
 .poster {
@@ -65,6 +38,7 @@
   opacity: 1;
 }
 
+/* logo-only work: the mark on a light tile */
 .tile {
   position: absolute;
   inset: 0;
@@ -75,52 +49,43 @@
 }
 
 .tileLogo {
-  width: 50%;
+  width: 38%;
   height: auto;
   border-radius: 50%;
   mix-blend-mode: multiply;
 }
 
-.meta {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 16px 16px;
-}
-
-.metaText {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-}
-
-.name {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-}
-
-.kind {
-  font-size: 13px;
-}
-
+/* small tag on the work itself: Klient / Realizace / Koncept */
 .tag {
-  flex-shrink: 0;
-  font-size: 12px;
-  font-weight: 500;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 2;
+  height: 22px;
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--pill);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.new {
+  left: auto;
+  right: 10px;
+  bottom: auto;
+  top: 10px;
+  background: var(--fg);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card,
   .poster,
   .video {
     transition: none;
-  }
-
-  .card:hover {
-    transform: none;
   }
 
   .card:hover .poster {
