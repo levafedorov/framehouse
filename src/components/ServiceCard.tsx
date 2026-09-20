@@ -9,10 +9,11 @@ import styles from "./ServiceCard.module.css";
  * the lead time.
  *
  * Desktop: a square coloured tile in the style of the reference category
- * tiles. Tablet and phone: the same parts laid out as a list row, with the
- * coloured tile shrunk to a thumbnail. Pictograms are white line art on
- * transparent PNG in public/media/services/<id>.png, generated with
- * GPT Image 2 via Higgsfield.
+ * tiles — pictogram, name and price stacked in the centre, bundle note
+ * top-right, result and lead time along the bottom. Tablet and phone: the
+ * same parts laid out as a list row, with the coloured tile shrunk to a
+ * thumbnail. Pictograms are white line art on transparent PNG in
+ * public/media/services/<id>.png, generated with GPT Image 2 via Higgsfield.
  */
 export default function ServiceCard({ service }: { service: Service }) {
   return (
@@ -42,24 +43,20 @@ export default function ServiceCard({ service }: { service: Service }) {
         )}
       </div>
 
-      <div className={styles.top}>
+      {service.bundle && (
+        <p className={`eyebrow ${styles.badge}`}>
+          Součást balíčku{" "}
+          <span className={styles.badgeName}>{bundleTitle(service.bundle)}</span>
+        </p>
+      )}
+
+      <div className={styles.centre}>
         <h3 className={`eyebrow ${styles.name}`}>{service.title}</h3>
-        {service.bundle && (
-          <p className={`eyebrow ${styles.badge}`}>
-            Součást balíčku{" "}
-            <span className={styles.badgeName}>
-              {bundleTitle(service.bundle)}
-            </span>
-          </p>
-        )}
+        <span className={styles.from}>{service.from}</span>
       </div>
 
       <p className={styles.result}>{service.result}</p>
-
-      <p className={styles.pricing}>
-        <span className={styles.from}>{service.from}</span>
-        <span className={styles.days}>{service.days}</span>
-      </p>
+      <span className={styles.days}>{service.days}</span>
     </article>
   );
 }

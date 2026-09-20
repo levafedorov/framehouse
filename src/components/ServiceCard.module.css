@@ -74,6 +74,9 @@
 /* ------------------------------------------------------------------ */
 
 @media (min-width: 901px) {
+  /* the pictogram is the tile's centre background; name and price sit
+     right on top of it, badge top-right, result and lead time along the
+     bottom — text overlays, it never pushes the pictogram around */
   .tile {
     aspect-ratio: 1 / 1;
     border-radius: var(--radius);
@@ -118,56 +121,61 @@
     height: 44cqw;
   }
 
-  .top {
+  .badge,
+  .centre,
+  .result,
+  .days {
     position: absolute;
-    left: 5.5cqw;
+    z-index: 1;
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.35),
+      0 2px 14px rgba(0, 0, 0, 0.35);
+  }
+
+  /* top-right; nothing sits top-left, so it may use the whole width */
+  .badge {
     right: 5.5cqw;
     top: 5.5cqw;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .name {
-    font-size: clamp(11px, 4.1cqw, 14px);
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
-  }
-
-  .badge {
+    max-width: calc(100% - 11cqw);
+    text-align: right;
+    white-space: nowrap;
     font-size: clamp(9px, 3cqw, 10px);
     opacity: 0.8;
   }
 
-  .result,
-  .pricing {
-    position: absolute;
+  /* dead centre, over the pictogram */
+  .centre {
     left: 5.5cqw;
     right: 5.5cqw;
-    z-index: 1;
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
-  }
-
-  .result {
-    bottom: calc(5.5cqw + 2.2em);
-    font-size: clamp(11px, 3.8cqw, 13px);
-    max-width: 30ch;
-  }
-
-  .pricing {
-    bottom: 5.5cqw;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .name {
+    font-size: clamp(11px, 4.1cqw, 14px);
   }
 
   .from {
-    font-size: clamp(13px, 5cqw, 17px);
+    font-size: clamp(14px, 5.4cqw, 18px);
+  }
+
+  /* bottom: result left, lead time right */
+  .result {
+    left: 5.5cqw;
+    right: 5.5cqw;
+    bottom: 5.5cqw;
+    padding-right: 7em;
+    font-size: clamp(11px, 3.8cqw, 13px);
   }
 
   .days {
+    right: 5.5cqw;
+    bottom: 5.5cqw;
     font-size: clamp(10px, 3.2cqw, 11px);
     opacity: 0.8;
   }
@@ -179,34 +187,39 @@
     }
   }
 
-  /* accent tiles: a circle needs centred text and more room */
-  .oval .top,
-  .oval .result,
-  .oval .pricing {
-    left: 14cqw;
-    right: 14cqw;
-    align-items: center;
-    text-align: center;
-  }
-
-  .oval .top {
-    top: 11cqw;
-  }
-
-  .oval .result {
-    bottom: calc(10cqw + 2.4em);
-    font-size: clamp(10px, 3.5cqw, 12px);
+  /* accent tiles: a circle needs everything centred and more room */
+  .oval .badge {
+    left: 20cqw;
+    right: 20cqw;
+    top: 9cqw;
     max-width: none;
-  }
-
-  .oval .pricing {
-    bottom: 10cqw;
-    justify-content: center;
-    gap: 14px;
+    text-align: center;
+    white-space: normal;
   }
 
   .oval .badgeName {
     display: none;
+  }
+
+  .oval .centre {
+    left: 14cqw;
+    right: 14cqw;
+  }
+
+  .oval .result {
+    left: 16cqw;
+    right: 16cqw;
+    bottom: 13cqw;
+    padding-right: 0;
+    text-align: center;
+    font-size: clamp(10px, 3.5cqw, 12px);
+  }
+
+  .oval .days {
+    left: 0;
+    right: 0;
+    bottom: 8cqw;
+    text-align: center;
   }
 }
 
@@ -219,15 +232,23 @@
     display: grid;
     grid-template-columns: 84px minmax(0, 1fr) auto;
     grid-template-areas:
-      "media top pricing"
-      "media result pricing";
+      "media name from"
+      "media badge days"
+      "media result .";
     column-gap: 16px;
-    row-gap: 6px;
-    align-items: center;
+    row-gap: 2px;
+    align-items: start;
     padding: 10px 18px 10px 10px;
     background: var(--card);
     border-radius: var(--radius);
     color: var(--fg);
+  }
+
+  /* no bundle note: don't leave an empty row between name and result */
+  .tile:not(:has(.badge)) {
+    grid-template-areas:
+      "media name from"
+      "media result days";
   }
 
   .media {
@@ -248,44 +269,42 @@
     opacity: 0.75;
   }
 
-  .top {
-    grid-area: top;
-    align-self: end;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  /* name and price become grid items of their own */
+  .centre {
+    display: contents;
   }
 
   .name {
+    grid-area: name;
+    align-self: end;
     font-size: 12px;
+    padding-top: 6px;
   }
 
   .badge {
+    grid-area: badge;
     font-size: 9px;
     color: var(--muted);
   }
 
   .result {
     grid-area: result;
-    align-self: start;
     font-size: 13px;
     color: var(--muted);
-  }
-
-  .pricing {
-    grid-area: pricing;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-    text-align: right;
+    margin-top: 4px;
   }
 
   .from {
+    grid-area: from;
+    justify-self: end;
+    align-self: end;
     font-size: 15px;
+    padding-top: 6px;
   }
 
   .days {
+    grid-area: days;
+    justify-self: end;
     font-size: 11px;
     color: var(--muted);
   }
@@ -293,20 +312,26 @@
 
 @media (max-width: 600px) {
   .tile {
-    grid-template-columns: 64px minmax(0, 1fr);
+    grid-template-columns: 64px minmax(0, 1fr) auto;
     grid-template-areas:
-      "media top"
-      "media result"
-      "media pricing";
+      "media name name"
+      "media badge badge"
+      "media result result"
+      "media from days";
     column-gap: 14px;
-    row-gap: 4px;
     padding: 10px 14px 10px 10px;
+  }
+
+  .tile:not(:has(.badge)) {
+    grid-template-areas:
+      "media name name"
+      "media result result"
+      "media from days";
   }
 
   .media {
     width: 64px;
     height: 64px;
-    align-self: start;
   }
 
   .icon {
@@ -322,15 +347,15 @@
     font-size: 12px;
   }
 
-  .pricing {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 8px;
-    text-align: left;
-    margin-top: 2px;
+  .from {
+    justify-self: start;
+    font-size: 14px;
+    padding-top: 4px;
   }
 
-  .from {
-    font-size: 14px;
+  .days {
+    justify-self: start;
+    align-self: end;
+    padding-left: 8px;
   }
 }
