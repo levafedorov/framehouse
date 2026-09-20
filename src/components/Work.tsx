@@ -1,4 +1,4 @@
-import ProjectCard from "./ProjectCard";
+import WorkRow from "./WorkRow";
 import { workRows } from "@/data/projects";
 import styles from "./Work.module.css";
 
@@ -22,19 +22,12 @@ export default function Work() {
 
       <ul className={styles.rows}>
         {workRows.map((row) => (
-          <li key={row.id} className={styles.row}>
-            <div className={styles.aside}>
-              <h3 className={`eyebrow ${styles.category}`}>{row.label}</h3>
-              <p className={`muted ${styles.blurb}`}>{row.blurb}</p>
-            </div>
-            <ul className={styles.strip}>
-              {row.items.map((p) => (
-                <li key={p.slug} className={styles.cell}>
-                  <ProjectCard project={p} />
-                </li>
-              ))}
-            </ul>
-          </li>
+          <WorkRow
+            key={row.id}
+            label={row.label}
+            blurb={row.blurb}
+            items={row.items}
+          />
         ))}
       </ul>
     </section>

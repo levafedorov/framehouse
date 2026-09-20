@@ -34,7 +34,7 @@
   border-bottom: 1px solid var(--line);
 }
 
-/* label at the top, blurb pinned to the bottom of the row */
+/* label at the top, blurb and arrows pinned to the bottom of the row */
 .aside {
   display: flex;
   flex-direction: column;
@@ -48,10 +48,86 @@
   font-weight: 600;
 }
 
+.asideBottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .blurb {
   font-size: 13px;
   line-height: 1.45;
   max-width: 36ch;
+}
+
+.arrows {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.arrow:hover:not(:disabled) {
+  background: var(--fg);
+  color: #fff;
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.arrow:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+/* the strip's edges fade into the page while there is more to scroll */
+.stripWrap {
+  position: relative;
+  min-width: 0;
+}
+
+.stripWrap::before,
+.stripWrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 8px;
+  width: 72px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.stripWrap::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg), rgba(243, 241, 234, 0));
+}
+
+.stripWrap::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg), rgba(243, 241, 234, 0));
+}
+
+.morePrev .stripWrap::before,
+.moreNext .stripWrap::after {
+  opacity: 1;
 }
 
 /* three landscape cards in view, the rest scroll sideways with snap */
@@ -95,11 +171,25 @@
     padding: 2px 4px;
   }
 
+  /* touch scrolls; the fade is hint enough */
+  .arrows {
+    display: none;
+  }
+
+  .stripWrap {
+    margin-right: calc(-1 * var(--edge));
+  }
+
+  .stripWrap::before,
+  .stripWrap::after {
+    bottom: 0;
+    width: 40px;
+  }
+
   /* edge to edge, no scrollbar on touch */
   .strip {
     scrollbar-width: none;
     padding-bottom: 0;
-    margin-right: calc(-1 * var(--edge));
     padding-right: var(--edge);
     scroll-padding-right: var(--edge);
   }
@@ -120,5 +210,13 @@
 
   .cell {
     flex-basis: 72%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow,
+  .stripWrap::before,
+  .stripWrap::after {
+    transition: none;
   }
 }
