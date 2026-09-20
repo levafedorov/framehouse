@@ -57,8 +57,10 @@
   );
 }
 
+/* white line-art pictogram, dimmed like the old SVG strokes */
 .icon {
-  stroke-width: 0.9;
+  width: 150px;
+  height: 150px;
   opacity: 0.55;
 }
 

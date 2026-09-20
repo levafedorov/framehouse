@@ -1,28 +1,16 @@
 import Image from "next/image";
-import { IconsIcon, LogoIcon, VideoIcon, WebsiteIcon } from "./Icons";
 import { bundleTitle } from "@/data/bundles";
 import { serviceAnchor, type Service } from "@/data/services";
 import styles from "./ServiceCard.module.css";
 
-const icon = {
-  video: VideoIcon,
-  logo: LogoIcon,
-  identity: LogoIcon,
-  icons: IconsIcon,
-  web: WebsiteIcon,
-  eshop: WebsiteIcon,
-  social: IconsIcon,
-  print: IconsIcon,
-} as const;
-
 /**
  * A coloured tile — the same visual as the category tiles in the reference —
  * carrying only what a visitor needs to decide to click: a frame from real
- * work (or the service icon), the name top-left, the result, the price and
- * the lead time.
+ * work (or the service pictogram), the name top-left, the result, the price
+ * and the lead time. Pictograms are white line art on transparent PNG in
+ * public/media/services/<id>.png, generated with GPT Image 2 via Higgsfield.
  */
 export default function ServiceCard({ service }: { service: Service }) {
-  const Icon = icon[service.id];
   return (
     <article
       className={`${styles.tile} ${styles[service.tone]} ${
@@ -39,7 +27,13 @@ export default function ServiceCard({ service }: { service: Service }) {
           className={styles.img}
         />
       ) : (
-        <Icon size={150} className={styles.icon} />
+        <Image
+          src={`/media/services/${service.id}.png`}
+          alt=""
+          width={150}
+          height={150}
+          className={styles.icon}
+        />
       )}
 
       <div className={styles.top}>
