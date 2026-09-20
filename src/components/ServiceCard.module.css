@@ -101,8 +101,10 @@
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0) 50%,
-      rgba(0, 0, 0, 0.42) 100%
+      rgba(0, 0, 0, 0.18) 0%,
+      rgba(0, 0, 0, 0) 22%,
+      rgba(0, 0, 0, 0) 48%,
+      rgba(0, 0, 0, 0.5) 100%
     );
     pointer-events: none;
   }
@@ -127,9 +129,9 @@
   .days {
     position: absolute;
     z-index: 1;
-    text-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.35),
-      0 2px 14px rgba(0, 0, 0, 0.35);
+    /* no blur radius: blurred text-shadow re-rasterises on every scroll
+       frame in Firefox and drops frames; the scrim below does the work */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
   }
 
   /* top-right; nothing sits top-left, so it may use the whole width */
