@@ -23,6 +23,7 @@
   font-size: 13px;
 }
 
+/* desktop: 4 square tiles per row */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -33,9 +34,11 @@
   min-width: 0;
 }
 
+/* tablet & phone: one list row per service */
 @media (max-width: 900px) {
   .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 }
 
