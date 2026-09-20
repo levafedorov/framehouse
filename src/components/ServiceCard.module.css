@@ -74,9 +74,9 @@
 /* ------------------------------------------------------------------ */
 
 @media (min-width: 901px) {
-  /* the pictogram is the tile's centre background; name and price sit
-     right on top of it, badge top-right, result and lead time along the
-     bottom — text overlays, it never pushes the pictogram around */
+  /* the pictogram is the tile's centre background; badge top-right,
+     name and price centred above the pictogram, result and lead time
+     along the bottom — text overlays, it never pushes the pictogram */
   .tile {
     aspect-ratio: 1 / 1;
     border-radius: var(--radius);
@@ -135,7 +135,7 @@
   /* top-right; nothing sits top-left, so it may use the whole width */
   .badge {
     right: 5.5cqw;
-    top: 5.5cqw;
+    top: 4.5cqw;
     max-width: calc(100% - 11cqw);
     text-align: right;
     white-space: nowrap;
@@ -143,12 +143,11 @@
     opacity: 0.8;
   }
 
-  /* dead centre, over the pictogram */
+  /* centred above the pictogram, under the badge row */
   .centre {
     left: 5.5cqw;
     right: 5.5cqw;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 11cqw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -201,9 +200,19 @@
     display: none;
   }
 
+  .oval .icon {
+    width: 38cqw;
+    height: 38cqw;
+  }
+
+  .oval .badge {
+    top: 8cqw;
+  }
+
   .oval .centre {
     left: 14cqw;
     right: 14cqw;
+    top: 15cqw;
   }
 
   .oval .result {
