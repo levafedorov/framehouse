@@ -14,8 +14,8 @@ export type Bundle = {
   term: string;
   /** Optional single add-on, links to the service card */
   recommended?: { label: string; service: ServiceId };
-  /** A real frame from a project; falls back to the sage tile */
-  image?: string;
+  /** Full-bleed illustration behind the tile text, public/media/bundles */
+  image: string;
 };
 
 // TODO: prices and terms are placeholders — confirm before launch (issue #13).
@@ -33,7 +33,7 @@ export const bundles: Bundle[] = [
     from: "od 32 000 Kč",
     term: "3–4 týdny",
     recommended: { label: "Maskot", service: "logo" },
-    image: "/media/akinu-puppy.jpg",
+    image: "/media/bundles/nova-znacka.jpg",
   },
   {
     id: "novy-kabat",
@@ -48,7 +48,7 @@ export const bundles: Bundle[] = [
     from: "od 36 000 Kč",
     term: "3–5 týdnů",
     recommended: { label: "Animované logo", service: "video" },
-    image: "/media/bohemia-bowl.jpg",
+    image: "/media/bundles/novy-kabat.jpg",
   },
   {
     id: "znacka-v-pohybu",
@@ -63,6 +63,7 @@ export const bundles: Bundle[] = [
     from: "od 28 000 Kč",
     term: "3–4 týdny",
     recommended: { label: "Tiskoviny s maskotem", service: "print" },
+    image: "/media/bundles/znacka-v-pohybu.jpg",
   },
 ];
 

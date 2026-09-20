@@ -6,6 +6,11 @@ import { serviceAnchor } from "@/data/services";
 import { site } from "@/data/site";
 import styles from "./Bundles.module.css";
 
+/**
+ * Three tall tiles, one per bundle. A full-bleed illustration (generated
+ * with GPT Image 2 via Higgsfield, public/media/bundles) fills the tile;
+ * the copy sits at the bottom on a dark scrim so it never fights the art.
+ */
 export default function Bundles() {
   return (
     <section
@@ -24,21 +29,16 @@ export default function Bundles() {
 
       <ul className={styles.grid}>
         {bundles.map((b) => (
-          <li
-            key={b.id}
-            className={`${styles.tile} ${b.image ? styles.photo : styles.sage}`}
-          >
-            {b.image && (
-              <Image
-                src={b.image}
-                alt=""
-                fill
-                sizes="(max-width: 900px) 100vw, 33vw"
-                className={styles.img}
-              />
-            )}
+          <li key={b.id} className={styles.tile}>
+            <Image
+              src={b.image}
+              alt=""
+              fill
+              sizes="(max-width: 900px) 100vw, 33vw"
+              className={styles.img}
+            />
 
-            <div className={styles.center}>
+            <div className={styles.copy}>
               <h3 className={`serif ${styles.title}`}>{b.title}</h3>
               <p className={styles.audience}>{b.audience}</p>
               <ul className={styles.includes}>
@@ -58,14 +58,11 @@ export default function Bundles() {
                   <ArrowRight size={12} />
                 </a>
               )}
-            </div>
-
-            <div className={styles.actions}>
               <Button
                 href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(`Balíček ${b.title}`)}`}
-                variant="outline"
+                variant="light"
                 size="sm"
-                block
+                className={styles.cta}
               >
                 Nezávazná poptávka
               </Button>
