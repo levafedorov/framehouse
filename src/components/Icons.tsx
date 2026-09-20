@@ -90,7 +90,8 @@ export function Close({ size = 22, ...rest }: Props) {
 export function VideoIcon({ size = 18, ...rest }: Props) {
   return (
     <svg {...base(size, rest)}>
-      <path d="M6 4l14 8-14 8z" />
+      {/* triangle centred on the viewBox, not flush left */}
+      <path d="M5 4l14 8-14 8z" />
     </svg>
   );
 }
