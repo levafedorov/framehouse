@@ -6,8 +6,8 @@ import Services from "@/components/Services";
 import Work from "@/components/Work";
 
 /**
- * hero → services with prices (the coloured tile band) → proof (work) →
- * bundles → contact. "How we work" lives on its own page: /jak-pracujeme.
+ * hero → proof (work) → services with prices → bundles → contact,
+ * as planned in issue #21. "How we work" lives on its own page: /jak-pracujeme.
  */
 export default function Home() {
   return (
@@ -15,8 +15,8 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Services />
         <Work />
+        <Services />
         <Bundles />
       </main>
       <Footer />
