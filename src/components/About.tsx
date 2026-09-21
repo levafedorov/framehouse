@@ -17,7 +17,7 @@ const cards = [
   {
     // TODO: confirm the designer's name and credit line (issue #19)
     title: `Kdo je ${site.name}`,
-    text: "Malý tým pro malé firmy: logo, ikony, tiskoviny i web od jedněch rukou, takže všechno k sobě sedí. Loga a firemní styl navrhuje Dinara — její práce se umisťují na 1.–3. místě v soutěžích TopDesigner.cz. Mluvíte přímo s lidmi, kteří práci dělají.",
+    text: "Malý tým pro malé firmy: logo, ikony, tiskoviny i web od jedněch rukou, takže všechno k sobě sedí. Loga a firemní styl navrhuje Dinara. Mluvíte přímo s lidmi, kteří práci dělají.",
   },
 ];
 

@@ -28,7 +28,7 @@ export default function Hero() {
             className={styles.img}
           />
           <p className={`serif ${styles.note}`}>
-            <em>Oceněno na TopDesigner.cz</em>
+            <em>Vybrané práce týmu</em>
             <ArrowRight size={16} />
           </p>
         </div>

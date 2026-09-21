@@ -127,26 +127,19 @@ export const relatedProjects = (project: Project): Project[] =>
 const img = (slug: string, n: number) => `/media/work/${slug}-${n}.jpg`;
 const card = (slug: string) => `/media/work/${slug}-card.jpg`;
 
-// TopDesigner.cz competition places, from the folder the pieces came in.
-// TODO: confirm which pieces were competition entries and which were direct
-// client work (issue #19).
-const place = (n: 1 | 2 | 3) => `Soutěž TopDesigner.cz, ${n}. místo`;
-
 const fact = {
   service: (value: string): Fact => ({ label: "Služba", value, icon: "service" }),
   client: (value: string): Fact => ({ label: "Klient", value, icon: "industry" }),
   industry: (value: string): Fact => ({ label: "Obor", value, icon: "industry" }),
-  context: (value: string): Fact => ({ label: "Kontext", value, icon: "context" }),
 };
 
 /**
- * The designer's portfolio — the strongest ten pieces. First places carry
- * the client's name; second and third places are concepts and carry only
- * the industry (issue #19). More pieces sit in the source folder and can
- * be added the same way.
+ * The designer's portfolio — the strongest ten pieces. Client work carries
+ * the client's name; concepts carry only the industry (issue #19). More
+ * pieces sit in the source folder and can be added the same way.
  */
 const all: Project[] = [
-  /* ---------------- 1. místo — client work ---------------- */
+  /* ---------------- client work ---------------- */
   {
     slug: "kooperativa",
     name: "Kooperativa",
@@ -156,12 +149,11 @@ const all: Project[] = [
     cover: img("kooperativa", 6),
     poster: card("kooperativa"),
     isNew: true,
-    context: place(1),
     brief:
       "Sada ikon pojistných produktů pro Kooperativu: cestovní pojištění, auto, penze, domov a zdraví.",
     solution:
       "Pět barevných dlaždic s jednoduchým symbolem, každá s vlastní barvou v CMYK. Ikony pak nesly láhev, visačku pro staff, tašky a tričko na akce.",
-    facts: [fact.service("Ikony a merch"), fact.client("Kooperativa"), fact.context(place(1))],
+    facts: [fact.service("Ikony a merch"), fact.client("Kooperativa")],
     stills: [
       { src: img("kooperativa", 2), label: "Ikony" },
       { src: img("kooperativa", 3), label: "Visačka" },
@@ -176,11 +168,10 @@ const all: Project[] = [
     kind: "client",
     cover: img("hinna", 1),
     poster: card("hinna"),
-    context: place(1),
     brief: "Logo pro módní značku Hinna, která prodává mikiny a trička.",
     solution:
       "Geometrický wordmark s tečkou, jednobarevný, aby seděl na výšivce i na štítku. Aplikace na mikinu, tričko a web.",
-    facts: [fact.service("Logo"), fact.client("Hinna"), fact.context(place(1))],
+    facts: [fact.service("Logo"), fact.client("Hinna")],
     stills: [
       { src: img("hinna", 1), label: "Znak" },
       { src: img("hinna", 2), label: "Wordmark" },
@@ -195,11 +186,10 @@ const all: Project[] = [
     kind: "client",
     cover: img("weber", 1),
     poster: card("weber"),
-    context: place(1),
     brief: "Logotyp pro svatební salon Weber.",
     solution:
       "Měkký wordmark s motýlem v písmenu b. Barevná, jednobarevná a inverzní verze a návrh na výloze salonu.",
-    facts: [fact.service("Logotyp"), fact.client("Weber"), fact.context(place(1))],
+    facts: [fact.service("Logotyp"), fact.client("Weber")],
   },
   {
     slug: "llama-loca",
@@ -209,11 +199,10 @@ const all: Project[] = [
     kind: "client",
     cover: img("llama-loca", 1),
     poster: card("llama-loca"),
-    context: place(1),
     brief: "Logo pro Llama Loca, malou značku s hravým jménem.",
     solution:
       "Lama nakreslená jednou nepřerušenou linkou, pod ní volný rukopisný nápis. Funguje v jedné barvě i v malé velikosti.",
-    facts: [fact.service("Logo"), fact.client("Llama Loca"), fact.context(place(1))],
+    facts: [fact.service("Logo"), fact.client("Llama Loca")],
   },
   {
     slug: "kismi",
@@ -223,18 +212,17 @@ const all: Project[] = [
     kind: "client",
     cover: img("kismi", 1),
     poster: card("kismi"),
-    context: place(1),
     brief: "Vizitky a certifikát pro Kismi, kurzy líčení.",
     solution:
       "Bílá, zlatá a růžová, mramorová textura. Oboustranná vizitka a certifikát se zlatou linkou, připravené k tisku.",
-    facts: [fact.service("Tiskoviny"), fact.client("Kismi"), fact.context(place(1))],
+    facts: [fact.service("Tiskoviny"), fact.client("Kismi")],
     stills: [
       { src: img("kismi", 1), label: "Vizitky" },
       { src: img("kismi", 2), label: "Certifikát" },
     ],
   },
 
-  /* ---------------- 2. místo — concepts ---------------- */
+  /* ---------------- concepts ---------------- */
   {
     slug: "koncept-kosmetika",
     name: "Přírodní kosmetika",
@@ -243,11 +231,10 @@ const all: Project[] = [
     kind: "concept",
     cover: img("koncept-kosmetika", 3),
     poster: card("koncept-kosmetika"),
-    context: place(2),
     brief: "Řada přírodní kosmetiky inspirovaná Asií.",
     solution:
       "Lahvička a krabička ve čtyřech barevných variantách podle vůně. Pagoda a torii jako jemný motiv na obalu.",
-    facts: [fact.service("Obaly"), fact.industry("Kosmetika"), fact.context(place(2))],
+    facts: [fact.service("Obaly"), fact.industry("Kosmetika")],
     stills: [
       { src: img("koncept-kosmetika", 1), label: "Bílá" },
       { src: img("koncept-kosmetika", 3), label: "Oranžová" },
@@ -262,11 +249,10 @@ const all: Project[] = [
     kind: "concept",
     cover: img("koncept-rezidence", 1),
     poster: card("koncept-rezidence"),
-    context: place(2),
     brief: "Rezidenční projekt na okraji města.",
     solution:
       "Monogram RH z tenkých linek, hnědá a tmavě zelená. Aplikace na vizuál domu, vizitky a hlavičku.",
-    facts: [fact.service("Logo a identita"), fact.industry("Reality"), fact.context(place(2))],
+    facts: [fact.service("Logo a identita"), fact.industry("Reality")],
     stills: [
       { src: img("koncept-rezidence", 1), label: "Identita" },
       { src: img("koncept-rezidence", 2), label: "Znak" },
@@ -281,11 +267,10 @@ const all: Project[] = [
     kind: "concept",
     cover: img("koncept-venave", 2),
     poster: card("koncept-venave"),
-    context: place(2),
     brief: "Technická firma s krátkým názvem a písmenem V.",
     solution:
       "Ostré V v červené a černé, verze pro tmavé i světlé pozadí. Lahve, kontejner, vizitky.",
-    facts: [fact.service("Logo a identita"), fact.industry("Technika"), fact.context(place(2))],
+    facts: [fact.service("Logo a identita"), fact.industry("Technika")],
     stills: [
       { src: img("koncept-venave", 1), label: "Značka" },
       { src: img("koncept-venave", 2), label: "Aplikace" },
@@ -293,7 +278,6 @@ const all: Project[] = [
     ],
   },
 
-  /* ---------------- 3. místo — concepts ---------------- */
   {
     slug: "koncept-safari-park",
     name: "Safari park",
@@ -302,11 +286,10 @@ const all: Project[] = [
     kind: "concept",
     cover: img("koncept-safari-park", 3),
     poster: card("koncept-safari-park"),
-    context: place(3),
     brief: "Safari park hledal motivy na plátěné tašky.",
     solution:
       "Nosorožec, žirafa a zebra jako plošné ilustrace v teplé paletě, s vlastním nápisem. Tisk na tašky.",
-    facts: [fact.service("Ilustrace"), fact.industry("Zoo a safari"), fact.context(place(3))],
+    facts: [fact.service("Ilustrace"), fact.industry("Zoo a safari")],
     stills: [
       { src: img("koncept-safari-park", 1), label: "Nosorožec" },
       { src: img("koncept-safari-park", 2), label: "Žirafa a zebra" },
@@ -321,11 +304,10 @@ const all: Project[] = [
     kind: "concept",
     cover: img("koncept-danova-poradkyne", 2),
     poster: card("koncept-danova-poradkyne"),
-    context: place(3),
     brief: "Daňová poradkyně, která chce působit přesně a klidně.",
     solution:
       "Wordmark s lomítkem a X v měděné barvě na tmavě modré. Vizitky, hlavička a razítko.",
-    facts: [fact.service("Logo a identita"), fact.industry("Daňové poradenství"), fact.context(place(3))],
+    facts: [fact.service("Logo a identita"), fact.industry("Daňové poradenství")],
     stills: [
       { src: img("koncept-danova-poradkyne", 2), label: "Wordmark" },
       { src: img("koncept-danova-poradkyne", 1), label: "Identita" },
