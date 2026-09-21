@@ -253,8 +253,8 @@ const all: Project[] = [
     ],
     stills: [
       { src: "/media/work/koncept-pekarna-1.jpg", label: "Znak" },
-      { src: "/media/work/koncept-pekarna-2.jpg", label: "Sáček" },
-      { src: "/media/work/koncept-pekarna-3.jpg", label: "Cedule" },
+      { src: "/media/work/koncept-pekarna-2-flat.jpg", label: "Sáček" },
+      { src: "/media/work/koncept-pekarna-3-flat.jpg", label: "Cedule" },
     ],
   },
 ];

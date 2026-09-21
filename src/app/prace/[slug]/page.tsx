@@ -272,7 +272,7 @@ export default async function WorkPage({ params }: Props) {
         <section className={`shell ${styles.offer}`} aria-label="Nabídka">
           <div className={styles.cta}>
             <Image
-              src="/media/work/cta-wash.webp"
+              src="/media/work/cta-flat.webp"
               alt=""
               width={520}
               height={520}
