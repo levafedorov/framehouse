@@ -9,7 +9,8 @@ const strip = ["Logo", "Ikony", "Web", "Tisk"];
 
 /**
  * Two pieces of real work side by side: a concept on the left, the
- * newest client piece on the right with the headline over it.
+ * newest client piece on the right (its hi-res `heroImage` where there
+ * is one) with the headline over it.
  * (The video panel that used to sit on the right is parked until video
  * ads are back on the menu.)
  */
@@ -21,7 +22,7 @@ export default function Hero() {
           {/* hidden on phones (see .left in the CSS), so it must not be
               preloaded — lazy images inside display:none are never fetched */}
           <Image
-            src="/media/work/koncept-kosmetika-3.jpg"
+            src="/media/work/koncept-kosmetika-cover.jpg"
             alt="Návrh obalů přírodní kosmetiky — lahvička a krabička v oranžové"
             fill
             sizes="(max-width: 900px) 100vw, 50vw"
@@ -47,8 +48,8 @@ export default function Hero() {
 
         <div className={styles.right}>
           <Image
-            src={heroProject.cover}
-            alt={`${heroProject.service} pro ${heroProject.name}`}
+            src={heroProject.heroImage ?? heroProject.cover}
+            alt={heroProject.caption}
             fill
             priority
             fetchPriority="high"

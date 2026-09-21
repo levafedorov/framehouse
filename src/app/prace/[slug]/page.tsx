@@ -261,10 +261,6 @@ export default async function WorkPage({ params }: Props) {
               {others.map((p) => (
                 <li key={p.slug} className={styles.other}>
                   <ProjectCard project={p} />
-                  <p className={styles.otherName}>
-                    <span className={styles.otherClient}>{p.name}</span>
-                    <span className="muted"> — {p.service}</span>
-                  </p>
                 </li>
               ))}
             </ul>

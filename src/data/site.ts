@@ -8,6 +8,7 @@ export const site = {
   contactEmail: "hello@framehouse.cz",
   city: "Praha",
   // TODO: fill in real profiles or remove the ones you don't use
+  // TODO: real profiles; the footer does not render the column while these are "#"
   social: [
     { id: "instagram", label: "Instagram", href: "#" },
     { id: "linkedin", label: "LinkedIn", href: "#" },

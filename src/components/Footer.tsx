@@ -1,15 +1,7 @@
 import Link from "next/link";
 import ContactForm from "./ContactForm";
-import { InstagramIcon, LinkedInIcon, TikTokIcon, YouTubeIcon } from "./Icons";
 import { footerColumns, site } from "@/data/site";
 import styles from "./Footer.module.css";
-
-const socialIcon = {
-  instagram: InstagramIcon,
-  linkedin: LinkedInIcon,
-  youtube: YouTubeIcon,
-  tiktok: TikTokIcon,
-} as const;
 
 export default function Footer() {
   return (
@@ -46,25 +38,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className={styles.social}>
-          <p className={`eyebrow ${styles.label}`}>Sledujte nás</p>
-          <ul className={styles.socialList}>
-            {site.social.map((s) => {
-              const Icon = socialIcon[s.id];
-              return (
-                <li key={s.id}>
-                  <a
-                    href={s.href}
-                    className={styles.socialLink}
-                    aria-label={s.label}
-                  >
-                    <Icon />
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        {/* "Sledujte nás" comes back once site.social has real profiles */}
 
         <div className={styles.bottom}>
           <p className={`serif ${styles.wordmark}`}>{site.name}</p>

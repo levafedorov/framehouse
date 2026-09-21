@@ -128,7 +128,7 @@ export const services: Service[] = [
       "Firemní styl a nosiče",
       "Registrace ochranné známky",
     ],
-    examples: ["hinna", "weber", "llama-loca"],
+    examples: ["hinna", "llama-loca", "quality-equals-cost"],
     ctaTitle: "Pojďme dát vaší firmě tvář.",
   },
   {
@@ -155,7 +155,7 @@ export const services: Service[] = [
     priceNote: "Cena závisí na počtu nosičů.",
     termNote: "Běžná doba pro 3–4 nosiče.",
     excluded: ["Logo — je samostatná služba", "Rozsáhlý brandbook", "Tisk"],
-    examples: ["koncept-kosmetika", "koncept-rezidence", "koncept-venave"],
+    examples: ["kismi", "koncept-kosmetika", "koncept-autolakovna"],
     ctaTitle: "Pojďme sladit všechno, co od vás lidé vidí.",
   },
   {
@@ -182,7 +182,7 @@ export const services: Service[] = [
     priceNote: "Cena závisí na počtu ikon a míře detailu.",
     termNote: "Běžná doba pro sadu 8 ikon.",
     excluded: ["Velké ikonové knihovny", "Ilustrace a maskot", "Animace ikon"],
-    examples: ["kooperativa", "koncept-safari-park"],
+    examples: ["kooperativa", "koncept-maskot", "koncept-safari-park"],
     ctaTitle: "Pojďme dát vašim ikonám jeden rukopis.",
   },
   {

@@ -67,28 +67,7 @@
   text-underline-offset: 3px;
 }
 
-.socialList {
-  display: flex;
-  gap: 10px;
-}
-
-.socialLink {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.socialLink:hover {
-  background: #fff;
-  color: var(--dark);
-}
+/* .social* styles removed with the column; see the TODO in src/data/site.ts */
 
 .bottom {
   display: flex;

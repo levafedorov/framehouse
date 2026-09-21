@@ -5,6 +5,17 @@ const nextConfig: NextConfig = {
     // optimized variants of /media/* are content-addressed by their query, safe to keep for a year
     minimumCacheTTL: 31536000,
   },
+  async redirects() {
+    return [
+      // pieces removed or renamed when the portfolio was rebuilt
+      { source: "/prace/weber", destination: "/#work", permanent: true },
+      {
+        source: "/prace/koncept-venave",
+        destination: "/prace/koncept-doprava",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

@@ -43,12 +43,20 @@ export type Project = {
   name: string;
   /** What we made */
   service: string;
+  /**
+   * One line under the card image, the only place the visitor reads what
+   * the piece is: "Logo pro Hinna" for client work, "Návrh loga — obor"
+   * or "Koncept identity — obor" for a concept. Also the link's aria-label.
+   */
+  caption: string;
   category: Category;
   kind: ProjectKind;
-  /** The main image of the piece, public/media/work/<slug>-<n>.jpg */
+  /** 4:3 image of the piece for the hero of /prace/[slug], public/media/work/<slug>-cover.jpg */
   cover: string;
-  /** 3:2 card image (the cover fitted on a blurred copy of itself) */
+  /** 3:2 card image, a clean crop of the piece (no letterbox, no blur fill), public/media/work/<slug>-card.jpg */
   poster: string;
+  /** Hi-res image for the homepage hero where the cover is too small; falls back to `cover` */
+  heroImage?: string;
   /** Shows the "Nové" badge */
   isNew?: boolean;
   /** Left out where we don't know it */
@@ -73,7 +81,7 @@ export type Project = {
   context?: string;
   /** The facts strip: služba, klient/obor, kontext … */
   facts?: Fact[];
-  /** Frames from the piece, public/media/work/<slug>-<n>.jpg */
+  /** 4:5 details of the piece, public/media/work/<slug>-still-<label>.jpg */
   stills?: Still[];
 };
 
@@ -124,19 +132,26 @@ export const relatedProjects = (project: Project): Project[] =>
     )
     .slice(0, 3);
 
-const img = (slug: string, n: number) => `/media/work/${slug}-${n}.jpg`;
+/* file names match the manifest in scripts/build-work-media.mjs */
 const card = (slug: string) => `/media/work/${slug}-card.jpg`;
+const cover = (slug: string) => `/media/work/${slug}-cover.jpg`;
+const still = (slug: string, id: string, label: string): Still => ({
+  src: `/media/work/${slug}-still-${id}.jpg`,
+  label,
+});
 
 const fact = {
   service: (value: string): Fact => ({ label: "Služba", value, icon: "service" }),
   client: (value: string): Fact => ({ label: "Klient", value, icon: "industry" }),
   industry: (value: string): Fact => ({ label: "Obor", value, icon: "industry" }),
+  year: (value: string): Fact => ({ label: "Rok", value, icon: "year" }),
 };
 
 /**
- * The designer's portfolio — the strongest ten pieces. Client work carries
- * the client's name; concepts carry only the industry (issue #19). More
- * pieces sit in the source folder and can be added the same way.
+ * The designer's portfolio — the strongest twelve pieces. Client work
+ * carries the client's name; concepts carry only the industry (issue #19).
+ * The order here is the display order within each kind. More pieces sit
+ * in the source folder and can be added the same way.
  */
 const all: Project[] = [
   /* ---------------- client work ---------------- */
@@ -144,60 +159,53 @@ const all: Project[] = [
     slug: "kooperativa",
     name: "Kooperativa",
     service: "Sada ikon a merch",
+    caption: "Sada ikon a merch pro Kooperativu",
     category: "icons",
     kind: "client",
-    cover: img("kooperativa", 6),
+    cover: cover("kooperativa"),
     poster: card("kooperativa"),
+    heroImage: "/media/work/kooperativa-hero.jpg",
     isNew: true,
     brief:
-      "Sada ikon pojistných produktů pro Kooperativu: cestovní pojištění, auto, penze, domov a zdraví.",
+      "Sada ikon pojistných produktů pro Kooperativu: cestovní pojištění, vozidla, podnikatelé, majetek a životní pojištění.",
     solution:
       "Pět barevných dlaždic s jednoduchým symbolem, každá s vlastní barvou v CMYK. Ikony pak nesly láhev, visačku pro staff, tašky a tričko na akce.",
     facts: [fact.service("Ikony a merch"), fact.client("Kooperativa")],
     stills: [
-      { src: img("kooperativa", 2), label: "Ikony" },
-      { src: img("kooperativa", 3), label: "Visačka" },
-      { src: img("kooperativa", 4), label: "Tašky" },
+      still("kooperativa", "ikony", "Ikony"),
+      still("kooperativa", "visacky", "Visačky"),
+      still("kooperativa", "tasky", "Tašky"),
     ],
   },
   {
     slug: "hinna",
     name: "Hinna",
-    service: "Logo a merch",
+    service: "Logo",
+    caption: "Logo pro Hinna",
     category: "logo",
     kind: "client",
-    cover: img("hinna", 1),
+    cover: cover("hinna"),
     poster: card("hinna"),
-    brief: "Logo pro módní značku Hinna, která prodává mikiny a trička.",
+    year: "2021",
+    brief:
+      "Logo pro módní značku Hinna, která prodává trička a mikiny z organické bavlny.",
     solution:
-      "Geometrický wordmark s tečkou, jednobarevný, aby seděl na výšivce i na štítku. Aplikace na mikinu, tričko a web.",
-    facts: [fact.service("Logo"), fact.client("Hinna")],
+      "Geometrický wordmark s tečkou, jednobarevný, aby seděl na výšivce, štítku i v hlavičce e-shopu. Značka ho používá od roku 2021.",
+    facts: [fact.service("Logo"), fact.client("Hinna"), fact.year("2021")],
     stills: [
-      { src: img("hinna", 1), label: "Znak" },
-      { src: img("hinna", 2), label: "Wordmark" },
-      { src: img("hinna", 3), label: "Merch" },
+      still("hinna", "web", "Web"),
+      still("hinna", "mikina", "Mikina"),
+      still("hinna", "mikina-bila", "Mikina bílá"),
     ],
-  },
-  {
-    slug: "weber",
-    name: "Weber",
-    service: "Logotyp",
-    category: "logo",
-    kind: "client",
-    cover: img("weber", 1),
-    poster: card("weber"),
-    brief: "Logotyp pro svatební salon Weber.",
-    solution:
-      "Měkký wordmark s motýlem v písmenu b. Barevná, jednobarevná a inverzní verze a návrh na výloze salonu.",
-    facts: [fact.service("Logotyp"), fact.client("Weber")],
   },
   {
     slug: "llama-loca",
     name: "Llama Loca",
     service: "Logo",
+    caption: "Logo pro Llama Loca",
     category: "logo",
     kind: "client",
-    cover: img("llama-loca", 1),
+    cover: cover("llama-loca"),
     poster: card("llama-loca"),
     brief: "Logo pro Llama Loca, malou značku s hravým jménem.",
     solution:
@@ -205,119 +213,181 @@ const all: Project[] = [
     facts: [fact.service("Logo"), fact.client("Llama Loca")],
   },
   {
+    slug: "quality-equals-cost",
+    name: "Quality equals cost",
+    service: "Logo",
+    caption: "Logo pro Quality equals cost",
+    category: "logo",
+    kind: "client",
+    cover: cover("quality-equals-cost"),
+    poster: card("quality-equals-cost"),
+    brief: "Logo pro značku Quality equals cost.",
+    solution:
+      "Červené Q, které zároveň připomíná tlačítko zapnutí, a název ve třech řádcích. Funguje v jedné barvě i v malé velikosti.",
+    facts: [fact.service("Logo"), fact.client("Quality equals cost")],
+  },
+  {
     slug: "kismi",
     name: "Kismi",
     service: "Vizitky a certifikát",
+    caption: "Vizitky a certifikát pro Kismi",
     category: "identity",
     kind: "client",
-    cover: img("kismi", 1),
+    cover: cover("kismi"),
     poster: card("kismi"),
-    brief: "Vizitky a certifikát pro Kismi, kurzy líčení.",
+    brief: "Vizitky a certifikát pro vizážistku Kismi (foto, video, make-up).",
     solution:
       "Bílá, zlatá a růžová, mramorová textura. Oboustranná vizitka a certifikát se zlatou linkou, připravené k tisku.",
     facts: [fact.service("Tiskoviny"), fact.client("Kismi")],
-    stills: [
-      { src: img("kismi", 1), label: "Vizitky" },
-      { src: img("kismi", 2), label: "Certifikát" },
-    ],
+    stills: [still("kismi", "vizitky", "Vizitky")],
   },
 
   /* ---------------- concepts ---------------- */
   {
-    slug: "koncept-kosmetika",
-    name: "Přírodní kosmetika",
-    service: "Obaly",
-    category: "identity",
-    kind: "concept",
-    cover: img("koncept-kosmetika", 3),
-    poster: card("koncept-kosmetika"),
-    brief: "Řada přírodní kosmetiky inspirovaná Asií.",
-    solution:
-      "Lahvička a krabička ve čtyřech barevných variantách podle vůně. Pagoda a torii jako jemný motiv na obalu.",
-    facts: [fact.service("Obaly"), fact.industry("Kosmetika")],
-    stills: [
-      { src: img("koncept-kosmetika", 1), label: "Bílá" },
-      { src: img("koncept-kosmetika", 3), label: "Oranžová" },
-      { src: img("koncept-kosmetika", 4), label: "Modrá" },
-    ],
-  },
-  {
-    slug: "koncept-rezidence",
-    name: "Rezidenční projekt",
+    slug: "koncept-doprava",
+    name: "Dopravní skupina",
     service: "Logo a identita",
+    caption: "Koncept identity — doprava a logistika",
     category: "logo",
     kind: "concept",
-    cover: img("koncept-rezidence", 1),
-    poster: card("koncept-rezidence"),
-    brief: "Rezidenční projekt na okraji města.",
+    cover: cover("koncept-doprava"),
+    poster: card("koncept-doprava"),
+    brief: "Dopravní a logistická skupina s krátkým názvem na V.",
     solution:
-      "Monogram RH z tenkých linek, hnědá a tmavě zelená. Aplikace na vizuál domu, vizitky a hlavičku.",
-    facts: [fact.service("Logo a identita"), fact.industry("Reality")],
-    stills: [
-      { src: img("koncept-rezidence", 1), label: "Identita" },
-      { src: img("koncept-rezidence", 2), label: "Znak" },
-      { src: img("koncept-rezidence", 3), label: "Aplikace" },
+      "Ostré V, do kterého je vepsaný symbol cíle cesty, dálnice a letadla. Červená, černá a bílá, verze se jménem i samostatný piktogram. Lahve, kontejner, vizitky a desky.",
+    facts: [
+      fact.service("Logo a identita"),
+      fact.industry("Doprava a logistika"),
     ],
-  },
-  {
-    slug: "koncept-venave",
-    name: "Technická firma",
-    service: "Logo a identita",
-    category: "logo",
-    kind: "concept",
-    cover: img("koncept-venave", 2),
-    poster: card("koncept-venave"),
-    brief: "Technická firma s krátkým názvem a písmenem V.",
-    solution:
-      "Ostré V v červené a černé, verze pro tmavé i světlé pozadí. Lahve, kontejner, vizitky.",
-    facts: [fact.service("Logo a identita"), fact.industry("Technika")],
     stills: [
-      { src: img("koncept-venave", 1), label: "Značka" },
-      { src: img("koncept-venave", 2), label: "Aplikace" },
-      { src: img("koncept-venave", 4), label: "Varianty" },
-    ],
-  },
-
-  {
-    slug: "koncept-safari-park",
-    name: "Safari park",
-    service: "Ilustrace a merch",
-    category: "icons",
-    kind: "concept",
-    cover: img("koncept-safari-park", 3),
-    poster: card("koncept-safari-park"),
-    brief: "Safari park hledal motivy na plátěné tašky.",
-    solution:
-      "Nosorožec, žirafa a zebra jako plošné ilustrace v teplé paletě, s vlastním nápisem. Tisk na tašky.",
-    facts: [fact.service("Ilustrace"), fact.industry("Zoo a safari")],
-    stills: [
-      { src: img("koncept-safari-park", 1), label: "Nosorožec" },
-      { src: img("koncept-safari-park", 2), label: "Žirafa a zebra" },
-      { src: img("koncept-safari-park", 4), label: "Taška" },
+      still("koncept-doprava", "znacka", "Značka"),
+      still("koncept-doprava", "aplikace", "Aplikace"),
+      still("koncept-doprava", "varianty", "Varianty"),
     ],
   },
   {
     slug: "koncept-danova-poradkyne",
     name: "Daňová poradkyně",
     service: "Logo a identita",
+    caption: "Koncept identity — daňové poradenství",
     category: "logo",
     kind: "concept",
-    cover: img("koncept-danova-poradkyne", 2),
+    cover: cover("koncept-danova-poradkyne"),
     poster: card("koncept-danova-poradkyne"),
     brief: "Daňová poradkyně, která chce působit přesně a klidně.",
     solution:
-      "Wordmark s lomítkem a X v měděné barvě na tmavě modré. Vizitky, hlavička a razítko.",
-    facts: [fact.service("Logo a identita"), fact.industry("Daňové poradenství")],
+      "Wordmark se svislou linkou a X, které je zároveň procentem, v měděné barvě na tmavě modré. Vizitky, hlavička a polep na dveře.",
+    facts: [
+      fact.service("Logo a identita"),
+      fact.industry("Daňové poradenství"),
+    ],
     stills: [
-      { src: img("koncept-danova-poradkyne", 2), label: "Wordmark" },
-      { src: img("koncept-danova-poradkyne", 1), label: "Identita" },
+      still("koncept-danova-poradkyne", "znak", "Znak"),
+      still("koncept-danova-poradkyne", "vizitky", "Vizitky"),
+    ],
+  },
+  {
+    slug: "koncept-rezidence",
+    name: "Rezidenční projekt",
+    service: "Logo",
+    caption: "Návrh loga — rezidenční projekt",
+    category: "logo",
+    kind: "concept",
+    cover: cover("koncept-rezidence"),
+    poster: card("koncept-rezidence"),
+    brief: "Rezidenční projekt na okraji města.",
+    solution:
+      "Tři směry monogramu z iniciál: s lístkem, geometrický z tenkých linek a s ornamentem. Hnědá a tmavě zelená, aplikace na vizuál domu.",
+    facts: [fact.service("Logo"), fact.industry("Reality")],
+    stills: [
+      still("koncept-rezidence", "smer-1", "Směr 1"),
+      still("koncept-rezidence", "smer-2", "Směr 2"),
+      still("koncept-rezidence", "smer-3", "Směr 3"),
+    ],
+  },
+  {
+    slug: "koncept-kosmetika",
+    name: "Přírodní kosmetika",
+    service: "Obaly",
+    caption: "Návrh obalů — přírodní kosmetika",
+    category: "identity",
+    kind: "concept",
+    cover: cover("koncept-kosmetika"),
+    poster: card("koncept-kosmetika"),
+    brief: "Řada přírodní kosmetiky inspirovaná Asií.",
+    solution:
+      "Lahvička a krabička ve čtyřech barevných variantách podle vůně. Pagoda a torii jako jemný motiv na obalu.",
+    facts: [fact.service("Obaly"), fact.industry("Kosmetika")],
+    stills: [
+      still("koncept-kosmetika", "bila", "Bílá"),
+      still("koncept-kosmetika", "oranzova", "Oranžová"),
+      still("koncept-kosmetika", "modra", "Modrá"),
+    ],
+  },
+  {
+    slug: "koncept-autolakovna",
+    name: "Autolakovna",
+    service: "Firemní oblečení",
+    caption: "Návrh firemního oblečení — autolakovna",
+    category: "identity",
+    kind: "concept",
+    cover: cover("koncept-autolakovna"),
+    poster: card("koncept-autolakovna"),
+    brief: "Pracovní polokošile pro tým autolakovny, s logy partnerů na zádech.",
+    solution:
+      "Tři směry: barevné linky na bílé, vlny s opakovaným názvem na šedé a na tyrkysové.",
+    facts: [
+      fact.service("Firemní oblečení"),
+      fact.industry("Autoservis a lakovna"),
+    ],
+    stills: [
+      still("koncept-autolakovna", "bila", "Bílá"),
+      still("koncept-autolakovna", "seda", "Šedá"),
+      still("koncept-autolakovna", "tyrkysova", "Tyrkysová"),
+    ],
+  },
+  {
+    slug: "koncept-maskot",
+    name: "Rodinný e-shop",
+    service: "Maskot a logo",
+    caption: "Návrh maskota — rodinný e-shop",
+    category: "icons",
+    kind: "concept",
+    cover: cover("koncept-maskot"),
+    poster: card("koncept-maskot"),
+    brief: "Rodinný e-shop, který má ve jménu cukr.",
+    solution:
+      "Dvě kostky cukru, které se drží kolem ramen, a čtyřlístek se srdcem. Barevná, černá a inverzní verze, kulatá samolepka.",
+    facts: [fact.service("Maskot a logo"), fact.industry("E-shop")],
+    stills: [
+      still("koncept-maskot", "verze", "Verze"),
+      still("koncept-maskot", "samolepky", "Samolepky"),
+    ],
+  },
+  {
+    slug: "koncept-safari-park",
+    name: "Safari park",
+    service: "Ilustrace a merch",
+    caption: "Ilustrace a merch — safari park",
+    category: "icons",
+    kind: "concept",
+    cover: cover("koncept-safari-park"),
+    poster: card("koncept-safari-park"),
+    brief: "Safari park hledal motivy na plátěné tašky.",
+    solution:
+      "Nosorožec, žirafa a zebra jako plošné ilustrace v teplé paletě, s vlastním nápisem. Tisk na tašky.",
+    facts: [fact.service("Ilustrace"), fact.industry("Zoo a safari")],
+    stills: [
+      still("koncept-safari-park", "nosorozec", "Nosorožec"),
+      still("koncept-safari-park", "zirafa", "Žirafa"),
+      still("koncept-safari-park", "taska", "Taška"),
     ],
   },
 ];
 
 const kindOrder: ProjectKind[] = ["client", "realized", "concept"];
 
-/** Real client work first, then realised concepts, then concepts */
+/** Real client work first, then realised concepts, then concepts (stable sort) */
 export const projects: Project[] = [...all].sort(
   (a, b) => kindOrder.indexOf(a.kind) - kindOrder.indexOf(b.kind),
 );

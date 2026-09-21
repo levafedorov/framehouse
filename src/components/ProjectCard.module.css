@@ -1,16 +1,35 @@
 .card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+/* the image box; the caption sits under it, outside the crop */
+.media {
   position: relative;
   display: block;
   aspect-ratio: 3 / 2;
   border-radius: var(--radius-sm);
   overflow: hidden;
   background: #ece9e1;
-  outline: none;
 }
 
-.card:focus-visible {
+.card:focus-visible .media {
   outline: 2px solid var(--fg);
   outline-offset: 2px;
+}
+
+/* one line under the image: what the piece is */
+.caption {
+  display: block;
+  margin-top: 8px;
+  padding: 0 2px;
+  font-size: 13px;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .poster {

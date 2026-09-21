@@ -308,18 +308,6 @@
 
 .other {
   min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.otherName {
-  font-size: 13px;
-  padding: 0 4px;
-}
-
-.otherClient {
-  font-weight: 600;
 }
 
 /* ------------------------------------------------------------------ */
