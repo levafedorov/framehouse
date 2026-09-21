@@ -55,7 +55,51 @@ export type Project = {
   /** Shows the "Nové" badge */
   isNew?: boolean;
   year: string;
+
+  /* --- detail page, /prace/[slug] --- */
+
+  /** "Zadání": what the client came with, 2–3 plain sentences */
+  brief?: string;
+  /** "Řešení": what we did, 2–3 plain sentences */
+  solution?: string;
+  /** The facts strip: služba, formát, délka, rok … */
+  facts?: Fact[];
+  /** 4:5 frames from the piece, public/media/work/<slug>-<n>.jpg */
+  stills?: Still[];
 };
+
+export type FactIcon = "service" | "format" | "length" | "year" | "channel";
+
+export type Fact = { label: string; value: string; icon: FactIcon };
+
+export type Still = { src: string; label: string };
+
+/** Tile colour of the work's category, shared by the hero and the CTA */
+export const categoryTone: Record<
+  Category,
+  "blue" | "brown" | "rose" | "sage" | "olive"
+> = {
+  video: "blue",
+  logo: "brown",
+  icons: "sage",
+  website: "olive",
+};
+
+export const projectPath = (slug: string) => `/prace/${slug}`;
+
+export const projectBySlug = (slug: string) =>
+  projects.find((p) => p.slug === slug);
+
+/** Up to three other works, the same category first */
+export const relatedProjects = (project: Project): Project[] =>
+  projects
+    .filter((p) => p.slug !== project.slug)
+    .sort(
+      (a, b) =>
+        Number(b.category === project.category) -
+        Number(a.category === project.category),
+    )
+    .slice(0, 3);
 
 const all: Project[] = [
   {
@@ -70,6 +114,21 @@ const all: Project[] = [
     video: "/media/bohemia-hero.mp4",
     poster: "/media/bohemia-card.jpg",
     isNew: true,
+    brief:
+      "Krátká videoreklama na krmivo pro psy, do feedu a stories na Instagramu a TikToku. Klient měl fotky produktu a brief — žádné natočené záběry ani rozpočet na natáčení.",
+    solution:
+      "Video vzniklo bez kamery, z produktových fotek a briefu. Pes v ranní aleji, moment krmení a produkt v záběru, sestříhané do vertikálního formátu pro sítě.",
+    facts: [
+      { label: "Služba", value: "Videoreklama", icon: "service" },
+      { label: "Formát", value: "Vertikální video", icon: "format" },
+      { label: "Délka", value: "12 s", icon: "length" },
+      { label: "Rok", value: "2026", icon: "year" },
+    ],
+    stills: [
+      { src: "/media/work/bohemia-pet-food-1.jpg", label: "Alej" },
+      { src: "/media/work/bohemia-pet-food-2.jpg", label: "Krmení" },
+      { src: "/media/work/bohemia-pet-food-3.jpg", label: "Miska" },
+    ],
   },
   {
     slug: "akinu",
@@ -82,6 +141,21 @@ const all: Project[] = [
     logoShape: "square",
     video: "/media/akinu.mp4",
     poster: "/media/akinu-card.jpg",
+    brief:
+      "Videoreklama pro značku psího krmiva Akinu, pro Instagram a TikTok. K dispozici byly fotky produktu, barvy značky a brief.",
+    solution:
+      "Kreslený příběh v barvách značky: pes, balíček Akinu a cesta k misce, jednou linkou na červené. Bez natáčení, z podkladů klienta, ve vertikálním formátu pro sítě.",
+    facts: [
+      { label: "Služba", value: "Videoreklama", icon: "service" },
+      { label: "Formát", value: "9:16", icon: "format" },
+      { label: "Délka", value: "10 s", icon: "length" },
+      { label: "Rok", value: "2026", icon: "year" },
+    ],
+    stills: [
+      { src: "/media/work/akinu-1.jpg", label: "Silueta" },
+      { src: "/media/work/akinu-2.jpg", label: "Balíček" },
+      { src: "/media/work/akinu-3.jpg", label: "Značka" },
+    ],
   },
   {
     slug: "dogfitness",
@@ -94,6 +168,21 @@ const all: Project[] = [
     logoShape: "wide",
     video: "/media/dogfitness.mp4",
     poster: "/media/dogfitness-card.jpg",
+    brief:
+      "Dogfitness.cz mělo hotové logo a chtělo ho rozhýbat: krátkou animaci na začátek videí a do stories.",
+    solution:
+      "Pes z loga se rozběhne a doběhne k nápisu. Jedna krátká smyčka, která funguje i bez zvuku, předaná jako MP4 ve vertikálním formátu.",
+    facts: [
+      { label: "Služba", value: "Animace loga", icon: "service" },
+      { label: "Formát", value: "9:16", icon: "format" },
+      { label: "Délka", value: "8 s", icon: "length" },
+      { label: "Rok", value: "2026", icon: "year" },
+    ],
+    stills: [
+      { src: "/media/work/dogfitness-1.jpg", label: "Pes" },
+      { src: "/media/work/dogfitness-2.jpg", label: "Rozběh" },
+      { src: "/media/work/dogfitness-3.jpg", label: "Logo" },
+    ],
   },
   {
     slug: "aromatica",
@@ -104,6 +193,15 @@ const all: Project[] = [
     kind: "client",
     logo: "/media/logo-aromatica.jpg",
     logoShape: "square",
+    brief:
+      "Sada ikon pro instagramový profil Aromatica, aby výběry příběhů a posty držely jeden styl.",
+    solution:
+      "Ikony v jemném akvarelovém stylu, který navazuje na značku: jedna paleta, jedna mřížka. Předáno jako PNG pro Instagram.",
+    facts: [
+      { label: "Služba", value: "Ikony", icon: "service" },
+      { label: "Použití", value: "Instagram", icon: "channel" },
+      { label: "Rok", value: "2026", icon: "year" },
+    ],
   },
   // TODO: add the TopDesigner.cz logo concepts (issue #19) as kind: "concept"
 ];

@@ -1,14 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
-import { kindLabel, type Project } from "@/data/projects";
+import { kindLabel, projectPath, type Project } from "@/data/projects";
 import styles from "./ProjectCard.module.css";
 
 /**
  * A landscape card the work fills edge to edge. Only two things sit on
  * top of it: the kind tag (Klient / Realizace / Koncept) and, for new
  * pieces, "Nové". The name lives in the row label, not on the card.
+ * The whole card is one link to the work's page, /prace/[slug]; the
+ * loop plays while it is hovered or focused.
  */
 export default function ProjectCard({ project }: { project: Project }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -23,13 +26,13 @@ export default function ProjectCard({ project }: { project: Project }) {
   const stop = () => videoRef.current?.pause();
 
   return (
-    <article
+    <Link
+      href={projectPath(project.slug)}
       className={styles.card}
       onMouseEnter={play}
       onMouseLeave={stop}
       onFocus={play}
       onBlur={stop}
-      tabIndex={0}
       aria-label={`${project.name} — ${project.service}`}
     >
       {project.video && project.poster ? (
@@ -69,6 +72,6 @@ export default function ProjectCard({ project }: { project: Project }) {
       {project.isNew && (
         <span className={`eyebrow ${styles.tag} ${styles.new}`}>Nové</span>
       )}
-    </article>
+    </Link>
   );
 }

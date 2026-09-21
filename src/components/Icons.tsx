@@ -155,6 +155,40 @@ export function ShieldIcon({ size = 24, ...rest }: Props) {
   );
 }
 
+/* Facts strip on a work page */
+
+export function ClapperIcon({ size = 24, ...rest }: Props) {
+  return (
+    <svg {...base(size, rest)}>
+      <rect x="3" y="9" width="18" height="11" rx="1.5" />
+      <path d="M3 9l2-4h16l-2 4" />
+      <path d="M9 5l-2 4" />
+      <path d="M14 5l-2 4" />
+      <path d="M19 5l-2 4" />
+    </svg>
+  );
+}
+
+export function PhoneIcon({ size = 24, ...rest }: Props) {
+  return (
+    <svg {...base(size, rest)}>
+      <rect x="7" y="3" width="10" height="18" rx="2" />
+      <path d="M11 17.5h2" />
+    </svg>
+  );
+}
+
+export function CalendarIcon({ size = 24, ...rest }: Props) {
+  return (
+    <svg {...base(size, rest)}>
+      <rect x="4" y="5" width="16" height="15" rx="1.5" />
+      <path d="M4 10h16" />
+      <path d="M8 3v4" />
+      <path d="M16 3v4" />
+    </svg>
+  );
+}
+
 /* Social */
 
 export function InstagramIcon({ size = 18, ...rest }: Props) {
