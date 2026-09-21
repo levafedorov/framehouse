@@ -5,15 +5,15 @@ import { notFound } from "next/navigation";
 import Button from "@/components/Button";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { ArrowRight, ChevronLeft } from "@/components/Icons";
-import ProjectCard from "@/components/ProjectCard";
-import { bundles } from "@/data/bundles";
+import { ArrowRight } from "@/components/Icons";
+import { bundleTitle } from "@/data/bundles";
 import {
-  defaultSteps,
   serviceById,
   serviceExamples,
+  serviceHero,
   serviceTerms,
   services,
+  type Tone,
 } from "@/data/services";
 import { site } from "@/data/site";
 import styles from "./page.module.css";
@@ -34,11 +34,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+/** the lead-time card sits next to the price card in a contrasting tone */
+const pairTone: Record<Tone, Tone> = {
+  blue: "olive",
+  brown: "sage",
+  rose: "sage",
+  sage: "brown",
+  olive: "blue",
+};
+
+const stepArt = ["/media/services/steps/1.jpg", "/media/services/steps/2.jpg", "/media/services/steps/3.jpg", "/media/services/steps/4.jpg"];
+
 /**
- * One service, standing on its own for paid traffic (issue #21): the
- * heading with the same one-line result as the tile, examples of exactly
- * this work, then what you get, how it goes, price, lead time, what is not
- * included, the bundle it belongs to and the offer CTA.
+ * One service on its own page (issue #21), laid out after the Higgsfield
+ * mockup derived from the homepage: hero card with a watercolor
+ * illustration, three examples, what you get, four illustrated steps,
+ * price and lead-time cards, what is not included, closing CTA.
  */
 export default async function ServicePage({ params }: Props) {
   const { id } = await params;
@@ -46,158 +57,205 @@ export default async function ServicePage({ params }: Props) {
   if (!service) notFound();
 
   const examples = serviceExamples(service);
-  const steps = service.steps ?? defaultSteps;
-  const bundle = service.bundle
-    ? bundles.find((b) => b.id === service.bundle)
-    : undefined;
-  const aside = bundle || service.note;
-  const mailto = `mailto:${site.contactEmail}?subject=${encodeURIComponent(
-    service.title,
-  )}`;
+  const mailto = `mailto:${site.contactEmail}?subject=${encodeURIComponent(service.title)}`;
 
   return (
     <>
       <Header />
       <main>
-        <section className={`shell ${styles.intro}`} id="top">
-          <div className={`${styles.card} ${styles[service.tone]}`}>
-            <Image
-              src={`/media/services/${service.id}.png`}
-              alt=""
-              width={150}
-              height={150}
-              className={styles.pictogram}
-              priority
-            />
-            <Link href="/#services" className={`eyebrow ${styles.back}`}>
-              <ChevronLeft size={12} />
-              Služby a ceny
-            </Link>
-            <h1 className={`serif ${styles.title}`}>{service.title}</h1>
-            <p className={styles.lead}>{service.result}</p>
-            <p className={`eyebrow ${styles.meta}`}>
-              {service.from} · {service.days}
-            </p>
+        {/* hero */}
+        <section className={`shell ${styles.heroWrap}`} id="top">
+          <div className={`${styles.hero} ${styles[service.tone]}`}>
+            <div className={styles.heroCopy}>
+              <p className={`eyebrow ${styles.eyebrow}`}>Služba</p>
+              <h1 className={`serif ${styles.title}`}>{service.title}</h1>
+              <p className={styles.lead}>{service.result}</p>
+
+              <dl className={styles.stats}>
+                <div className={styles.stat}>
+                  <dt className="eyebrow">od</dt>
+                  <dd className={`serif ${styles.statValue}`}>
+                    {service.from.replace(/^od\s+/, "")}
+                  </dd>
+                </div>
+                <div className={styles.stat}>
+                  <dt className="eyebrow">dodání</dt>
+                  <dd className={`serif ${styles.statValue}`}>{service.days}</dd>
+                </div>
+              </dl>
+
+              <ul className={styles.facts}>
+                {service.facts.map((f) => (
+                  <li key={f}>{f}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className={styles.heroArt}>
+              <Image
+                src={serviceHero(service.id)}
+                alt=""
+                width={520}
+                height={520}
+                priority
+                sizes="(max-width: 900px) 60vw, 36vw"
+                className={styles.heroImg}
+              />
+            </div>
           </div>
         </section>
 
+        {/* examples */}
         {examples.length > 0 && (
-          <section
-            className={`shell ${styles.examples}`}
-            aria-labelledby="examples-title"
-          >
+          <section className={`shell ${styles.section}`} aria-labelledby="examples-title">
             <div className={styles.head}>
               <h2 id="examples-title" className={`eyebrow ${styles.heading}`}>
-                Ukázky
+                Příklady prací
               </h2>
-              <p className={`muted ${styles.hint}`}>
-                Co jsme v této službě už udělali.
-              </p>
+              <Link href="/#work" className={`eyebrow ${styles.headLink}`}>
+                Zobrazit všechny práce
+                <ArrowRight size={12} />
+              </Link>
             </div>
-            <ul className={styles.examplesGrid}>
+            <ul className={styles.examples}>
               {examples.map((p) => (
                 <li key={p.slug} className={styles.example}>
-                  <ProjectCard project={p} />
-                  <p className={styles.exampleName}>
-                    <span className={styles.exampleClient}>{p.name}</span>
-                    <span className="muted"> — {p.service}</span>
-                  </p>
+                  {p.poster ? (
+                    <Image
+                      src={p.poster}
+                      alt=""
+                      fill
+                      sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+                      className={styles.exampleImg}
+                    />
+                  ) : (
+                    <div className={styles.exampleTile}>
+                      <Image src={p.logo} alt="" width={140} height={140} className={styles.exampleLogo} />
+                    </div>
+                  )}
+                  <span className={`eyebrow ${styles.exampleTag}`}>{p.service}</span>
+                  <span className={`serif ${styles.exampleName}`}>{p.name}</span>
                 </li>
               ))}
             </ul>
           </section>
         )}
 
-        <section className={`shell ${styles.details}`} aria-label="Podrobnosti">
-          <div className={styles.grid}>
-            <div className={`${styles.box} ${styles.wide}`}>
-              <h2 className={`eyebrow ${styles.label}`}>Co dostanete</h2>
-              <ul className={`${styles.list} ${styles.checks}`}>
-                {service.deliverables.map((d) => (
-                  <li key={d}>{d}</li>
-                ))}
-              </ul>
-            </div>
+        {/* what you get */}
+        <section className={`shell ${styles.section}`} aria-labelledby="get-title">
+          <div className={styles.box}>
+            <h2 id="get-title" className={`eyebrow ${styles.boxLabel}`}>
+              Co dostanete
+            </h2>
+            <ul className={styles.checks}>
+              {service.deliverables.map((d) => (
+                <li key={d} className={styles.check}>
+                  <span className={styles.mark} aria-hidden>
+                    ✓
+                  </span>
+                  {d}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
-            <div className={`${styles.box} ${styles.wide}`}>
-              <h2 className={`eyebrow ${styles.label}`}>Jak to probíhá</h2>
-              <ol className={`${styles.list} ${styles.steps}`}>
-                {steps.map((s) => (
-                  <li key={s}>{s}</li>
-                ))}
-              </ol>
-              <p className={`muted ${styles.fine}`}>{serviceTerms.payment}</p>
-            </div>
+        {/* process */}
+        <section className={`shell ${styles.section}`} aria-labelledby="steps-title">
+          <div className={styles.head}>
+            <h2 id="steps-title" className={`eyebrow ${styles.heading}`}>
+              Jak to probíhá
+            </h2>
+            <p className={`muted ${styles.hint}`}>{serviceTerms.payment}</p>
+          </div>
+          <ol className={styles.steps}>
+            {service.steps.map((s, i) => (
+              <li key={s.title} className={styles.step}>
+                <div className={styles.stepHead}>
+                  <span className={styles.stepNo}>{i + 1}</span>
+                  <div>
+                    <h3 className={`eyebrow ${styles.stepTitle}`}>{s.title}</h3>
+                    <p className={styles.stepText}>{s.text}</p>
+                  </div>
+                </div>
+                <Image
+                  src={stepArt[i]}
+                  alt=""
+                  width={300}
+                  height={300}
+                  sizes="(max-width: 600px) 40vw, 22vw"
+                  className={styles.stepArt}
+                />
+              </li>
+            ))}
+          </ol>
+        </section>
 
-            <div className={`${styles.box} ${styles.narrow}`}>
-              <h2 className={`eyebrow ${styles.label}`}>Cena</h2>
-              <p className={`serif ${styles.big}`}>{service.from}</p>
-              <p className={styles.text}>{service.priceNote}</p>
-              <p className={`muted ${styles.fine}`}>{serviceTerms.licence}</p>
-            </div>
-
-            <div className={`${styles.box} ${styles.narrow}`}>
-              <h2 className={`eyebrow ${styles.label}`}>Termín</h2>
-              <p className={`serif ${styles.big}`}>obvykle {service.days}</p>
-              <p className={styles.text}>{service.termNote}</p>
-            </div>
-
-            <div className={`${styles.box} ${styles.narrow}`}>
-              <h2 className={`eyebrow ${styles.label}`}>Co není součástí</h2>
-              <ul className={`${styles.list} ${styles.dashes}`}>
-                {service.excluded.map((e) => (
-                  <li key={e}>{e}</li>
-                ))}
-              </ul>
-            </div>
-
-            {bundle ? (
-              <div className={`${styles.box} ${styles.narrow}`}>
-                <h2 className={`eyebrow ${styles.label}`}>Součást balíčku</h2>
-                <p className={`serif ${styles.big}`}>{bundle.title}</p>
-                <p className={styles.text}>{bundle.audience}</p>
-                <p className={`eyebrow ${styles.bundleFrom}`}>
-                  {bundle.from} · {bundle.term}
-                </p>
-                <Link href="/#bundles" className={styles.more}>
-                  Zobrazit balíček
+        {/* price & lead time */}
+        <section className={`shell ${styles.section}`} aria-label="Cena a termín">
+          <div className={styles.pair}>
+            <div className={`${styles.big} ${styles[service.tone]}`}>
+              <p className="eyebrow">Investice</p>
+              <p className={`serif ${styles.bigValue}`}>{service.from}</p>
+              <p className={styles.bigNote}>{service.priceNote}</p>
+              {service.bundle && (
+                <Link href="/#bundles" className={styles.bigLink}>
+                  Součást balíčku {bundleTitle(service.bundle)}
                   <ArrowRight size={12} />
                 </Link>
-              </div>
-            ) : (
-              service.note && (
-                <div className={`${styles.box} ${styles.narrow}`}>
-                  <h2 className={`eyebrow ${styles.label}`}>Tip</h2>
-                  <p className={styles.text}>{service.note.text}</p>
-                  <Link href={service.note.href} className={styles.more}>
-                    Balíčky
-                    <ArrowRight size={12} />
-                  </Link>
-                </div>
-              )
-            )}
-
-            <div
-              className={`${styles.box} ${styles.cta} ${styles[service.tone]} ${
-                aside ? "" : styles.ctaFull
-              }`}
-            >
-              <h2 className={`serif ${styles.ctaTitle}`}>
-                Napište, co potřebujete. {site.announcement}.
-              </h2>
-              <div className={styles.ctaRow}>
-                <Button href={mailto} variant="light" size="sm">
-                  Chci nabídku
-                  <ArrowRight size={12} />
-                </Button>
-                <p className={styles.ctaHint}>
-                  Nebo rovnou na{" "}
-                  <a href={mailto} className={styles.ctaMail}>
-                    {site.contactEmail}
-                  </a>
-                </p>
-              </div>
+              )}
+              <Button href={mailto} size="sm" className={styles.bigCta}>
+                Chci nabídku
+                <ArrowRight size={12} />
+              </Button>
             </div>
+            <div className={`${styles.big} ${styles[pairTone[service.tone]]}`}>
+              <p className="eyebrow">Dodání</p>
+              <p className={`serif ${styles.bigValue}`}>{service.days}</p>
+              <p className={styles.bigNote}>{service.termNote}</p>
+              <p className={styles.bigFine}>{serviceTerms.licence}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* not included */}
+        <section className={`shell ${styles.section}`} aria-labelledby="not-title">
+          <div className={`${styles.box} ${styles.outlined}`}>
+            <h2 id="not-title" className={`eyebrow ${styles.boxLabel}`}>
+              Co není součástí
+            </h2>
+            <ul className={styles.checks}>
+              {service.excluded.map((e) => (
+                <li key={e} className={styles.check}>
+                  <span className={`${styles.mark} ${styles.cross}`} aria-hidden>
+                    ×
+                  </span>
+                  {e}
+                </li>
+              ))}
+            </ul>
+            {service.note && (
+              <p className={`muted ${styles.note}`}>
+                {service.note.text}{" "}
+                <Link href={service.note.href} className={styles.noteLink}>
+                  Balíčky
+                  <ArrowRight size={12} />
+                </Link>
+              </p>
+            )}
+          </div>
+        </section>
+
+        {/* closing CTA */}
+        <section className={`shell ${styles.section} ${styles.last}`} aria-label="Poptávka">
+          <div className={`${styles.cta} ${styles[service.tone]}`}>
+            <Image src="/media/services/leaves.webp" alt="" width={260} height={260} className={`${styles.leaf} ${styles.leafLeft}`} />
+            <Image src="/media/services/leaves.webp" alt="" width={260} height={260} className={`${styles.leaf} ${styles.leafRight}`} />
+            <h2 className={`serif ${styles.ctaTitle}`}>{service.ctaTitle}</h2>
+            <Button href={mailto} variant="light" size="sm">
+              Chci nabídku
+              <ArrowRight size={12} />
+            </Button>
           </div>
         </section>
       </main>
