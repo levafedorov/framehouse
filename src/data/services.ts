@@ -314,4 +314,6 @@ export const serviceExamples = (service: Service): Project[] =>
     .slice(0, 3);
 
 /** Watercolor hero illustration, public/media/services/hero */
-export const serviceHero = (id: ServiceId) => `/media/services/hero/${id}.webp`;
+/* file names carry a style suffix: replacing an image must change its URL,
+   because optimized variants are cached for a year */
+export const serviceHero = (id: ServiceId) => `/media/services/hero/${id}-flat.webp`;

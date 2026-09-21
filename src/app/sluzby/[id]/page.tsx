@@ -43,7 +43,7 @@ const pairTone: Record<Tone, Tone> = {
   olive: "blue",
 };
 
-const stepArt = ["/media/services/steps/1.jpg", "/media/services/steps/2.jpg", "/media/services/steps/3.jpg", "/media/services/steps/4.jpg"];
+const stepArt = [1, 2, 3, 4].map((n) => `/media/services/steps/${n}-flat.jpg`);
 
 /**
  * One service on its own page (issue #21), laid out after the Higgsfield
@@ -249,8 +249,8 @@ export default async function ServicePage({ params }: Props) {
         {/* closing CTA */}
         <section className={`shell ${styles.section} ${styles.last}`} aria-label="Poptávka">
           <div className={`${styles.cta} ${styles[service.tone]}`}>
-            <Image src="/media/services/leaves.webp" alt="" width={260} height={260} className={`${styles.leaf} ${styles.leafLeft}`} />
-            <Image src="/media/services/leaves.webp" alt="" width={260} height={260} className={`${styles.leaf} ${styles.leafRight}`} />
+            <Image src="/media/services/leaves-flat.webp" alt="" width={260} height={260} className={`${styles.leaf} ${styles.leafLeft}`} />
+            <Image src="/media/services/leaves-flat.webp" alt="" width={260} height={260} className={`${styles.leaf} ${styles.leafRight}`} />
             <h2 className={`serif ${styles.ctaTitle}`}>{service.ctaTitle}</h2>
             <Button href={mailto} variant="light" size="sm">
               Chci nabídku
