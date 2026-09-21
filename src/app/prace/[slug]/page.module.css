@@ -1,0 +1,507 @@
+/* ------------------------------------------------------------------ */
+/* hero: the piece on the left, the copy on a tile in the category's   */
+/* colour on the right — one card, split in two like the homepage hero */
+/* ------------------------------------------------------------------ */
+
+.intro {
+  padding-bottom: 0;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  min-height: 560px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  color: #f3f1ea;
+}
+
+.blue {
+  background: var(--tile-blue);
+}
+
+.brown {
+  background: var(--tile-brown);
+}
+
+.rose {
+  background: var(--tile-rose);
+}
+
+.sage {
+  background: var(--tile-sage);
+}
+
+.olive {
+  background: var(--tile-olive);
+}
+
+.media {
+  position: relative;
+  min-height: 420px;
+  background: #ece9e1;
+}
+
+/* logo-only work: the mark on a light tile, like the work card */
+.mediaLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3efe8;
+}
+
+.logo {
+  width: 42%;
+  max-width: 260px;
+  height: auto;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+}
+
+/* the kind tag, the same as on the cards */
+.tag {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 3;
+  height: 24px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--pill);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.new {
+  left: auto;
+  right: 16px;
+  bottom: auto;
+  top: 16px;
+  background: var(--fg);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px 44px 44px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  opacity: 0.85;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.back:hover {
+  border-color: currentColor;
+}
+
+.title {
+  font-size: 56px;
+  line-height: 1.02;
+  max-width: 16ch;
+  margin-top: auto;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.metaKey {
+  min-width: 64px;
+  height: 22px;
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--pill);
+  border: 1px solid rgba(243, 241, 234, 0.6);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+
+.metaValue {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+/* ------------------------------------------------------------------ */
+/* zadání / řešení: two white cards, the first sentence in serif       */
+/* ------------------------------------------------------------------ */
+
+.stories {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
+  padding-top: var(--gap);
+}
+
+.story {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 30px 32px 34px;
+  background: var(--card);
+  border-radius: var(--radius);
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.lead {
+  font-size: 28px;
+  line-height: 1.18;
+  max-width: 26ch;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 48ch;
+}
+
+/* ------------------------------------------------------------------ */
+/* frames from the piece: three portrait stills, numbered              */
+/* ------------------------------------------------------------------ */
+
+.frames {
+  padding-top: var(--gap);
+}
+
+.framesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #ece9e1;
+}
+
+.frameImg {
+  object-fit: cover;
+}
+
+/* numbered caption in the same pill as the kind tag, so it reads on
+   light frames (a logo on white) as well as on photos */
+.caption {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 1;
+  height: 24px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--pill);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ------------------------------------------------------------------ */
+/* facts strip: one white card, columns divided by hairlines           */
+/* ------------------------------------------------------------------ */
+
+.factsWrap {
+  padding-top: var(--gap);
+}
+
+.facts {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 30px 16px;
+  background: var(--card);
+  border-radius: var(--radius);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 4px 12px;
+  border-left: 1px solid var(--line);
+}
+
+.fact:first-child {
+  border-left: 0;
+}
+
+.factIcon {
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.factKey {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.factValue {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ------------------------------------------------------------------ */
+/* další práce: the same landscape cards as the work section           */
+/* ------------------------------------------------------------------ */
+
+.others {
+  padding-top: 30px;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 4px 16px;
+}
+
+.heading {
+  font-size: 12px;
+  font-weight: 600;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid var(--fg);
+}
+
+.all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  transition: color 0.15s ease;
+}
+
+.all:hover {
+  color: var(--fg);
+}
+
+.othersGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.other {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.otherName {
+  font-size: 13px;
+  padding: 0 4px;
+}
+
+.otherClient {
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ */
+/* the offer: one rose card with a watercolor wash behind the button   */
+/* ------------------------------------------------------------------ */
+
+.offer {
+  padding-top: 30px;
+  padding-bottom: 26px;
+}
+
+.cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 200px;
+  padding: 40px 44px;
+  border-radius: var(--radius);
+  background: var(--tile-rose);
+  color: #f3f1ea;
+  overflow: hidden;
+}
+
+/* the wash sits low right, under the button, and never blocks a click */
+.wash {
+  position: absolute;
+  right: -40px;
+  bottom: -150px;
+  width: 520px;
+  height: 520px;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.ctaCopy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ctaTitle {
+  font-size: 40px;
+  line-height: 1.05;
+}
+
+.ctaText {
+  font-size: 14px;
+  opacity: 0.9;
+  max-width: 40ch;
+}
+
+.cta > a {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .media {
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+
+  .copy {
+    gap: 22px;
+    padding: 28px 28px 32px;
+  }
+
+  .title {
+    font-size: 42px;
+    margin-top: 0;
+  }
+
+  .stories {
+    grid-template-columns: 1fr;
+  }
+
+  .lead {
+    font-size: 24px;
+  }
+
+  .facts {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 24px;
+    padding: 26px 8px;
+  }
+
+  .fact:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .othersGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ctaTitle {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 600px) {
+  .media {
+    aspect-ratio: 3 / 4;
+  }
+
+  .tag {
+    left: 12px;
+    bottom: 12px;
+  }
+
+  .new {
+    left: auto;
+    right: 12px;
+    top: 12px;
+  }
+
+  .copy {
+    padding: 22px 20px 26px;
+  }
+
+  .title {
+    font-size: 34px;
+  }
+
+  .story {
+    padding: 22px 20px 24px;
+  }
+
+  .lead {
+    font-size: 22px;
+  }
+
+  .framesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .othersGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 26px 22px 28px;
+  }
+
+  .wash {
+    width: 380px;
+    height: 380px;
+    right: -120px;
+    bottom: -120px;
+    opacity: 0.6;
+  }
+
+  .ctaTitle {
+    font-size: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back,
+  .all {
+    transition: none;
+  }
+}
