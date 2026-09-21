@@ -13,6 +13,8 @@ import {
   ClockIcon,
   InstagramIcon,
   PhoneIcon,
+  StoreIcon,
+  TrophyIcon,
 } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
 import WorkVideo from "@/components/WorkVideo";
@@ -22,7 +24,9 @@ import {
   projectBySlug,
   projects,
   relatedProjects,
+  storyLabels,
   type FactIcon,
+  type Project,
 } from "@/data/projects";
 import { site } from "@/data/site";
 import styles from "./page.module.css";
@@ -49,7 +53,28 @@ const factIcon: Record<FactIcon, typeof ClapperIcon> = {
   length: ClockIcon,
   year: CalendarIcon,
   channel: InstagramIcon,
+  industry: StoreIcon,
+  context: TrophyIcon,
 };
+
+/**
+ * The offer under the work. A concept has no client behind it, so it asks
+ * about the visitor's own firm instead of "something similar".
+ */
+function offer(project: Project) {
+  if (project.kind === "concept") {
+    return {
+      title: `Chcete ${project.service.toLowerCase()} pro svou firmu?`,
+      text: `Napište, co děláte. ${site.announcement}.`,
+      subject: project.service,
+    };
+  }
+  return {
+    title: "Chcete něco podobného?",
+    text: `Napište, co potřebujete. ${site.announcement}.`,
+    subject: `Něco jako ${project.name} — ${project.service}`,
+  };
+}
 
 /** First sentence set in serif, the rest in the small sans */
 function splitLead(text: string): [string, string] {
@@ -74,6 +99,11 @@ function Story({ label, text }: { label: string; text: string }) {
  * category's colour, the brief and what we did, frames from the piece,
  * a strip of facts, three other works and the offer. The layout follows
  * the case-study mockup generated from the homepage (GPT Image 2).
+ *
+ * Kinds: client and realised work share the layout (the tag says which);
+ * a concept (issue #19) names only the industry and the context, reads
+ * "Výchozí bod / Co jsme zkoušeli" and ends with an offer for the
+ * visitor's own firm.
  */
 export default async function WorkPage({ params }: Props) {
   const { slug } = await params;
@@ -81,9 +111,12 @@ export default async function WorkPage({ params }: Props) {
   if (!project) notFound();
 
   const tone = categoryTone[project.category];
+  const concept = project.kind === "concept";
+  const [briefLabel, solutionLabel] = storyLabels[project.kind];
   const others = relatedProjects(project);
+  const cta = offer(project);
   const mailto = `mailto:${site.contactEmail}?subject=${encodeURIComponent(
-    `Něco jako ${project.name} — ${project.service}`,
+    cta.subject,
   )}`;
 
   return (
@@ -128,12 +161,29 @@ export default async function WorkPage({ params }: Props) {
                 {project.service}
               </h1>
               <dl className={styles.meta}>
-                <div className={styles.metaRow}>
-                  <dt className={`eyebrow ${styles.metaKey}`}>
-                    {kindLabel[project.kind]}
-                  </dt>
-                  <dd className={styles.metaValue}>{project.name}</dd>
-                </div>
+                {concept ? (
+                  <>
+                    <div className={styles.metaRow}>
+                      <dt className={`eyebrow ${styles.metaKey}`}>Obor</dt>
+                      <dd className={styles.metaValue}>{project.name}</dd>
+                    </div>
+                    {project.context && (
+                      <div className={styles.metaRow}>
+                        <dt className={`eyebrow ${styles.metaKey}`}>
+                          Kontext
+                        </dt>
+                        <dd className={styles.metaValue}>{project.context}</dd>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className={styles.metaRow}>
+                    <dt className={`eyebrow ${styles.metaKey}`}>
+                      {kindLabel[project.kind]}
+                    </dt>
+                    <dd className={styles.metaValue}>{project.name}</dd>
+                  </div>
+                )}
                 <div className={styles.metaRow}>
                   <dt className={`eyebrow ${styles.metaKey}`}>Rok</dt>
                   <dd className={styles.metaValue}>{project.year}</dd>
@@ -145,9 +195,9 @@ export default async function WorkPage({ params }: Props) {
 
         {(project.brief || project.solution) && (
           <section className={`shell ${styles.stories}`} aria-label="O práci">
-            {project.brief && <Story label="Zadání" text={project.brief} />}
+            {project.brief && <Story label={briefLabel} text={project.brief} />}
             {project.solution && (
-              <Story label="Řešení" text={project.solution} />
+              <Story label={solutionLabel} text={project.solution} />
             )}
           </section>
         )}
@@ -229,12 +279,8 @@ export default async function WorkPage({ params }: Props) {
               className={styles.wash}
             />
             <div className={styles.ctaCopy}>
-              <h2 className={`serif ${styles.ctaTitle}`}>
-                Chcete něco podobného?
-              </h2>
-              <p className={styles.ctaText}>
-                Napište, co potřebujete. {site.announcement}.
-              </p>
+              <h2 className={`serif ${styles.ctaTitle}`}>{cta.title}</h2>
+              <p className={styles.ctaText}>{cta.text}</p>
             </div>
             <Button href={mailto} variant="light">
               Popište nám projekt

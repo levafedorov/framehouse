@@ -58,17 +58,42 @@ export type Project = {
 
   /* --- detail page, /prace/[slug] --- */
 
-  /** "Zadání": what the client came with, 2–3 plain sentences */
+  /**
+   * The two story cards. The same pair of fields serves every kind; only
+   * the labels differ (see `storyLabels`): client and realised work read
+   * "Zadání / Řešení", a concept — which had no client brief — reads
+   * "Výchozí bod / Co jsme zkoušeli".
+   */
+  /** What the work starts from, 2–3 plain sentences */
   brief?: string;
-  /** "Řešení": what we did, 2–3 plain sentences */
+  /** What we did or tried, 2–3 plain sentences */
   solution?: string;
-  /** The facts strip: služba, formát, délka, rok … */
+  /**
+   * Concepts only: where the piece comes from — a competition, a study —
+   * shown next to the industry in the hero (never a client name)
+   */
+  context?: string;
+  /** The facts strip: služba, formát, délka, rok … (concepts: obor, kontext) */
   facts?: Fact[];
   /** 4:5 frames from the piece, public/media/work/<slug>-<n>.jpg */
   stills?: Still[];
 };
 
-export type FactIcon = "service" | "format" | "length" | "year" | "channel";
+/** Labels of the two story cards, per kind */
+export const storyLabels: Record<ProjectKind, [string, string]> = {
+  client: ["Zadání", "Řešení"],
+  realized: ["Zadání", "Řešení"],
+  concept: ["Výchozí bod", "Co jsme zkoušeli"],
+};
+
+export type FactIcon =
+  | "service"
+  | "format"
+  | "length"
+  | "year"
+  | "channel"
+  | "industry"
+  | "context";
 
 export type Fact = { label: string; value: string; icon: FactIcon };
 
@@ -203,7 +228,35 @@ const all: Project[] = [
       { label: "Rok", value: "2026", icon: "year" },
     ],
   },
-  // TODO: add the TopDesigner.cz logo concepts (issue #19) as kind: "concept"
+  // TODO: replace with the real TopDesigner.cz concept (issue #19) — the
+  // images below are a generated placeholder so the concept layout can be
+  // tested. Concepts carry the industry as `name`, never a client name.
+  {
+    slug: "koncept-pekarna",
+    year: "2026",
+    name: "Pekárna",
+    service: "Návrh loga",
+    category: "logo",
+    kind: "concept",
+    logo: "/media/work/koncept-pekarna-1.jpg",
+    logoShape: "square",
+    context: "Soutěžní návrh",
+    brief:
+      "Malá řemeslná pekárna bez vlastní značky. Chtěli jsme značku, která obstojí na papírovém sáčku i na ceduli nad vchodem a nepotřebuje k tomu doprovodný text.",
+    solution:
+      "Klas v kruhu, dvě barvy: tmavě hnědá a okrová. Zkoušeli jsme sílu linky a míru zjednodušení, aby znak fungoval i v malé velikosti na razítku.",
+    facts: [
+      { label: "Služba", value: "Návrh loga", icon: "service" },
+      { label: "Obor", value: "Pekárna", icon: "industry" },
+      { label: "Kontext", value: "Soutěžní návrh", icon: "context" },
+      { label: "Rok", value: "2026", icon: "year" },
+    ],
+    stills: [
+      { src: "/media/work/koncept-pekarna-1.jpg", label: "Znak" },
+      { src: "/media/work/koncept-pekarna-2.jpg", label: "Sáček" },
+      { src: "/media/work/koncept-pekarna-3.jpg", label: "Cedule" },
+    ],
+  },
 ];
 
 const kindOrder: ProjectKind[] = ["client", "realized", "concept"];
