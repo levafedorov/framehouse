@@ -1,13 +1,18 @@
 import Image from "next/image";
 import Button from "./Button";
-import HeroVideo from "./HeroVideo";
 import { ArrowRight } from "./Icons";
-import { heroProject } from "@/data/projects";
+import { heroProject, projectPath } from "@/data/projects";
 import { site } from "@/data/site";
 import styles from "./Hero.module.css";
 
-const strip = ["Video", "Logo", "Ikony", "Web"];
+const strip = ["Logo", "Ikony", "Web", "Tisk"];
 
+/**
+ * Two pieces of real work side by side: a concept on the left, the
+ * newest client piece on the right with the headline over it.
+ * (The video panel that used to sit on the right is parked until video
+ * ads are back on the menu.)
+ */
 export default function Hero() {
   return (
     <section className={`shell ${styles.section}`} id="top">
@@ -16,14 +21,14 @@ export default function Hero() {
           {/* hidden on phones (see .left in the CSS), so it must not be
               preloaded — lazy images inside display:none are never fetched */}
           <Image
-            src="/media/bohemia-run.jpg"
-            alt="Pes běží ranní alejí — záběr z videoreklamy pro Bohemia Pet Food"
+            src="/media/work/koncept-kosmetika-3.jpg"
+            alt="Návrh obalů přírodní kosmetiky — lahvička a krabička v oranžové"
             fill
             sizes="(max-width: 900px) 100vw, 50vw"
             className={styles.img}
           />
           <p className={`serif ${styles.note}`}>
-            <em>Vzniklo bez kamery.</em>
+            <em>Oceněno na TopDesigner.cz</em>
             <ArrowRight size={16} />
           </p>
         </div>
@@ -41,11 +46,22 @@ export default function Hero() {
         </div>
 
         <div className={styles.right}>
-          <HeroVideo project={heroProject} poster="/media/bohemia-hero.jpg" />
+          <Image
+            src={heroProject.cover}
+            alt={`${heroProject.service} pro ${heroProject.name}`}
+            fill
+            priority
+            fetchPriority="high"
+            sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 55vw"
+            className={styles.rightImg}
+          />
           <div className={styles.copy}>
-            <p className={`eyebrow ${styles.eyebrow}`}>
-              Nová videoreklama · {heroProject.name}
-            </p>
+            <a
+              href={projectPath(heroProject.slug)}
+              className={`eyebrow ${styles.eyebrow}`}
+            >
+              Nová práce · {heroProject.name}
+            </a>
             <h1 className={`serif ${styles.title}`}>{site.tagline}</h1>
             <div className={styles.actions}>
               <Button href="#work" variant="light" size="sm">

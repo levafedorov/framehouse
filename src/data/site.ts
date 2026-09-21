@@ -1,8 +1,8 @@
 export const site = {
   name: "Framehouse",
-  tagline: "Video, logo a web pro malé firmy.",
+  tagline: "Logo, ikony a web pro malé firmy.",
   description:
-    "Videoreklamy, loga, firemní styl, ikony a weby pro malé firmy. Ceny od, jasný postup, hotovo v týdnech.",
+    "Loga, firemní styl, ikony, tiskoviny a weby pro malé firmy. Ceny od, jasný postup, hotovo v týdnech.",
   announcement: "Ozveme se Vám do jednoho pracovního dne",
   // TODO: replace with the real studio address
   contactEmail: "hello@framehouse.cz",
@@ -30,7 +30,6 @@ export const footerColumns = [
   {
     title: "Služby",
     links: [
-      { label: "Videoreklamy", href: "/sluzby/video" },
       { label: "Loga a firemní styl", href: "/sluzby/logo" },
       { label: "Ikony", href: "/sluzby/icons" },
       { label: "Weby a e-shopy", href: "/sluzby/web" },

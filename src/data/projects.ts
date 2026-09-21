@@ -1,26 +1,26 @@
-export type Category = "video" | "logo" | "icons" | "website";
+export type Category = "logo" | "identity" | "icons" | "print";
 
 /** Rows of the work section, in display order */
 export const categories: { id: Category; label: string; blurb: string }[] = [
   {
-    id: "video",
-    label: "Videoreklamy",
-    blurb: "Krátká videa pro sítě a web — vznikají bez kamery, z fotek a briefu.",
-  },
-  {
     id: "logo",
     label: "Loga a identita",
-    blurb: "Značky, které fungují na vizitce, na ceduli i v animaci.",
+    blurb: "Značky, které fungují na vizitce, na ceduli i na výšivce.",
+  },
+  {
+    id: "identity",
+    label: "Firemní styl a obaly",
+    blurb: "Obaly, tiskoviny a nosiče, aby všechno k sobě sedělo.",
   },
   {
     id: "icons",
-    label: "Ikony",
-    blurb: "Sady ikon ve stylu značky pro web a sociální sítě.",
+    label: "Ikony a ilustrace",
+    blurb: "Sady ikon a ilustrace ve stylu značky pro web, tisk i merch.",
   },
   {
-    id: "website",
-    label: "Weby",
-    blurb: "Vizitky a landing pages ve firemním stylu, s analytikou v ceně.",
+    id: "print",
+    label: "Tiskoviny",
+    blurb: "Vizitky, certifikáty a tiskoviny včetně tiskových dat.",
   },
 ];
 
@@ -45,16 +45,14 @@ export type Project = {
   service: string;
   category: Category;
   kind: ProjectKind;
-  logo: string;
-  /** How the logo should sit inside a light tile */
-  logoShape?: "square" | "wide";
-  /** short loop, optional (the hero one is a 3:4 crop, ~1 MB) */
-  video?: string;
-  /** 3:2 landscape crop for the work card, public/media/*-card.jpg */
-  poster?: string;
+  /** The main image of the piece, public/media/work/<slug>-<n>.jpg */
+  cover: string;
+  /** 3:2 card image (the cover fitted on a blurred copy of itself) */
+  poster: string;
   /** Shows the "Nové" badge */
   isNew?: boolean;
-  year: string;
+  /** Left out where we don't know it */
+  year?: string;
 
   /* --- detail page, /prace/[slug] --- */
 
@@ -64,18 +62,18 @@ export type Project = {
    * "Zadání / Řešení", a concept — which had no client brief — reads
    * "Výchozí bod / Co jsme zkoušeli".
    */
-  /** What the work starts from, 2–3 plain sentences */
+  /** What the work starts from, 1–2 plain sentences */
   brief?: string;
-  /** What we did or tried, 2–3 plain sentences */
+  /** What we did or tried, 1–2 plain sentences */
   solution?: string;
   /**
-   * Concepts only: where the piece comes from — a competition, a study —
-   * shown next to the industry in the hero (never a client name)
+   * Where the piece comes from — a competition, a study — shown next to
+   * the name in the hero (concepts never carry a client name)
    */
   context?: string;
-  /** The facts strip: služba, formát, délka, rok … (concepts: obor, kontext) */
+  /** The facts strip: služba, klient/obor, kontext … */
   facts?: Fact[];
-  /** 4:5 frames from the piece, public/media/work/<slug>-<n>.jpg */
+  /** Frames from the piece, public/media/work/<slug>-<n>.jpg */
   stills?: Still[];
 };
 
@@ -104,10 +102,10 @@ export const categoryTone: Record<
   Category,
   "blue" | "brown" | "rose" | "sage" | "olive"
 > = {
-  video: "blue",
   logo: "brown",
+  identity: "rose",
   icons: "sage",
-  website: "olive",
+  print: "blue",
 };
 
 export const projectPath = (slug: string) => `/prace/${slug}`;
@@ -126,135 +124,211 @@ export const relatedProjects = (project: Project): Project[] =>
     )
     .slice(0, 3);
 
+const img = (slug: string, n: number) => `/media/work/${slug}-${n}.jpg`;
+const card = (slug: string) => `/media/work/${slug}-card.jpg`;
+
+// TopDesigner.cz competition places, from the folder the pieces came in.
+// TODO: confirm which pieces were competition entries and which were direct
+// client work (issue #19).
+const place = (n: 1 | 2 | 3) => `Soutěž TopDesigner.cz, ${n}. místo`;
+
+const fact = {
+  service: (value: string): Fact => ({ label: "Služba", value, icon: "service" }),
+  client: (value: string): Fact => ({ label: "Klient", value, icon: "industry" }),
+  industry: (value: string): Fact => ({ label: "Obor", value, icon: "industry" }),
+  context: (value: string): Fact => ({ label: "Kontext", value, icon: "context" }),
+};
+
+/**
+ * The designer's portfolio — the strongest ten pieces. First places carry
+ * the client's name; second and third places are concepts and carry only
+ * the industry (issue #19). More pieces sit in the source folder and can
+ * be added the same way.
+ */
 const all: Project[] = [
+  /* ---------------- 1. místo — client work ---------------- */
   {
-    slug: "bohemia-pet-food",
-    year: "2026",
-    name: "Bohemia Pet Food",
-    service: "Videoreklama",
-    category: "video",
-    kind: "client",
-    logo: "/media/logo-bohemia.png",
-    logoShape: "square",
-    video: "/media/bohemia-hero.mp4",
-    poster: "/media/bohemia-card.jpg",
-    isNew: true,
-    brief:
-      "Krátká videoreklama na krmivo pro psy, do feedu a stories na Instagramu a TikToku. Klient měl fotky produktu a brief — žádné natočené záběry ani rozpočet na natáčení.",
-    solution:
-      "Video vzniklo bez kamery, z produktových fotek a briefu. Pes v ranní aleji, moment krmení a produkt v záběru, sestříhané do vertikálního formátu pro sítě.",
-    facts: [
-      { label: "Služba", value: "Videoreklama", icon: "service" },
-      { label: "Formát", value: "Vertikální video", icon: "format" },
-      { label: "Délka", value: "12 s", icon: "length" },
-      { label: "Rok", value: "2026", icon: "year" },
-    ],
-    stills: [
-      { src: "/media/work/bohemia-pet-food-1.jpg", label: "Alej" },
-      { src: "/media/work/bohemia-pet-food-2.jpg", label: "Krmení" },
-      { src: "/media/work/bohemia-pet-food-3.jpg", label: "Miska" },
-    ],
-  },
-  {
-    slug: "akinu",
-    year: "2026",
-    name: "Akinu",
-    service: "Videoreklama",
-    category: "video",
-    kind: "client",
-    logo: "/media/logo-akinu.jpg",
-    logoShape: "square",
-    video: "/media/akinu.mp4",
-    poster: "/media/akinu-card.jpg",
-    brief:
-      "Videoreklama pro značku psího krmiva Akinu, pro Instagram a TikTok. K dispozici byly fotky produktu, barvy značky a brief.",
-    solution:
-      "Kreslený příběh v barvách značky: pes, balíček Akinu a cesta k misce, jednou linkou na červené. Bez natáčení, z podkladů klienta, ve vertikálním formátu pro sítě.",
-    facts: [
-      { label: "Služba", value: "Videoreklama", icon: "service" },
-      { label: "Formát", value: "9:16", icon: "format" },
-      { label: "Délka", value: "10 s", icon: "length" },
-      { label: "Rok", value: "2026", icon: "year" },
-    ],
-    stills: [
-      { src: "/media/work/akinu-1.jpg", label: "Silueta" },
-      { src: "/media/work/akinu-2.jpg", label: "Balíček" },
-      { src: "/media/work/akinu-3.jpg", label: "Značka" },
-    ],
-  },
-  {
-    slug: "dogfitness",
-    year: "2026",
-    name: "Dogfitness.cz",
-    service: "Animace loga",
-    category: "logo",
-    kind: "client",
-    logo: "/media/logo-dogfitness.png",
-    logoShape: "wide",
-    video: "/media/dogfitness.mp4",
-    poster: "/media/dogfitness-card.jpg",
-    brief:
-      "Dogfitness.cz mělo hotové logo a chtělo ho rozhýbat: krátkou animaci na začátek videí a do stories.",
-    solution:
-      "Pes z loga se rozběhne a doběhne k nápisu. Jedna krátká smyčka, která funguje i bez zvuku, předaná jako MP4 ve vertikálním formátu.",
-    facts: [
-      { label: "Služba", value: "Animace loga", icon: "service" },
-      { label: "Formát", value: "9:16", icon: "format" },
-      { label: "Délka", value: "8 s", icon: "length" },
-      { label: "Rok", value: "2026", icon: "year" },
-    ],
-    stills: [
-      { src: "/media/work/dogfitness-1.jpg", label: "Pes" },
-      { src: "/media/work/dogfitness-2.jpg", label: "Rozběh" },
-      { src: "/media/work/dogfitness-3.jpg", label: "Logo" },
-    ],
-  },
-  {
-    slug: "aromatica",
-    year: "2026",
-    name: "Aromatica",
-    service: "Ikony pro Instagram",
+    slug: "kooperativa",
+    name: "Kooperativa",
+    service: "Sada ikon a merch",
     category: "icons",
     kind: "client",
-    logo: "/media/logo-aromatica.jpg",
-    logoShape: "square",
+    cover: img("kooperativa", 6),
+    poster: card("kooperativa"),
+    isNew: true,
+    context: place(1),
     brief:
-      "Sada ikon pro instagramový profil Aromatica, aby výběry příběhů a posty držely jeden styl.",
+      "Sada ikon pojistných produktů pro Kooperativu: cestovní pojištění, auto, penze, domov a zdraví.",
     solution:
-      "Ikony v jemném akvarelovém stylu, který navazuje na značku: jedna paleta, jedna mřížka. Předáno jako PNG pro Instagram.",
-    facts: [
-      { label: "Služba", value: "Ikony", icon: "service" },
-      { label: "Použití", value: "Instagram", icon: "channel" },
-      { label: "Rok", value: "2026", icon: "year" },
+      "Pět barevných dlaždic s jednoduchým symbolem, každá s vlastní barvou v CMYK. Ikony pak nesly láhev, visačku pro staff, tašky a tričko na akce.",
+    facts: [fact.service("Ikony a merch"), fact.client("Kooperativa"), fact.context(place(1))],
+    stills: [
+      { src: img("kooperativa", 2), label: "Ikony" },
+      { src: img("kooperativa", 3), label: "Visačka" },
+      { src: img("kooperativa", 4), label: "Tašky" },
     ],
   },
-  // TODO: replace with the real TopDesigner.cz concept (issue #19) — the
-  // images below are a generated placeholder so the concept layout can be
-  // tested. Concepts carry the industry as `name`, never a client name.
   {
-    slug: "koncept-pekarna",
-    year: "2026",
-    name: "Pekárna",
-    service: "Návrh loga",
+    slug: "hinna",
+    name: "Hinna",
+    service: "Logo a merch",
+    category: "logo",
+    kind: "client",
+    cover: img("hinna", 1),
+    poster: card("hinna"),
+    context: place(1),
+    brief: "Logo pro módní značku Hinna, která prodává mikiny a trička.",
+    solution:
+      "Geometrický wordmark s tečkou, jednobarevný, aby seděl na výšivce i na štítku. Aplikace na mikinu, tričko a web.",
+    facts: [fact.service("Logo"), fact.client("Hinna"), fact.context(place(1))],
+    stills: [
+      { src: img("hinna", 1), label: "Znak" },
+      { src: img("hinna", 2), label: "Wordmark" },
+      { src: img("hinna", 3), label: "Merch" },
+    ],
+  },
+  {
+    slug: "weber",
+    name: "Weber",
+    service: "Logotyp",
+    category: "logo",
+    kind: "client",
+    cover: img("weber", 1),
+    poster: card("weber"),
+    context: place(1),
+    brief: "Logotyp pro svatební salon Weber.",
+    solution:
+      "Měkký wordmark s motýlem v písmenu b. Barevná, jednobarevná a inverzní verze a návrh na výloze salonu.",
+    facts: [fact.service("Logotyp"), fact.client("Weber"), fact.context(place(1))],
+  },
+  {
+    slug: "llama-loca",
+    name: "Llama Loca",
+    service: "Logo",
+    category: "logo",
+    kind: "client",
+    cover: img("llama-loca", 1),
+    poster: card("llama-loca"),
+    context: place(1),
+    brief: "Logo pro Llama Loca, malou značku s hravým jménem.",
+    solution:
+      "Lama nakreslená jednou nepřerušenou linkou, pod ní volný rukopisný nápis. Funguje v jedné barvě i v malé velikosti.",
+    facts: [fact.service("Logo"), fact.client("Llama Loca"), fact.context(place(1))],
+  },
+  {
+    slug: "kismi",
+    name: "Kismi",
+    service: "Vizitky a certifikát",
+    category: "identity",
+    kind: "client",
+    cover: img("kismi", 1),
+    poster: card("kismi"),
+    context: place(1),
+    brief: "Vizitky a certifikát pro Kismi, kurzy líčení.",
+    solution:
+      "Bílá, zlatá a růžová, mramorová textura. Oboustranná vizitka a certifikát se zlatou linkou, připravené k tisku.",
+    facts: [fact.service("Tiskoviny"), fact.client("Kismi"), fact.context(place(1))],
+    stills: [
+      { src: img("kismi", 1), label: "Vizitky" },
+      { src: img("kismi", 2), label: "Certifikát" },
+    ],
+  },
+
+  /* ---------------- 2. místo — concepts ---------------- */
+  {
+    slug: "koncept-kosmetika",
+    name: "Přírodní kosmetika",
+    service: "Obaly",
+    category: "identity",
+    kind: "concept",
+    cover: img("koncept-kosmetika", 3),
+    poster: card("koncept-kosmetika"),
+    context: place(2),
+    brief: "Řada přírodní kosmetiky inspirovaná Asií.",
+    solution:
+      "Lahvička a krabička ve čtyřech barevných variantách podle vůně. Pagoda a torii jako jemný motiv na obalu.",
+    facts: [fact.service("Obaly"), fact.industry("Kosmetika"), fact.context(place(2))],
+    stills: [
+      { src: img("koncept-kosmetika", 1), label: "Bílá" },
+      { src: img("koncept-kosmetika", 3), label: "Oranžová" },
+      { src: img("koncept-kosmetika", 4), label: "Modrá" },
+    ],
+  },
+  {
+    slug: "koncept-rezidence",
+    name: "Rezidenční projekt",
+    service: "Logo a identita",
     category: "logo",
     kind: "concept",
-    logo: "/media/work/koncept-pekarna-1.jpg",
-    logoShape: "square",
-    context: "Soutěžní návrh",
-    brief:
-      "Malá řemeslná pekárna bez vlastní značky. Chtěli jsme značku, která obstojí na papírovém sáčku i na ceduli nad vchodem a nepotřebuje k tomu doprovodný text.",
+    cover: img("koncept-rezidence", 1),
+    poster: card("koncept-rezidence"),
+    context: place(2),
+    brief: "Rezidenční projekt na okraji města.",
     solution:
-      "Klas v kruhu, dvě barvy: tmavě hnědá a okrová. Zkoušeli jsme sílu linky a míru zjednodušení, aby znak fungoval i v malé velikosti na razítku.",
-    facts: [
-      { label: "Služba", value: "Návrh loga", icon: "service" },
-      { label: "Obor", value: "Pekárna", icon: "industry" },
-      { label: "Kontext", value: "Soutěžní návrh", icon: "context" },
-      { label: "Rok", value: "2026", icon: "year" },
-    ],
+      "Monogram RH z tenkých linek, hnědá a tmavě zelená. Aplikace na vizuál domu, vizitky a hlavičku.",
+    facts: [fact.service("Logo a identita"), fact.industry("Reality"), fact.context(place(2))],
     stills: [
-      { src: "/media/work/koncept-pekarna-1.jpg", label: "Znak" },
-      { src: "/media/work/koncept-pekarna-2-flat.jpg", label: "Sáček" },
-      { src: "/media/work/koncept-pekarna-3-flat.jpg", label: "Cedule" },
+      { src: img("koncept-rezidence", 1), label: "Identita" },
+      { src: img("koncept-rezidence", 2), label: "Znak" },
+      { src: img("koncept-rezidence", 3), label: "Aplikace" },
+    ],
+  },
+  {
+    slug: "koncept-venave",
+    name: "Technická firma",
+    service: "Logo a identita",
+    category: "logo",
+    kind: "concept",
+    cover: img("koncept-venave", 2),
+    poster: card("koncept-venave"),
+    context: place(2),
+    brief: "Technická firma s krátkým názvem a písmenem V.",
+    solution:
+      "Ostré V v červené a černé, verze pro tmavé i světlé pozadí. Lahve, kontejner, vizitky.",
+    facts: [fact.service("Logo a identita"), fact.industry("Technika"), fact.context(place(2))],
+    stills: [
+      { src: img("koncept-venave", 1), label: "Značka" },
+      { src: img("koncept-venave", 2), label: "Aplikace" },
+      { src: img("koncept-venave", 4), label: "Varianty" },
+    ],
+  },
+
+  /* ---------------- 3. místo — concepts ---------------- */
+  {
+    slug: "koncept-safari-park",
+    name: "Safari park",
+    service: "Ilustrace a merch",
+    category: "icons",
+    kind: "concept",
+    cover: img("koncept-safari-park", 3),
+    poster: card("koncept-safari-park"),
+    context: place(3),
+    brief: "Safari park hledal motivy na plátěné tašky.",
+    solution:
+      "Nosorožec, žirafa a zebra jako plošné ilustrace v teplé paletě, s vlastním nápisem. Tisk na tašky.",
+    facts: [fact.service("Ilustrace"), fact.industry("Zoo a safari"), fact.context(place(3))],
+    stills: [
+      { src: img("koncept-safari-park", 1), label: "Nosorožec" },
+      { src: img("koncept-safari-park", 2), label: "Žirafa a zebra" },
+      { src: img("koncept-safari-park", 4), label: "Taška" },
+    ],
+  },
+  {
+    slug: "koncept-danova-poradkyne",
+    name: "Daňová poradkyně",
+    service: "Logo a identita",
+    category: "logo",
+    kind: "concept",
+    cover: img("koncept-danova-poradkyne", 2),
+    poster: card("koncept-danova-poradkyne"),
+    context: place(3),
+    brief: "Daňová poradkyně, která chce působit přesně a klidně.",
+    solution:
+      "Wordmark s lomítkem a X v měděné barvě na tmavě modré. Vizitky, hlavička a razítko.",
+    facts: [fact.service("Logo a identita"), fact.industry("Daňové poradenství"), fact.context(place(3))],
+    stills: [
+      { src: img("koncept-danova-poradkyne", 2), label: "Wordmark" },
+      { src: img("koncept-danova-poradkyne", 1), label: "Identita" },
     ],
   },
 ];

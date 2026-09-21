@@ -120,19 +120,13 @@ export default async function ServicePage({ params }: Props) {
             <ul className={styles.examples}>
               {examples.map((p) => (
                 <li key={p.slug} className={styles.example}>
-                  {p.poster ? (
-                    <Image
-                      src={p.poster}
-                      alt=""
-                      fill
-                      sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-                      className={styles.exampleImg}
-                    />
-                  ) : (
-                    <div className={styles.exampleTile}>
-                      <Image src={p.logo} alt="" width={140} height={140} className={styles.exampleLogo} />
-                    </div>
-                  )}
+                  <Image
+                    src={p.poster}
+                    alt=""
+                    fill
+                    sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+                    className={styles.exampleImg}
+                  />
                   <span className={`eyebrow ${styles.exampleTag}`}>{p.service}</span>
                   <span className={`serif ${styles.exampleName}`}>{p.name}</span>
                 </li>

@@ -17,7 +17,6 @@ import {
   TrophyIcon,
 } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
-import WorkVideo from "@/components/WorkVideo";
 import {
   categoryTone,
   kindLabel,
@@ -125,21 +124,16 @@ export default async function WorkPage({ params }: Props) {
       <main>
         <section className={`shell ${styles.intro}`} id="top">
           <article className={`${styles.hero} ${styles[tone]}`}>
-            <div
-              className={`${styles.media} ${project.video ? "" : styles.mediaLogo}`}
-            >
-              {project.video ? (
-                <WorkVideo project={project} />
-              ) : (
-                <Image
-                  src={project.logo}
-                  alt=""
-                  width={260}
-                  height={260}
-                  preload
-                  className={styles.logo}
-                />
-              )}
+            <div className={styles.media}>
+              <Image
+                src={project.cover}
+                alt=""
+                fill
+                preload
+                fetchPriority="high"
+                sizes="(max-width: 900px) 100vw, 55vw"
+                className={styles.cover}
+              />
               <span className={`eyebrow ${styles.tag}`}>
                 {kindLabel[project.kind]}
               </span>
@@ -184,10 +178,18 @@ export default async function WorkPage({ params }: Props) {
                     <dd className={styles.metaValue}>{project.name}</dd>
                   </div>
                 )}
-                <div className={styles.metaRow}>
-                  <dt className={`eyebrow ${styles.metaKey}`}>Rok</dt>
-                  <dd className={styles.metaValue}>{project.year}</dd>
-                </div>
+                {project.context && !concept && (
+                  <div className={styles.metaRow}>
+                    <dt className={`eyebrow ${styles.metaKey}`}>Kontext</dt>
+                    <dd className={styles.metaValue}>{project.context}</dd>
+                  </div>
+                )}
+                {project.year && (
+                  <div className={styles.metaRow}>
+                    <dt className={`eyebrow ${styles.metaKey}`}>Rok</dt>
+                    <dd className={styles.metaValue}>{project.year}</dd>
+                  </div>
+                )}
               </dl>
             </div>
           </article>

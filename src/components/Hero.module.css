@@ -25,13 +25,18 @@
 
 .note {
   position: absolute;
-  left: 28px;
-  top: 28px;
+  left: 20px;
+  top: 20px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 6px 14px 7px;
+  border-radius: var(--pill);
+  background: rgba(26, 26, 26, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: #fff;
-  font-size: 22px;
+  font-size: 20px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
 }
 
@@ -76,11 +81,26 @@
   opacity: 0.6;
 }
 
+/* right panel image and the shade the copy sits on */
+.rightImg {
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+.right::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.5) 100%);
+  pointer-events: none;
+}
+
 .copy {
   position: absolute;
   right: 32px;
   bottom: 28px;
-  z-index: 3; /* above the video and its shade */
+  z-index: 3; /* above the image and its shade */
   display: flex;
   flex-direction: column;
   align-items: flex-end;

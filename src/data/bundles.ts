@@ -47,7 +47,7 @@ export const bundles: Bundle[] = [
     ],
     from: "od 36 000 Kč",
     term: "3–5 týdnů",
-    recommended: { label: "Animované logo", service: "video" },
+    recommended: { label: "Tiskoviny s novým logem", service: "print" },
     image: "/media/bundles/novy-kabat.jpg",
   },
   {

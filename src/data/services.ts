@@ -69,9 +69,10 @@ export const serviceTerms = {
     "Exkluzivní, časově neomezená licence. White-label +50 %. Podpora po předání za zvláštní cenu.",
 };
 
-// TODO: prices and lead times are placeholders except video, logo and web —
+// TODO: prices and lead times are placeholders except logo and web —
 // confirm before launch (issue #13).
 export const services: Service[] = [
+  /* Video ads are parked for now — the entry stays for when they are back.
   {
     id: "video",
     title: "Videoreklama",
@@ -103,6 +104,7 @@ export const services: Service[] = [
     examples: ["bohemia-pet-food", "akinu"],
     ctaTitle: "Pojďme vytvořit video, které prodává.",
   },
+  */
   {
     id: "logo",
     title: "Logo",
@@ -126,7 +128,7 @@ export const services: Service[] = [
       "Firemní styl a nosiče",
       "Registrace ochranné známky",
     ],
-    examples: ["dogfitness"],
+    examples: ["hinna", "weber", "llama-loca"],
     ctaTitle: "Pojďme dát vaší firmě tvář.",
   },
   {
@@ -153,6 +155,7 @@ export const services: Service[] = [
     priceNote: "Cena závisí na počtu nosičů.",
     termNote: "Běžná doba pro 3–4 nosiče.",
     excluded: ["Logo — je samostatná služba", "Rozsáhlý brandbook", "Tisk"],
+    examples: ["koncept-kosmetika", "koncept-rezidence", "koncept-venave"],
     ctaTitle: "Pojďme sladit všechno, co od vás lidé vidí.",
   },
   {
@@ -179,7 +182,7 @@ export const services: Service[] = [
     priceNote: "Cena závisí na počtu ikon a míře detailu.",
     termNote: "Běžná doba pro sadu 8 ikon.",
     excluded: ["Velké ikonové knihovny", "Ilustrace a maskot", "Animace ikon"],
-    examples: ["aromatica"],
+    examples: ["kooperativa", "koncept-safari-park"],
     ctaTitle: "Pojďme dát vašim ikonám jeden rukopis.",
   },
   {
@@ -295,6 +298,7 @@ export const services: Service[] = [
     priceNote: "Cena závisí na počtu tiskovin a variant.",
     termNote: "Běžná doba pro 2–3 tiskoviny.",
     excluded: ["Tisk — dodáme jen data", "Nový firemní styl", "Distribuce"],
+    examples: ["kismi"],
     ctaTitle: "Pojďme připravit tiskoviny, které nemusíte předělávat.",
   },
 ];

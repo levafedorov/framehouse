@@ -16,7 +16,7 @@ export default function Work() {
     >
       <div className={styles.head}>
         <h2 id="work-title" className={`serif ${styles.title}`}>
-          Vybrané práce <em>týmu</em> — od loga po video.
+          Vybrané práce <em>týmu</em> — od loga po obaly.
         </h2>
       </div>
 

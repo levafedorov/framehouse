@@ -42,20 +42,10 @@
   background: #ece9e1;
 }
 
-/* logo-only work: the mark on a light tile, like the work card */
-.mediaLogo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f3efe8;
-}
-
-.logo {
-  width: 42%;
-  max-width: 260px;
-  height: auto;
-  border-radius: 50%;
-  mix-blend-mode: multiply;
+/* the piece itself fills the panel */
+.cover {
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 /* the kind tag, the same as on the cards */
