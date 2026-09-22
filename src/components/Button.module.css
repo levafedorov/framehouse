@@ -1,21 +1,27 @@
+/* The pill: serif label, round arrow at the end */
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 44px;
-  padding: 0 22px;
+  justify-content: space-between;
+  gap: 14px;
+  height: 52px;
+  padding: 0 6px 0 22px;
   border-radius: var(--pill);
   border: 1px solid transparent;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow: none;
   white-space: nowrap;
+  cursor: pointer;
   transition:
     background-color 0.15s ease,
     color 0.15s ease,
     border-color 0.15s ease,
+    box-shadow 0.15s ease,
     transform 0.15s ease;
 }
 
@@ -28,33 +34,72 @@
   outline-offset: 3px;
 }
 
-/* solid dark */
+/* serif sits a touch low on the pill; lift it optically */
+.label {
+  padding-bottom: 2px;
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  transition:
+    transform 0.2s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* solid dark, on paper */
 .dark {
   background: var(--fg);
   color: #fff;
 }
 
-.dark:hover {
-  background: #333;
-}
-
-/* solid white (on photos) */
-.light {
+.dark .arrow {
   background: #fff;
   color: var(--fg);
 }
 
-.light:hover {
-  background: #eae7df;
+.dark:hover {
+  background: #2c2c2c;
 }
 
-/* transparent with white border (on photos) */
-.outline {
-  background: rgba(0, 0, 0, 0.18);
+/* solid white, on photos and dark tiles */
+.light {
+  background: #fff;
+  color: var(--fg);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+.light .arrow {
+  background: var(--fg);
   color: #fff;
-  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.light:hover {
+  background: #f3f1ea;
+}
+
+/* transparent with white border, next to a light one */
+.outline {
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+}
+
+.outline .arrow {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--fg);
 }
 
 .outline:hover {
@@ -62,10 +107,21 @@
   color: var(--fg);
 }
 
+.outline:hover .arrow {
+  background: var(--fg);
+  color: #fff;
+}
+
 .sm {
-  height: 36px;
-  padding: 0 16px;
-  font-size: 10px;
+  height: 42px;
+  padding: 0 5px 0 18px;
+  gap: 12px;
+  font-size: 17px;
+}
+
+.sm .arrow {
+  width: 30px;
+  height: 30px;
 }
 
 .block {
@@ -74,10 +130,23 @@
 
 @media (max-width: 600px) {
   .btn {
-    height: 46px;
+    height: 54px;
+    font-size: 20px;
   }
 
   .sm {
-    height: 36px;
+    height: 42px;
+    font-size: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .arrow {
+    transition: none;
+  }
+
+  .btn:hover .arrow {
+    transform: none;
   }
 }

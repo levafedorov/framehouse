@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Button from "./Button";
 import { ArrowRight } from "./Icons";
-import { heroProject, projectPath } from "@/data/projects";
+import { heroProject } from "@/data/projects";
 import { site } from "@/data/site";
 import styles from "./Hero.module.css";
 
@@ -29,7 +29,7 @@ export default function Hero() {
             className={styles.img}
           />
           <p className={`serif ${styles.note}`}>
-            <em>Vybrané práce týmu</em>
+            <em>Naše práce</em>
             <ArrowRight size={16} />
           </p>
         </div>
@@ -57,18 +57,12 @@ export default function Hero() {
             className={styles.rightImg}
           />
           <div className={styles.copy}>
-            <a
-              href={projectPath(heroProject.slug)}
-              className={`eyebrow ${styles.eyebrow}`}
-            >
-              Nová práce · {heroProject.name}
-            </a>
             <h1 className={`serif ${styles.title}`}>{site.tagline}</h1>
             <div className={styles.actions}>
               <Button href="#work" variant="light" size="sm">
                 Naše práce
               </Button>
-              <Button href="#services" variant="light" size="sm">
+              <Button href="#services" variant="outline" size="sm">
                 Služby a ceny
               </Button>
             </div>

@@ -16,7 +16,7 @@ export default function Work() {
     >
       <div className={styles.head}>
         <h2 id="work-title" className={`serif ${styles.title}`}>
-          Vybrané práce <em>týmu</em> — od loga po obaly.
+          Naše <em>práce</em> — od loga po obaly.
         </h2>
       </div>
 
@@ -25,7 +25,6 @@ export default function Work() {
           <WorkRow
             key={row.id}
             label={row.label}
-            blurb={row.blurb}
             items={row.items}
           />
         ))}

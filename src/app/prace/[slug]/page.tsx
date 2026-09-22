@@ -23,7 +23,6 @@ import {
   projectBySlug,
   projects,
   relatedProjects,
-  storyLabels,
   type FactIcon,
   type Project,
 } from "@/data/projects";
@@ -75,27 +74,9 @@ function offer(project: Project) {
   };
 }
 
-/** First sentence set in serif, the rest in the small sans */
-function splitLead(text: string): [string, string] {
-  const i = text.indexOf(". ");
-  if (i === -1) return [text, ""];
-  return [text.slice(0, i + 1), text.slice(i + 2)];
-}
-
-function Story({ label, text }: { label: string; text: string }) {
-  const [lead, rest] = splitLead(text);
-  return (
-    <div className={styles.story}>
-      <h2 className={`eyebrow ${styles.label}`}>{label}</h2>
-      <p className={`serif ${styles.lead}`}>{lead}</p>
-      {rest && <p className={`muted ${styles.text}`}>{rest}</p>}
-    </div>
-  );
-}
-
 /**
  * One work, standing on its own: the piece itself next to a tile in the
- * category's colour, the brief and what we did, frames from the piece,
+ * category's colour, frames from the piece,
  * a strip of facts, three other works and the offer. The layout follows
  * the case-study mockup generated from the homepage (GPT Image 2).
  *
@@ -111,7 +92,6 @@ export default async function WorkPage({ params }: Props) {
 
   const tone = categoryTone[project.category];
   const concept = project.kind === "concept";
-  const [briefLabel, solutionLabel] = storyLabels[project.kind];
   const others = relatedProjects(project);
   const cta = offer(project);
   const mailto = `mailto:${site.contactEmail}?subject=${encodeURIComponent(
@@ -147,7 +127,7 @@ export default async function WorkPage({ params }: Props) {
             <div className={styles.copy}>
               <Link href="/#work" className={`eyebrow ${styles.back}`}>
                 <ChevronLeft size={12} />
-                Vybrané práce
+                Naše práce
               </Link>
               <h1 className={`serif ${styles.title}`}>
                 {project.name}&nbsp;—
@@ -194,15 +174,6 @@ export default async function WorkPage({ params }: Props) {
             </div>
           </article>
         </section>
-
-        {(project.brief || project.solution) && (
-          <section className={`shell ${styles.stories}`} aria-label="O práci">
-            {project.brief && <Story label={briefLabel} text={project.brief} />}
-            {project.solution && (
-              <Story label={solutionLabel} text={project.solution} />
-            )}
-          </section>
-        )}
 
         {project.stills && project.stills.length > 0 && (
           <section className={`shell ${styles.frames}`} aria-label="Záběry">
@@ -282,7 +253,6 @@ export default async function WorkPage({ params }: Props) {
             </div>
             <Button href={mailto} variant="light">
               Popište nám projekt
-              <ArrowRight size={12} />
             </Button>
           </div>
         </section>

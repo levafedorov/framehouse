@@ -139,39 +139,6 @@
 /* zadání / řešení: two white cards, the first sentence in serif       */
 /* ------------------------------------------------------------------ */
 
-.stories {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gap);
-  padding-top: var(--gap);
-}
-
-.story {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 30px 32px 34px;
-  background: var(--card);
-  border-radius: var(--radius);
-}
-
-.label {
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.lead {
-  font-size: 28px;
-  line-height: 1.18;
-  max-width: 26ch;
-}
-
-.text {
-  font-size: 14px;
-  line-height: 1.55;
-  max-width: 48ch;
-}
-
 /* ------------------------------------------------------------------ */
 /* frames from the piece: three portrait stills, numbered              */
 /* ------------------------------------------------------------------ */
@@ -390,14 +357,6 @@
     margin-top: 0;
   }
 
-  .stories {
-    grid-template-columns: 1fr;
-  }
-
-  .lead {
-    font-size: 24px;
-  }
-
   .facts {
     grid-auto-flow: row;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -440,14 +399,6 @@
 
   .title {
     font-size: 34px;
-  }
-
-  .story {
-    padding: 22px 20px 24px;
-  }
-
-  .lead {
-    font-size: 22px;
   }
 
   .framesGrid {

@@ -1,26 +1,22 @@
 export type Category = "logo" | "identity" | "icons" | "print";
 
 /** Rows of the work section, in display order */
-export const categories: { id: Category; label: string; blurb: string }[] = [
+export const categories: { id: Category; label: string }[] = [
   {
     id: "logo",
     label: "Loga a identita",
-    blurb: "Značky, které fungují na vizitce, na ceduli i na výšivce.",
   },
   {
     id: "identity",
     label: "Firemní styl a obaly",
-    blurb: "Obaly, tiskoviny a nosiče, aby všechno k sobě sedělo.",
   },
   {
     id: "icons",
     label: "Ikony a ilustrace",
-    blurb: "Sady ikon a ilustrace ve stylu značky pro web, tisk i merch.",
   },
   {
     id: "print",
     label: "Tiskoviny",
-    blurb: "Vizitky, certifikáty a tiskoviny včetně tiskových dat.",
   },
 ];
 

@@ -50,7 +50,6 @@ export default function Header() {
               className={styles.cta}
             >
               Napište nám
-              <ArrowRight size={12} className={styles.ctaArrow} />
             </Button>
             <button
               type="button"

@@ -13,9 +13,6 @@ export default function Services() {
         <h2 id="services-title" className={`eyebrow ${styles.title}`}>
           Služby a ceny
         </h2>
-        <p className={`muted ${styles.hint}`}>
-          Fixní cena, nebo platba za iteraci — vyberete si.
-        </p>
       </div>
 
       <ul className={styles.grid}>

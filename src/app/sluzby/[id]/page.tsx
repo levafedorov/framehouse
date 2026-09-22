@@ -200,7 +200,6 @@ export default async function ServicePage({ params }: Props) {
               )}
               <Button href={mailto} size="sm" className={styles.bigCta}>
                 Chci nabídku
-                <ArrowRight size={12} />
               </Button>
             </div>
             <div className={`${styles.big} ${styles[pairTone[service.tone]]}`}>
@@ -212,43 +211,14 @@ export default async function ServicePage({ params }: Props) {
           </div>
         </section>
 
-        {/* not included */}
-        <section className={`shell ${styles.section}`} aria-labelledby="not-title">
-          <div className={`${styles.box} ${styles.outlined}`}>
-            <h2 id="not-title" className={`eyebrow ${styles.boxLabel}`}>
-              Co není součástí
-            </h2>
-            <ul className={styles.checks}>
-              {service.excluded.map((e) => (
-                <li key={e} className={styles.check}>
-                  <span className={`${styles.mark} ${styles.cross}`} aria-hidden>
-                    ×
-                  </span>
-                  {e}
-                </li>
-              ))}
-            </ul>
-            {service.note && (
-              <p className={`muted ${styles.note}`}>
-                {service.note.text}{" "}
-                <Link href={service.note.href} className={styles.noteLink}>
-                  Balíčky
-                  <ArrowRight size={12} />
-                </Link>
-              </p>
-            )}
-          </div>
-        </section>
-
         {/* closing CTA */}
         <section className={`shell ${styles.section} ${styles.last}`} aria-label="Poptávka">
           <div className={`${styles.cta} ${styles[service.tone]}`}>
             <Image src="/media/services/leaves-flat.webp" alt="" width={260} height={260} className={`${styles.leaf} ${styles.leafLeft}`} />
             <Image src="/media/services/leaves-flat.webp" alt="" width={260} height={260} className={`${styles.leaf} ${styles.leafRight}`} />
             <h2 className={`serif ${styles.ctaTitle}`}>{service.ctaTitle}</h2>
-            <Button href={mailto} variant="light" size="sm">
+            <Button href={mailto} variant="light">
               Chci nabídku
-              <ArrowRight size={12} />
             </Button>
           </div>
         </section>

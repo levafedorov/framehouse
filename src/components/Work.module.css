@@ -34,37 +34,29 @@
   border-bottom: 1px solid var(--line);
 }
 
-/* label at the top, blurb and arrows pinned to the bottom of the row */
+/* the category name sits in the vertical middle of the row; the arrows
+   stay pinned to its bottom-left corner */
 .aside {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 24px;
+  align-items: center;
   padding: 4px 16px 4px 4px;
 }
 
 .category {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.asideBottom {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.blurb {
-  font-size: 13px;
-  line-height: 1.45;
-  max-width: 36ch;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  max-width: 12ch;
 }
 
 .arrows {
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
   display: flex;
   gap: 6px;
-  flex-shrink: 0;
 }
 
 .arrow {
@@ -167,8 +159,12 @@
   }
 
   .aside {
-    gap: 6px;
     padding: 2px 4px;
+  }
+
+  .category {
+    font-size: 24px;
+    max-width: none;
   }
 
   /* touch scrolls; the fade is hint enough */

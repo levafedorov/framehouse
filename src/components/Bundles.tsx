@@ -23,9 +23,6 @@ export default function Bundles() {
         <h2 id="bundles-title" className={`eyebrow ${styles.heading}`}>
           Balíčky
         </h2>
-        <p className={`muted ${styles.hint}`}>
-          Kombinace služeb podle toho, kde vaše firma právě je.
-        </p>
       </div>
 
       <ul className={styles.grid}>
@@ -62,7 +59,6 @@ export default function Bundles() {
               <Button
                 href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(`Balíček ${b.title}`)}`}
                 variant="light"
-                size="sm"
                 className={styles.cta}
               >
                 Nezávazná poptávka

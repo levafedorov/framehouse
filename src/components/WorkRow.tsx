@@ -8,7 +8,6 @@ import styles from "./Work.module.css";
 
 type Props = {
   label: string;
-  blurb: string;
   items: Project[];
 };
 
@@ -16,7 +15,7 @@ type Props = {
  * One category row. The strip scrolls sideways; while there is more to
  * see, the edge fades into the page and the arrows in the aside are live.
  */
-export default function WorkRow({ label, blurb, items }: Props) {
+export default function WorkRow({ label, items }: Props) {
   const stripRef = useRef<HTMLUListElement>(null);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(false);
@@ -56,32 +55,29 @@ export default function WorkRow({ label, blurb, items }: Props) {
       }`}
     >
       <div className={styles.aside}>
-        <h3 className={`eyebrow ${styles.category}`}>{label}</h3>
-        <div className={styles.asideBottom}>
-          <p className={`muted ${styles.blurb}`}>{blurb}</p>
-          {(canPrev || canNext) && (
-            <div className={styles.arrows}>
-              <button
-                type="button"
-                className={styles.arrow}
-                onClick={() => scrollBy(-1)}
-                aria-label={`${label}: předchozí`}
-                disabled={!canPrev}
-              >
-                <ChevronLeft />
-              </button>
-              <button
-                type="button"
-                className={styles.arrow}
-                onClick={() => scrollBy(1)}
-                aria-label={`${label}: další`}
-                disabled={!canNext}
-              >
-                <ChevronRight />
-              </button>
-            </div>
-          )}
-        </div>
+        <h3 className={`serif ${styles.category}`}>{label}</h3>
+        {(canPrev || canNext) && (
+          <div className={styles.arrows}>
+            <button
+              type="button"
+              className={styles.arrow}
+              onClick={() => scrollBy(-1)}
+              aria-label={`${label}: předchozí`}
+              disabled={!canPrev}
+            >
+              <ChevronLeft />
+            </button>
+            <button
+              type="button"
+              className={styles.arrow}
+              onClick={() => scrollBy(1)}
+              aria-label={`${label}: další`}
+              disabled={!canNext}
+            >
+              <ChevronRight />
+            </button>
+          </div>
+        )}
       </div>
 
       <div className={styles.stripWrap}>

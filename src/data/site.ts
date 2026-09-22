@@ -1,6 +1,6 @@
 export const site = {
   name: "Framehouse",
-  tagline: "Logo, ikony a web pro malé firmy.",
+  tagline: "Brand design pro vaši firmu.",
   description:
     "Loga, firemní styl, ikony, tiskoviny a weby pro malé firmy. Ceny od, jasný postup, hotovo v týdnech.",
   announcement: "Ozveme se Vám do jednoho pracovního dne",
@@ -48,7 +48,7 @@ export const footerColumns = [
   {
     title: "Studio",
     links: [
-      { label: "Vybrané práce", href: "/#work" },
+      { label: "Naše práce", href: "/#work" },
       { label: "Jak pracujeme", href: "/jak-pracujeme" },
       { label: "E-mail", href: "mailto:hello@framehouse.cz" },
     ],

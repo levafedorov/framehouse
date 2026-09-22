@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { ArrowRight } from "./Icons";
 import { site } from "@/data/site";
 import styles from "./ContactForm.module.css";
 
@@ -35,8 +36,9 @@ export default function ContactForm() {
         className={styles.input}
         autoComplete="email"
       />
-      <button type="submit" className={`eyebrow ${styles.submit}`}>
-        Odeslat
+      <button type="submit" className={styles.submit}>
+        <span className={styles.submitLabel}>Odeslat</span>
+        <ArrowRight size={12} />
       </button>
     </form>
   );

@@ -1,5 +1,5 @@
 .section {
-  padding-top: 16px;
+  padding-top: 72px;
   padding-bottom: var(--gap);
   scroll-margin-top: 80px;
 }
@@ -19,10 +19,6 @@
   border-bottom: 1.5px solid var(--fg);
 }
 
-.hint {
-  font-size: 13px;
-}
-
 /* desktop: 4 square tiles per row */
 .grid {
   display: grid;
@@ -36,6 +32,10 @@
 
 /* tablet & phone: one list row per service */
 @media (max-width: 900px) {
+  .section {
+    padding-top: 48px;
+  }
+
   .grid {
     grid-template-columns: 1fr;
     gap: 6px;

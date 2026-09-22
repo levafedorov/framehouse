@@ -1,6 +1,6 @@
 .section {
-  padding-top: 26px;
-  padding-bottom: var(--gap);
+  padding-top: 72px;
+  padding-bottom: 64px;
   scroll-margin-top: 80px;
 }
 
@@ -17,10 +17,6 @@
   font-weight: 600;
   padding-bottom: 3px;
   border-bottom: 1.5px solid var(--fg);
-}
-
-.hint {
-  font-size: 13px;
 }
 
 .grid {
@@ -123,9 +119,6 @@
 
 .cta {
   margin-top: 10px;
-  height: 44px;
-  padding: 0 22px;
-  font-size: 11px;
 }
 
 @media (max-width: 900px) {
@@ -144,7 +137,8 @@
 
 @media (max-width: 600px) {
   .section {
-    padding-top: 20px;
+    padding-top: 44px;
+    padding-bottom: 40px;
   }
 
   .head {
