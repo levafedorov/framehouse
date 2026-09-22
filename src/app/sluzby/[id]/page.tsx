@@ -6,11 +6,12 @@ import Button from "@/components/Button";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { ArrowRight } from "@/components/Icons";
-import { bundleTitle } from "@/data/bundles";
+import { bundleTitle, czk, priceById, priceTerms } from "@/data/pricing";
 import {
   serviceById,
   serviceExamples,
   serviceHero,
+  servicePicto,
   serviceTerms,
   services,
   type Tone,
@@ -57,6 +58,11 @@ export default async function ServicePage({ params }: Props) {
   if (!service) notFound();
 
   const examples = serviceExamples(service);
+  const price = priceById(service.id);
+  const heroArt = serviceHero(service.id);
+  const includes = price?.includes.length
+    ? price.includes
+    : (service.deliverables ?? []);
   const mailto = `mailto:${site.contactEmail}?subject=${encodeURIComponent(service.title)}`;
 
   return (
@@ -80,7 +86,9 @@ export default async function ServicePage({ params }: Props) {
                 </div>
                 <div className={styles.stat}>
                   <dt className="eyebrow">dodání</dt>
-                  <dd className={`serif ${styles.statValue}`}>{service.days}</dd>
+                  <dd className={`serif ${styles.statValue}`}>
+                    {service.days}
+                  </dd>
                 </div>
               </dl>
 
@@ -93,13 +101,13 @@ export default async function ServicePage({ params }: Props) {
 
             <div className={styles.heroArt}>
               <Image
-                src={serviceHero(service.id)}
+                src={heroArt ?? servicePicto(service.id)}
                 alt=""
                 width={520}
                 height={520}
                 priority
                 sizes="(max-width: 900px) 60vw, 36vw"
-                className={styles.heroImg}
+                className={`${styles.heroImg} ${heroArt ? "" : styles.heroPicto}`}
               />
             </div>
           </div>
@@ -107,7 +115,10 @@ export default async function ServicePage({ params }: Props) {
 
         {/* examples */}
         {examples.length > 0 && (
-          <section className={`shell ${styles.section}`} aria-labelledby="examples-title">
+          <section
+            className={`shell ${styles.section}`}
+            aria-labelledby="examples-title"
+          >
             <div className={styles.head}>
               <h2 id="examples-title" className={`eyebrow ${styles.heading}`}>
                 Příklady prací
@@ -127,8 +138,12 @@ export default async function ServicePage({ params }: Props) {
                     sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
                     className={styles.exampleImg}
                   />
-                  <span className={`eyebrow ${styles.exampleTag}`}>{p.service}</span>
-                  <span className={`serif ${styles.exampleName}`}>{p.name}</span>
+                  <span className={`eyebrow ${styles.exampleTag}`}>
+                    {p.service}
+                  </span>
+                  <span className={`serif ${styles.exampleName}`}>
+                    {p.name}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -136,26 +151,34 @@ export default async function ServicePage({ params }: Props) {
         )}
 
         {/* what you get */}
-        <section className={`shell ${styles.section}`} aria-labelledby="get-title">
-          <div className={styles.box}>
-            <h2 id="get-title" className={`eyebrow ${styles.boxLabel}`}>
-              Co dostanete
-            </h2>
-            <ul className={styles.checks}>
-              {service.deliverables.map((d) => (
-                <li key={d} className={styles.check}>
-                  <span className={styles.mark} aria-hidden>
-                    ✓
-                  </span>
-                  {d}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+        {includes.length > 0 && (
+          <section
+            className={`shell ${styles.section}`}
+            aria-labelledby="get-title"
+          >
+            <div className={styles.box}>
+              <h2 id="get-title" className={`eyebrow ${styles.boxLabel}`}>
+                Co dostanete
+              </h2>
+              <ul className={styles.checks}>
+                {includes.map((d) => (
+                  <li key={d} className={styles.check}>
+                    <span className={styles.mark} aria-hidden>
+                      ✓
+                    </span>
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
 
         {/* process */}
-        <section className={`shell ${styles.section}`} aria-labelledby="steps-title">
+        <section
+          className={`shell ${styles.section}`}
+          aria-labelledby="steps-title"
+        >
           <div className={styles.head}>
             <h2 id="steps-title" className={`eyebrow ${styles.heading}`}>
               Jak to probíhá
@@ -186,12 +209,30 @@ export default async function ServicePage({ params }: Props) {
         </section>
 
         {/* price & lead time */}
-        <section className={`shell ${styles.section}`} aria-label="Cena a termín">
+        <section
+          className={`shell ${styles.section}`}
+          aria-label="Cena a termín"
+        >
           <div className={styles.pair}>
             <div className={`${styles.big} ${styles[service.tone]}`}>
               <p className="eyebrow">Investice</p>
               <p className={`serif ${styles.bigValue}`}>{service.from}</p>
               <p className={styles.bigNote}>{service.priceNote}</p>
+              {price?.parts && (
+                <ul className={styles.priceParts}>
+                  {price.parts.map((part) => (
+                    <li key={part.name}>
+                      <span>{part.name}</span>
+                      <span>od {czk(part.priceFrom)}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {price?.unit && (
+                <p className={styles.bigFine}>Cena {price.unit}.</p>
+              )}
+              {price?.note && <p className={styles.bigFine}>{price.note}</p>}
+              <p className={styles.bigFine}>{priceTerms.vat}</p>
               {service.bundle && (
                 <Link href="/#bundles" className={styles.bigLink}>
                   Součást balíčku {bundleTitle(service.bundle)}
@@ -212,10 +253,25 @@ export default async function ServicePage({ params }: Props) {
         </section>
 
         {/* closing CTA */}
-        <section className={`shell ${styles.section} ${styles.last}`} aria-label="Poptávka">
+        <section
+          className={`shell ${styles.section} ${styles.last}`}
+          aria-label="Poptávka"
+        >
           <div className={`${styles.cta} ${styles[service.tone]}`}>
-            <Image src="/media/services/leaves-flat.webp" alt="" width={260} height={260} className={`${styles.leaf} ${styles.leafLeft}`} />
-            <Image src="/media/services/leaves-flat.webp" alt="" width={260} height={260} className={`${styles.leaf} ${styles.leafRight}`} />
+            <Image
+              src="/media/services/leaves-flat.webp"
+              alt=""
+              width={260}
+              height={260}
+              className={`${styles.leaf} ${styles.leafLeft}`}
+            />
+            <Image
+              src="/media/services/leaves-flat.webp"
+              alt=""
+              width={260}
+              height={260}
+              className={`${styles.leaf} ${styles.leafRight}`}
+            />
             <h2 className={`serif ${styles.ctaTitle}`}>{service.ctaTitle}</h2>
             <Button href={mailto} variant="light">
               Chci nabídku

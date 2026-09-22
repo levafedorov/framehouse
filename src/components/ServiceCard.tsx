@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { bundleTitle } from "@/data/bundles";
+import { bundleTitle } from "@/data/pricing";
 import { serviceAnchor, servicePath, type Service } from "@/data/services";
 import styles from "./ServiceCard.module.css";
 
@@ -48,7 +48,9 @@ export default function ServiceCard({ service }: { service: Service }) {
       {service.bundle && (
         <p className={`eyebrow ${styles.badge}`}>
           Součást balíčku{" "}
-          <span className={styles.badgeName}>{bundleTitle(service.bundle)}</span>
+          <span className={styles.badgeName}>
+            {bundleTitle(service.bundle)}
+          </span>
         </p>
       )}
 

@@ -19,15 +19,33 @@
   border-bottom: 1.5px solid var(--fg);
 }
 
-/* desktop: 4 square tiles per row */
+/* desktop: nine square tiles, three to a row */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--gap);
 }
 
 .cell {
   min-width: 0;
+}
+
+/* what every price already carries, and the VAT line */
+.terms {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 4px 0;
+}
+
+.included {
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 76ch;
+}
+
+.vat {
+  font-size: 13px;
 }
 
 /* tablet & phone: one list row per service */

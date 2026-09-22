@@ -1,15 +1,13 @@
-import type { BundleId } from "./bundles";
+import {
+  serviceDays,
+  serviceFrom,
+  type BundleId,
+  type PriceId,
+} from "./pricing";
 import { projects, type Project } from "./projects";
 
-export type ServiceId =
-  | "video"
-  | "logo"
-  | "identity"
-  | "icons"
-  | "web"
-  | "eshop"
-  | "social"
-  | "print";
+/** Everything in the ceník, plus the pages that are not offered there */
+export type ServiceId = PriceId | "video" | "web" | "eshop";
 
 export type Tone = "blue" | "brown" | "rose" | "sage" | "olive";
 
@@ -36,16 +34,16 @@ export type Service = {
 
   /** Two short facts under the hero stats */
   facts: [string, string];
-  /** "Co dostanete": exactly four short points */
-  deliverables: [string, string, string, string];
+  /** "Co dostanete", where the ceník has nothing to say */
+  deliverables?: string[];
   /** "Jak to probíhá": four steps, brief → drafty → doladění → předání */
   steps: [Step, Step, Step, Step];
   /** What the price depends on — one short line */
   priceNote: string;
   /** What the lead time depends on — one short line */
   termNote: string;
-  /** "Co není součástí": 3–4 short points */
-  excluded: string[];
+  /** Kept from the earlier layout; no section renders it today */
+  excluded?: string[];
   /** Project slugs shown as examples, up to three; the block is omitted when empty */
   examples?: string[];
   /** Serif headline of the closing CTA card */
@@ -69,8 +67,8 @@ export const serviceTerms = {
     "Exkluzivní, časově neomezená licence. White-label +50 %. Podpora po předání za zvláštní cenu.",
 };
 
-// TODO: prices and lead times are placeholders except logo and web —
-// confirm before launch (issue #13).
+// Prices and lead times of the design services live in the ceník
+// (src/data/pricing.ts); web and e-shop are not in it and carry their own.
 export const services: Service[] = [
   /* Video ads are parked for now — the entry stays for when they are back.
   {
@@ -109,11 +107,14 @@ export const services: Service[] = [
     id: "logo",
     title: "Logo",
     result: "Značka, která funguje na vizitce i na ceduli.",
-    from: "od 12 000 Kč",
-    days: "od 7 dnů",
+    from: serviceFrom("logo"),
+    days: serviceDays("logo") ?? "",
     tone: "brown",
     shape: "oval",
-    facts: ["Nové logo nebo redesign", "Funguje malé i velké, barevně i jednobarevně"],
+    facts: [
+      "Nové logo nebo redesign",
+      "Funguje malé i velké, barevně i jednobarevně",
+    ],
     deliverables: [
       "Logo v SVG, PDF a PNG",
       "Barevná, jednobarevná a inverzní verze",
@@ -132,11 +133,29 @@ export const services: Service[] = [
     ctaTitle: "Pojďme dát vaší firmě tvář.",
   },
   {
+    id: "logo-redesign",
+    title: "Redesign loga",
+    result: "Vaše logo v současné podobě, bez toho abyste začínali znovu.",
+    from: serviceFrom("logo-redesign"),
+    days: serviceDays("logo-redesign") ?? "po domluvě",
+    tone: "blue",
+    facts: ["Vychází z loga, které máte", "Zachová to, co na vás lidé znají"],
+    steps: [
+      { title: "Brief", text: "Co na logu drhne a co musí zůstat." },
+      { title: "Návrh", text: "Dvě varianty modernizace." },
+      { title: "Doladění", text: "Úpravy vybrané varianty." },
+      { title: "Předání", text: "Kompletní sada souborů." },
+    ],
+    priceNote: "Cena závisí na stavu podkladů a rozsahu změn.",
+    termNote: "Běžná doba při rychlé zpětné vazbě.",
+    ctaTitle: "Pojďme vašemu logu vrátit formu.",
+  },
+  {
     id: "identity",
     title: "Firemní styl",
     result: "Paleta, typografie a nosiče, aby všechno k sobě sedělo.",
-    from: "od 18 000 Kč",
-    days: "od 14 dnů",
+    from: serviceFrom("identity"),
+    days: serviceDays("identity") ?? "",
     tone: "rose",
     bundle: "nova-znacka",
     facts: ["Navazuje na vaše logo", "3–4 nosiče podle toho, co používáte"],
@@ -160,10 +179,10 @@ export const services: Service[] = [
   },
   {
     id: "icons",
-    title: "Ikony",
+    title: "Sada ikon",
     result: "Sada ikon ve stylu značky pro web i sociální sítě.",
-    from: "od 8 000 Kč",
-    days: "od 5 dnů",
+    from: serviceFrom("icons"),
+    days: serviceDays("icons") ?? "od 5 dnů",
     tone: "sage",
     bundle: "znacka-v-pohybu",
     facts: ["Sada zhruba 8 ikon", "Jednotná mřížka a síla linky"],
@@ -184,6 +203,46 @@ export const services: Service[] = [
     excluded: ["Velké ikonové knihovny", "Ilustrace a maskot", "Animace ikon"],
     examples: ["kooperativa", "koncept-maskot", "koncept-safari-park"],
     ctaTitle: "Pojďme dát vašim ikonám jeden rukopis.",
+  },
+  {
+    id: "maskot",
+    title: "Maskot",
+    result: "Postava, která mluví za vaši značku.",
+    from: serviceFrom("maskot"),
+    days: serviceDays("maskot") ?? "po domluvě",
+    tone: "olive",
+    shape: "oval",
+    bundle: "znacka-v-pohybu",
+    facts: ["Postava ve třech pozicích", "Navazuje na vaše logo a barvy"],
+    steps: [
+      { title: "Brief", text: "Komu maskot mluví a kde se objeví." },
+      { title: "Návrh", text: "Dva až tři charaktery, vyberete jeden." },
+      { title: "Doladění", text: "Pozice a výrazy vybrané postavy." },
+      { title: "Předání", text: "Vektory a pravidla použití." },
+    ],
+    priceNote: "Cena závisí na složitosti postavy a počtu pozic.",
+    termNote: "Běžná doba pro postavu ve třech pozicích.",
+    examples: ["koncept-maskot", "koncept-safari-park"],
+    ctaTitle: "Pojďme vaší značce dát tvář.",
+  },
+  {
+    id: "logo-animace",
+    title: "Animované logo",
+    result: "Logo, které se rozhýbe na webu i v prezentaci.",
+    from: serviceFrom("logo-animace"),
+    days: serviceDays("logo-animace") ?? "po domluvě",
+    tone: "blue",
+    bundle: "znacka-v-pohybu",
+    facts: ["Krátká animace vašeho loga", "Pro web, prezentace i sítě"],
+    steps: [
+      { title: "Brief", text: "Kde se animace objeví a jak dlouhá má být." },
+      { title: "Návrh", text: "Dva pohybové směry." },
+      { title: "Doladění", text: "Tempo a detaily vybraného směru." },
+      { title: "Předání", text: "MP4, Lottie a GIF." },
+    ],
+    priceNote: "Cena závisí na složitosti loga a délce animace.",
+    termNote: "Běžná doba, když logo už máte hotové.",
+    ctaTitle: "Pojďme vaše logo rozhýbat.",
   },
   {
     id: "web",
@@ -249,12 +308,11 @@ export const services: Service[] = [
   },
   {
     id: "social",
-    title: "Sociální sítě",
+    title: "Sada pro sociální sítě",
     result: "Avatar, cover a šablony postů, které zvládnete sami.",
-    from: "od 6 000 Kč",
-    days: "od 5 dnů",
+    from: serviceFrom("social"),
+    days: serviceDays("social") ?? "od 5 dnů",
     tone: "rose",
-    shape: "oval",
     bundle: "nova-znacka",
     facts: ["Navazuje na vaše logo a styl", "Šablony upravíte sami"],
     deliverables: [
@@ -271,15 +329,19 @@ export const services: Service[] = [
     ],
     priceNote: "Cena závisí na počtu sítí a šablon.",
     termNote: "Běžná doba pro jednu síť.",
-    excluded: ["Vedení sítí a psaní postů", "Reklama", "Fotky a videa do postů"],
+    excluded: [
+      "Vedení sítí a psaní postů",
+      "Reklama",
+      "Fotky a videa do postů",
+    ],
     ctaTitle: "Pojďme, ať vaše sítě vypadají jako jedna značka.",
   },
   {
     id: "print",
     title: "Tiskoviny",
     result: "Vizitky, hlavička a polep — včetně tiskových dat.",
-    from: "od 5 000 Kč",
-    days: "od 5 dnů",
+    from: serviceFrom("print"),
+    days: serviceDays("print") ?? "od 5 dnů",
     tone: "brown",
     bundle: "novy-kabat",
     facts: ["Tisková data připravená pro tiskárnu", "Navazuje na váš styl"],
@@ -301,6 +363,25 @@ export const services: Service[] = [
     examples: ["kismi"],
     ctaTitle: "Pojďme připravit tiskoviny, které nemusíte předělávat.",
   },
+  {
+    id: "logo-dotazeni",
+    title: "Dotažení hotového loga",
+    result: "Logo, které máte, připravené na tisk i na web.",
+    from: serviceFrom("logo-dotazeni"),
+    days: serviceDays("logo-dotazeni") ?? "po domluvě",
+    tone: "sage",
+    shape: "oval",
+    facts: ["Pro logo, které už máte odjinud", "Převod do vektoru a varianty"],
+    steps: [
+      { title: "Podklady", text: "Pošlete, co k logu máte." },
+      { title: "Převod", text: "Překreslíme do vektoru a vyčistíme tvary." },
+      { title: "Varianty", text: "Barevná, černobílá, inverzní, symbol." },
+      { title: "Předání", text: "Soubory a pravidla použití." },
+    ],
+    priceNote: "Cena závisí na kvalitě podkladů.",
+    termNote: "Běžná doba, když máte podklady po ruce.",
+    ctaTitle: "Pojďme vaše logo dotáhnout do konce.",
+  },
 ];
 
 export const serviceAnchor = (id: ServiceId) => `service-${id}`;
@@ -319,5 +400,21 @@ export const serviceExamples = (service: Service): Project[] =>
 
 /** Watercolor hero illustration, public/media/services/hero */
 /* file names carry a style suffix: replacing an image must change its URL,
-   because optimized variants are cached for a year */
-export const serviceHero = (id: ServiceId) => `/media/services/hero/${id}-flat.webp`;
+   because optimized variants are cached for a year. The services that came
+   with the ceník have only a pictogram; their pages show that instead. */
+const withHeroArt = new Set<ServiceId>([
+  "logo",
+  "identity",
+  "icons",
+  "social",
+  "print",
+  "web",
+  "eshop",
+  "video",
+]);
+
+export const serviceHero = (id: ServiceId) =>
+  withHeroArt.has(id) ? `/media/services/hero/${id}-flat.webp` : undefined;
+
+/** White line-art pictogram, public/media/services */
+export const servicePicto = (id: ServiceId) => `/media/services/${id}.png`;

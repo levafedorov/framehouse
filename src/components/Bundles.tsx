@@ -2,15 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "./Button";
 import { ArrowRight } from "./Icons";
-import { bundles } from "@/data/bundles";
-import { servicePath } from "@/data/services";
-import { site } from "@/data/site";
+import {
+  bundleTerms,
+  bundles,
+  priceFromLabel,
+  weeksLabel,
+} from "@/data/pricing";
 import styles from "./Bundles.module.css";
 
 /**
  * Three tall tiles, one per bundle. A full-bleed illustration (generated
  * with GPT Image 2 via Higgsfield, public/media/bundles) fills the tile;
  * the copy sits at the bottom on a dark scrim so it never fights the art.
+ * The add-on line points at the service, the button at the form.
  */
 export default function Bundles() {
   return (
@@ -37,36 +41,34 @@ export default function Bundles() {
             />
 
             <div className={styles.copy}>
-              <h3 className={`serif ${styles.title}`}>{b.title}</h3>
-              <p className={styles.audience}>{b.audience}</p>
+              <h3 className={`serif ${styles.title}`}>{b.name}</h3>
+              <p className={styles.audience}>{b.forWho}</p>
               <ul className={styles.includes}>
-                {b.includes.map((item) => (
+                {b.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
               <p className={`eyebrow ${styles.from}`}>
-                {b.from} · {b.term}
+                {priceFromLabel(b.priceFrom)} · {weeksLabel(b.deliveryWeeks)}
               </p>
               {b.recommended && (
-                <Link
-                  href={servicePath(b.recommended.service)}
-                  className={styles.recommended}
-                >
+                <Link href={b.recommended.href} className={styles.recommended}>
                   Doporučujeme k tomu: {b.recommended.label}
                   <ArrowRight size={12} />
                 </Link>
               )}
-              <Button
-                href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(`Balíček ${b.title}`)}`}
-                variant="light"
-                className={styles.cta}
-              >
+              <Button href="/#contact" variant="light" className={styles.cta}>
                 Nezávazná poptávka
               </Button>
             </div>
           </li>
         ))}
       </ul>
+
+      <div className={styles.terms}>
+        <p className={styles.saving}>{bundleTerms.saving}</p>
+        <p className={`muted ${styles.vat}`}>{bundleTerms.vat}</p>
+      </div>
     </section>
   );
 }

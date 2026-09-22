@@ -121,6 +121,23 @@
   margin-top: 10px;
 }
 
+/* what the bundle saves, and the VAT line */
+.terms {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 4px 0;
+}
+
+.saving {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.vat {
+  font-size: 13px;
+}
+
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;

@@ -127,6 +127,12 @@
   height: auto;
 }
 
+/* a pictogram has no illustration around it, so it needs room and air */
+.heroPicto {
+  width: min(72%, 380px);
+  opacity: 0.6;
+}
+
 /* ------------------------------------------------------------------ */
 /* shared section bits                                                 */
 /* ------------------------------------------------------------------ */
@@ -186,11 +192,11 @@
   font-weight: 600;
 }
 
-/* four items in a row, divided by hairlines */
+/* as many points as the ceník carries, wrapped into even columns */
 .checks {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px 26px;
 }
 
 .check {
@@ -199,12 +205,6 @@
   gap: 12px;
   font-size: 14px;
   line-height: 1.4;
-  padding-right: 16px;
-}
-
-.check + .check {
-  padding-left: 16px;
-  border-left: 1px solid var(--line);
 }
 
 .mark {
@@ -336,6 +336,25 @@
   opacity: 0.7;
   max-width: 44ch;
   line-height: 1.45;
+}
+
+/* the print sheet: sub-items with their own floor price */
+.priceParts {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+  max-width: 340px;
+  font-size: 14px;
+}
+
+.priceParts li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.35);
 }
 
 .bigLink {
@@ -475,14 +494,8 @@
     font-size: 64px;
   }
 
-  .checks,
   .steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .check + .check {
-    padding-left: 0;
-    border-left: 0;
   }
 
   .step + .step::before {
