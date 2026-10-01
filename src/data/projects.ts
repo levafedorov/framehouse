@@ -51,21 +51,11 @@ export type Project = {
   cover: string;
   /** 3:2 card image, a clean crop of the piece (no letterbox, no blur fill), public/media/work/<slug>-card.jpg */
   poster: string;
-  /** Hi-res image for the homepage hero where the cover is too small; falls back to `cover` */
-  heroImage?: string;
-  /** Shows the "Nové" badge */
-  isNew?: boolean;
   /** Left out where we don't know it */
   year?: string;
 
   /* --- detail page, /prace/[slug] --- */
 
-  /**
-   * The two story cards. The same pair of fields serves every kind; only
-   * the labels differ (see `storyLabels`): client and realised work read
-   * "Zadání / Řešení", a concept — which had no client brief — reads
-   * "Výchozí bod / Co jsme zkoušeli".
-   */
   /** What the work starts from, 1–2 plain sentences */
   brief?: string;
   /** What we did or tried, 1–2 plain sentences */
@@ -81,36 +71,9 @@ export type Project = {
   stills?: Still[];
 };
 
-/** Labels of the two story cards, per kind */
-export const storyLabels: Record<ProjectKind, [string, string]> = {
-  client: ["Zadání", "Řešení"],
-  realized: ["Zadání", "Řešení"],
-  concept: ["Výchozí bod", "Co jsme zkoušeli"],
-};
-
-export type FactIcon =
-  | "service"
-  | "format"
-  | "length"
-  | "year"
-  | "channel"
-  | "industry"
-  | "context";
-
-export type Fact = { label: string; value: string; icon: FactIcon };
+export type Fact = { label: string; value: string };
 
 export type Still = { src: string; label: string };
-
-/** Tile colour of the work's category, shared by the hero and the CTA */
-export const categoryTone: Record<
-  Category,
-  "blue" | "brown" | "rose" | "sage" | "olive"
-> = {
-  logo: "brown",
-  identity: "rose",
-  icons: "sage",
-  print: "blue",
-};
 
 export const projectPath = (slug: string) => `/prace/${slug}`;
 
@@ -137,10 +100,10 @@ const still = (slug: string, id: string, label: string): Still => ({
 });
 
 const fact = {
-  service: (value: string): Fact => ({ label: "Služba", value, icon: "service" }),
-  client: (value: string): Fact => ({ label: "Klient", value, icon: "industry" }),
-  industry: (value: string): Fact => ({ label: "Obor", value, icon: "industry" }),
-  year: (value: string): Fact => ({ label: "Rok", value, icon: "year" }),
+  service: (value: string): Fact => ({ label: "Služba", value }),
+  client: (value: string): Fact => ({ label: "Klient", value }),
+  industry: (value: string): Fact => ({ label: "Obor", value }),
+  year: (value: string): Fact => ({ label: "Rok", value }),
 };
 
 /**
@@ -160,8 +123,6 @@ const all: Project[] = [
     kind: "client",
     cover: cover("kooperativa"),
     poster: card("kooperativa"),
-    heroImage: "/media/work/kooperativa-hero.jpg",
-    isNew: true,
     brief:
       "Sada ikon pojistných produktů pro Kooperativu: cestovní pojištění, vozidla, podnikatelé, majetek a životní pojištění.",
     solution:

@@ -43,16 +43,6 @@ const manifest = [
   { out: "kooperativa-card.jpg", src: src("1/kooperativa/image(1).png"), crop: region(0, 41, 1000, 667), target: CARD },
   { out: "kooperativa-cover.jpg", src: src("1/kooperativa/image(1).png"), crop: region(0, 0, 1000, 750), target: COVER },
   {
-    // hi-res for the homepage hero; the placeholder line on the green bag
-    // is covered with a patch of the same fabric a little lower down
-    out: "kooperativa-hero.jpg",
-    src: src("1/kooperativa/image(6).png"),
-    // the fabric band right under the line has the same shading as the line
-    patch: { from: region(2690, 1082, 980, 64), to: { left: 2690, top: 1014 } },
-    crop: region(900, 300, 3400, 2600),
-    target: { w: 1600, h: 1224 },
-  },
-  {
     // the icon set: nine tiles cut from the sheet, laid out 3×3 — the
     // sheet's captions must not appear on the site
     out: "kooperativa-still-ikony.jpg",

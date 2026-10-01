@@ -24,14 +24,6 @@ export function ArrowRight({ size = 14, ...rest }: Props) {
   );
 }
 
-export function ChevronLeft({ size = 14, ...rest }: Props) {
-  return (
-    <svg {...base(size, rest)} strokeWidth={2}>
-      <path d="M15 6l-6 6 6 6" />
-    </svg>
-  );
-}
-
 export function ChevronRight({ size = 14, ...rest }: Props) {
   return (
     <svg {...base(size, rest)} strokeWidth={2}>
@@ -137,15 +129,6 @@ export function TeamIcon({ size = 24, ...rest }: Props) {
   );
 }
 
-export function ClockIcon({ size = 24, ...rest }: Props) {
-  return (
-    <svg {...base(size, rest)}>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 7v5l3 2" />
-    </svg>
-  );
-}
-
 export function ShieldIcon({ size = 24, ...rest }: Props) {
   return (
     <svg {...base(size, rest)}>
@@ -155,76 +138,7 @@ export function ShieldIcon({ size = 24, ...rest }: Props) {
   );
 }
 
-/* Facts strip on a work page */
-
-export function ClapperIcon({ size = 24, ...rest }: Props) {
-  return (
-    <svg {...base(size, rest)}>
-      <rect x="3" y="9" width="18" height="11" rx="1.5" />
-      <path d="M3 9l2-4h16l-2 4" />
-      <path d="M9 5l-2 4" />
-      <path d="M14 5l-2 4" />
-      <path d="M19 5l-2 4" />
-    </svg>
-  );
-}
-
-export function PhoneIcon({ size = 24, ...rest }: Props) {
-  return (
-    <svg {...base(size, rest)}>
-      <rect x="7" y="3" width="10" height="18" rx="2" />
-      <path d="M11 17.5h2" />
-    </svg>
-  );
-}
-
-export function CalendarIcon({ size = 24, ...rest }: Props) {
-  return (
-    <svg {...base(size, rest)}>
-      <rect x="4" y="5" width="16" height="15" rx="1.5" />
-      <path d="M4 10h16" />
-      <path d="M8 3v4" />
-      <path d="M16 3v4" />
-    </svg>
-  );
-}
-
-export function StoreIcon({ size = 24, ...rest }: Props) {
-  return (
-    <svg {...base(size, rest)}>
-      <path d="M4 10l1.5-5h13L20 10" />
-      <path d="M4 10a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0" />
-      <path d="M5 12v8h14v-8" />
-      <path d="M10 20v-5h4v5" />
-    </svg>
-  );
-}
-
-export function TrophyIcon({ size = 24, ...rest }: Props) {
-  return (
-    <svg {...base(size, rest)}>
-      <path d="M8 4h8v5a4 4 0 0 1-8 0z" />
-      <path d="M8 6H5v1a3 3 0 0 0 3 3" />
-      <path d="M16 6h3v1a3 3 0 0 1-3 3" />
-      <path d="M12 13v4" />
-      <path d="M8 20h8" />
-      <path d="M9 17h6v3H9z" />
-    </svg>
-  );
-}
-
 /* Social */
-
-export function InstagramIcon({ size = 18, ...rest }: Props) {
-  return (
-    <svg {...base(size, rest)}>
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.3" cy="6.7" r="0.8" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 export function LinkedInIcon({ size = 18, ...rest }: Props) {
   return (
     <svg {...base(size, rest)}>

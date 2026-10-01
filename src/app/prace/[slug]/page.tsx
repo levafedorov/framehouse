@@ -5,25 +5,13 @@ import { notFound } from "next/navigation";
 import Button from "@/components/Button";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import {
-  ArrowRight,
-  CalendarIcon,
-  ChevronLeft,
-  ClapperIcon,
-  ClockIcon,
-  InstagramIcon,
-  PhoneIcon,
-  StoreIcon,
-  TrophyIcon,
-} from "@/components/Icons";
+import { ArrowRight } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
 import {
-  categoryTone,
   kindLabel,
   projectBySlug,
   projects,
   relatedProjects,
-  type FactIcon,
   type Project,
 } from "@/data/projects";
 import { site } from "@/data/site";
@@ -40,25 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = projectBySlug(slug);
   if (!project) return {};
   return {
-    title: `${project.name} — ${project.service} · ${site.name}`,
+    title: `${project.caption} — ${site.name}`,
     description: project.brief,
   };
 }
 
-const factIcon: Record<FactIcon, typeof ClapperIcon> = {
-  service: ClapperIcon,
-  format: PhoneIcon,
-  length: ClockIcon,
-  year: CalendarIcon,
-  channel: InstagramIcon,
-  industry: StoreIcon,
-  context: TrophyIcon,
-};
-
-/**
- * The offer under the work. A concept has no client behind it, so it asks
- * about the visitor's own firm instead of "something similar".
- */
 function offer(project: Project) {
   if (project.kind === "concept") {
     return {
@@ -74,163 +48,101 @@ function offer(project: Project) {
   };
 }
 
-/**
- * One work, standing on its own: the piece itself next to a tile in the
- * category's colour, frames from the piece,
- * a strip of facts, three other works and the offer. The layout follows
- * the case-study mockup generated from the homepage (GPT Image 2).
- *
- * Kinds: client and realised work share the layout (the tag says which);
- * a concept (issue #19) names only the industry and the context, reads
- * "Výchozí bod / Co jsme zkoušeli" and ends with an offer for the
- * visitor's own firm.
- */
 export default async function WorkPage({ params }: Props) {
   const { slug } = await params;
   const project = projectBySlug(slug);
   if (!project) notFound();
 
-  const tone = categoryTone[project.category];
-  const concept = project.kind === "concept";
   const others = relatedProjects(project);
   const cta = offer(project);
   const mailto = `mailto:${site.contactEmail}?subject=${encodeURIComponent(
     cta.subject,
   )}`;
+  const facts = [
+    ...(project.facts ?? []),
+    ...(project.context ? [{ label: "Kontext", value: project.context }] : []),
+  ];
 
   return (
     <>
       <Header />
-      <main>
-        <section className={`shell ${styles.intro}`} id="top">
-          <article className={`${styles.hero} ${styles[tone]}`}>
-            <div className={styles.media}>
-              <Image
-                src={project.cover}
-                alt=""
-                fill
-                preload
-                fetchPriority="high"
-                sizes="(max-width: 900px) 100vw, 55vw"
-                className={styles.cover}
-              />
-              <span className={`eyebrow ${styles.tag}`}>
-                {kindLabel[project.kind]}
-              </span>
-              {project.isNew && (
-                <span className={`eyebrow ${styles.tag} ${styles.new}`}>
-                  Nové
-                </span>
-              )}
-            </div>
+      <main className={styles.page}>
+        <section className={styles.hero} id="top">
+          <div className={styles.copy}>
+            <Link href="/#work" className={`eyebrow ${styles.back}`}>
+              <ArrowRight size={12} className={styles.backArrow} />
+              Naše práce
+            </Link>
+            <p className={`eyebrow ${styles.kind}`}>
+              {kindLabel[project.kind]}
+            </p>
+            <h1 className={styles.title}>{project.caption}</h1>
+            {project.brief && <p className={styles.lead}>{project.brief}</p>}
+            {project.solution && (
+              <p className={styles.text}>{project.solution}</p>
+            )}
 
-            <div className={styles.copy}>
-              <Link href="/#work" className={`eyebrow ${styles.back}`}>
-                <ChevronLeft size={12} />
-                Naše práce
-              </Link>
-              <h1 className={`serif ${styles.title}`}>
-                {project.name}&nbsp;—
-                <br />
-                {project.service}
-              </h1>
-              <dl className={styles.meta}>
-                {concept ? (
-                  <>
-                    <div className={styles.metaRow}>
-                      <dt className={`eyebrow ${styles.metaKey}`}>Obor</dt>
-                      <dd className={styles.metaValue}>{project.name}</dd>
-                    </div>
-                    {project.context && (
-                      <div className={styles.metaRow}>
-                        <dt className={`eyebrow ${styles.metaKey}`}>
-                          Kontext
-                        </dt>
-                        <dd className={styles.metaValue}>{project.context}</dd>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <div className={styles.metaRow}>
-                    <dt className={`eyebrow ${styles.metaKey}`}>
-                      {kindLabel[project.kind]}
-                    </dt>
-                    <dd className={styles.metaValue}>{project.name}</dd>
+            {facts.length > 0 && (
+              <dl className={styles.facts}>
+                {facts.map((f) => (
+                  <div key={f.label} className={styles.fact}>
+                    <dt className="eyebrow">{f.label}</dt>
+                    <dd>{f.value}</dd>
                   </div>
-                )}
-                {project.context && !concept && (
-                  <div className={styles.metaRow}>
-                    <dt className={`eyebrow ${styles.metaKey}`}>Kontext</dt>
-                    <dd className={styles.metaValue}>{project.context}</dd>
-                  </div>
-                )}
-                {project.year && (
-                  <div className={styles.metaRow}>
-                    <dt className={`eyebrow ${styles.metaKey}`}>Rok</dt>
-                    <dd className={styles.metaValue}>{project.year}</dd>
-                  </div>
-                )}
+                ))}
               </dl>
-            </div>
-          </article>
+            )}
+          </div>
+
+          <div className={styles.media}>
+            <Image
+              src={project.cover}
+              alt=""
+              fill
+              preload
+              fetchPriority="high"
+              sizes="(max-width: 900px) 100vw, 58vw"
+              className={styles.cover}
+            />
+          </div>
         </section>
 
         {project.stills && project.stills.length > 0 && (
-          <section className={`shell ${styles.frames}`} aria-label="Záběry">
-            <ul className={styles.framesGrid}>
-              {project.stills.map((still, i) => (
-                <li key={still.src} className={styles.frame}>
-                  <Image
-                    src={still.src}
-                    alt={`${project.name}: ${still.label}`}
-                    fill
-                    sizes="(max-width: 600px) 100vw, 33vw"
-                    quality={75}
-                    className={styles.frameImg}
-                  />
-                  <span className={`eyebrow ${styles.caption}`}>
-                    {String(i + 1).padStart(2, "0")} / {still.label}
+          <section className={styles.section} aria-label="Detaily">
+            <ul className={styles.stills}>
+              {project.stills.map((still) => (
+                <li key={still.src}>
+                  <span className={styles.still}>
+                    <Image
+                      src={still.src}
+                      alt={`${project.name}: ${still.label}`}
+                      fill
+                      sizes="(max-width: 600px) 100vw, 33vw"
+                      quality={75}
+                      className={styles.stillImg}
+                    />
                   </span>
+                  <span className={styles.caption}>{still.label}</span>
                 </li>
               ))}
             </ul>
           </section>
         )}
 
-        {project.facts && project.facts.length > 0 && (
-          <section className={`shell ${styles.factsWrap}`} aria-label="Fakta">
-            <dl className={styles.facts}>
-              {project.facts.map((f) => {
-                const Icon = factIcon[f.icon];
-                return (
-                  <div key={f.label} className={styles.fact}>
-                    <Icon size={30} className={styles.factIcon} />
-                    <dt className={`eyebrow ${styles.factKey}`}>{f.label}</dt>
-                    <dd className={styles.factValue}>{f.value}</dd>
-                  </div>
-                );
-              })}
-            </dl>
-          </section>
-        )}
-
         {others.length > 0 && (
-          <section
-            className={`shell ${styles.others}`}
-            aria-labelledby="others-title"
-          >
+          <section className={styles.section} aria-labelledby="others-title">
             <div className={styles.head}>
               <h2 id="others-title" className={`eyebrow ${styles.heading}`}>
                 Další práce
               </h2>
-              <Link href="/#work" className={`muted ${styles.all}`}>
+              <Link href="/#work" className={styles.headLink}>
                 Všechny práce
                 <ArrowRight size={12} />
               </Link>
             </div>
-            <ul className={styles.othersGrid}>
+            <ul className={styles.others}>
               {others.map((p) => (
-                <li key={p.slug} className={styles.other}>
+                <li key={p.slug}>
                   <ProjectCard project={p} />
                 </li>
               ))}
@@ -238,23 +150,17 @@ export default async function WorkPage({ params }: Props) {
           </section>
         )}
 
-        <section className={`shell ${styles.offer}`} aria-label="Nabídka">
-          <div className={styles.cta}>
-            <Image
-              src="/media/work/cta-flat.webp"
-              alt=""
-              width={520}
-              height={520}
-              className={styles.wash}
-            />
-            <div className={styles.ctaCopy}>
-              <h2 className={`serif ${styles.ctaTitle}`}>{cta.title}</h2>
-              <p className={styles.ctaText}>{cta.text}</p>
-            </div>
-            <Button href={mailto} variant="light">
-              Popište nám projekt
-            </Button>
-          </div>
+        <section className={styles.cta} aria-label="Nabídka">
+          <h2 className={styles.ctaTitle}>{cta.title}</h2>
+          <p className={styles.ctaText}>{cta.text}</p>
+          <Button
+            href={mailto}
+            variant="outline"
+            arrow={false}
+            className={styles.pill}
+          >
+            Popište nám projekt
+          </Button>
         </section>
       </main>
       <Footer />
