@@ -1,0 +1,61 @@
+.section {
+  padding-top: 48px;
+  padding-bottom: 72px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 0 4px 32px;
+  font-weight: inherit;
+}
+
+.label {
+  color: var(--muted);
+}
+
+.title {
+  font-size: clamp(44px, 6.6vw, 96px);
+}
+
+/* desktop: nine square tiles, three to a row */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.cell {
+  min-width: 0;
+}
+
+/* what every price already carries, and the VAT line */
+.terms {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 4px 0;
+}
+
+.included {
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 76ch;
+}
+
+.vat {
+  font-size: 13px;
+}
+
+/* tablet & phone: one list row per service */
+@media (max-width: 900px) {
+  .section {
+    padding-top: 48px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

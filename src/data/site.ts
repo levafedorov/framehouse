@@ -1,6 +1,7 @@
 export const site = {
   name: "Framehouse",
   tagline: "Brand design pro vaši firmu.",
+  motto: "Design, který má smysl.",
   description:
     "Loga, firemní styl, ikony, tiskoviny a weby pro malé firmy. Ceny od, jasný postup, hotovo v týdnech.",
   announcement: "Ozveme se Vám do jednoho pracovního dne",
@@ -32,7 +33,7 @@ export const footerColumns = [
     title: "Služby",
     links: [
       { label: "Loga a firemní styl", href: "/sluzby/logo" },
-      { label: "Ikony", href: "/sluzby/icons" },
+      { label: "Ikony a ilustrace", href: "/sluzby/icons" },
       { label: "Weby a e-shopy", href: "/sluzby/web" },
       { label: "Sociální sítě a tisk", href: "/sluzby/social" },
     ],
@@ -43,6 +44,7 @@ export const footerColumns = [
       { label: "Nová značka", href: "/#bundles" },
       { label: "Nový kabát", href: "/#bundles" },
       { label: "Značka v pohybu", href: "/#bundles" },
+      { label: "Individuální řešení", href: "/#contact" },
     ],
   },
   {
@@ -50,7 +52,8 @@ export const footerColumns = [
     links: [
       { label: "Naše práce", href: "/#work" },
       { label: "Jak pracujeme", href: "/jak-pracujeme" },
-      { label: "E-mail", href: "mailto:hello@framehouse.cz" },
+      { label: "Ceník", href: "/sluzby" },
+      { label: "Kontakt", href: "/#contact" },
     ],
   },
 ];

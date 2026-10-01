@@ -1,4 +1,4 @@
-/* The pill: serif label, round arrow at the end */
+/* The pill: sans label, round arrow at the end */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -8,9 +8,9 @@
   padding: 0 6px 0 22px;
   border-radius: var(--pill);
   border: 1px solid transparent;
-  font-family: var(--font-serif);
-  font-size: 19px;
-  font-weight: 400;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
   line-height: 1;
   letter-spacing: 0;
   text-transform: none;
@@ -34,9 +34,8 @@
   outline-offset: 3px;
 }
 
-/* serif sits a touch low on the pill; lift it optically */
 .label {
-  padding-bottom: 2px;
+  padding-bottom: 1px;
 }
 
 .arrow {
@@ -76,16 +75,16 @@
 .light {
   background: #fff;
   color: var(--fg);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
 }
 
 .light .arrow {
-  background: var(--fg);
-  color: #fff;
+  border: 1px solid var(--fg);
+  color: var(--fg);
 }
 
-.light:hover {
-  background: #f3f1ea;
+.light:hover .arrow {
+  background: var(--fg);
+  color: #fff;
 }
 
 /* transparent with white border, next to a light one */
@@ -113,10 +112,10 @@
 }
 
 .sm {
-  height: 42px;
-  padding: 0 5px 0 18px;
+  height: 38px;
+  padding: 0 4px 0 18px;
   gap: 12px;
-  font-size: 17px;
+  font-size: 12px;
 }
 
 .sm .arrow {
@@ -131,12 +130,12 @@
 @media (max-width: 600px) {
   .btn {
     height: 54px;
-    font-size: 20px;
+    font-size: 15px;
   }
 
   .sm {
-    height: 42px;
-    font-size: 17px;
+    height: 38px;
+    font-size: 12px;
   }
 }
 

@@ -1,12 +1,7 @@
-import WorkRow from "./WorkRow";
-import { workRows } from "@/data/projects";
+import ProjectCard from "./ProjectCard";
+import { featuredProjects } from "@/data/projects";
 import styles from "./Work.module.css";
 
-/**
- * One row per category: the label and a one-liner on the left, the work
- * itself on the right as landscape cards the piece fills edge to edge.
- * Rows are divided by hairlines, like a case-study index.
- */
 export default function Work() {
   return (
     <section
@@ -14,19 +9,16 @@ export default function Work() {
       id="work"
       aria-labelledby="work-title"
     >
-      <div className={styles.head}>
-        <h2 id="work-title" className={`serif ${styles.title}`}>
-          Naše <em>práce</em> — od loga po obaly.
-        </h2>
-      </div>
+      <h2 id="work-title" className={styles.head}>
+        <span className={`display ${styles.title}`}>Naše práce</span>
+        <em className={`serif ${styles.sub}`}>od loga po obaly</em>
+      </h2>
 
-      <ul className={styles.rows}>
-        {workRows.map((row) => (
-          <WorkRow
-            key={row.id}
-            label={row.label}
-            items={row.items}
-          />
+      <ul className={styles.grid}>
+        {featuredProjects.map((p) => (
+          <li key={p.slug}>
+            <ProjectCard project={p} />
+          </li>
         ))}
       </ul>
     </section>

@@ -1,42 +1,37 @@
-import ServiceCard from "./ServiceCard";
-import { priceList, priceTerms } from "@/data/pricing";
-import { serviceById } from "@/data/services";
+import CircleLink from "./CircleLink";
+import { groupPriceLabel, priceGroups } from "@/data/pricing";
 import styles from "./Services.module.css";
 
-/**
- * The ceník: one tile per service, in the order of the price list. The tile
- * carries only what decides a click — the pictogram, the name, the price
- * and the lead time; what the price includes waits on the service's page.
- */
 export default function Services() {
   return (
     <section
-      className={`shell ${styles.section}`}
+      className={styles.section}
       id="services"
       aria-labelledby="services-title"
     >
+      <p className={`eyebrow rule-label ${styles.label}`}>Služby a ceny</p>
+
       <div className={styles.head}>
-        <h2 id="services-title" className={`eyebrow ${styles.title}`}>
-          Služby a ceny
+        <h2 id="services-title" className={`display ${styles.title}`}>
+          Co děláme
         </h2>
+        <CircleLink href="/sluzby" tone="plain" className={styles.all}>
+          Všechny
+          <br />
+          služby
+        </CircleLink>
       </div>
 
-      <ul className={styles.grid}>
-        {priceList.map((item) => {
-          const service = serviceById(item.id);
-          if (!service) return null;
-          return (
-            <li key={item.id} className={styles.cell}>
-              <ServiceCard service={service} />
-            </li>
-          );
-        })}
-      </ul>
-
-      <div className={styles.terms}>
-        <p className={styles.included}>{priceTerms.included}</p>
-        <p className={`muted ${styles.vat}`}>{priceTerms.vat}</p>
-      </div>
+      <ol className={styles.grid}>
+        {priceGroups.map((g, i) => (
+          <li key={g.id} className={styles.col}>
+            <span className={styles.num}>{String(i + 1).padStart(2, "0")}</span>
+            <h3 className={styles.name}>{g.title}</h3>
+            <p className={styles.price}>{groupPriceLabel(g)}</p>
+            <CircleLink href={g.href} ariaLabel={g.title} />
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }

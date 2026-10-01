@@ -37,8 +37,8 @@ export default function ContactForm() {
         autoComplete="email"
       />
       <button type="submit" className={styles.submit}>
-        <span className={styles.submitLabel}>Odeslat</span>
-        <ArrowRight size={12} />
+        <span className="visually-hidden">Odeslat</span>
+        <ArrowRight size={14} />
       </button>
     </form>
   );

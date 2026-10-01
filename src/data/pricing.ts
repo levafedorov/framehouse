@@ -167,6 +167,48 @@ export const serviceDays = (id: PriceId) => {
   return days ? workdaysLabel(days) : undefined;
 };
 
+export type PriceGroup = {
+  id: string;
+  title: string;
+  items: PriceId[];
+  href: string;
+};
+
+export const priceGroups: PriceGroup[] = [
+  {
+    id: "logo",
+    title: "Logo & identita",
+    items: ["logo", "logo-redesign", "identity"],
+    href: "/sluzby/logo",
+  },
+  {
+    id: "icons",
+    title: "Ikony & ilustrace",
+    items: ["icons", "maskot"],
+    href: "/sluzby/icons",
+  },
+  { id: "web", title: "Web design", items: [], href: "/sluzby/web" },
+  {
+    id: "motion",
+    title: "Animace & social",
+    items: ["logo-animace", "social"],
+    href: "/sluzby/social",
+  },
+  {
+    id: "print",
+    title: "Tisk & obaly",
+    items: ["print"],
+    href: "/sluzby/print",
+  },
+];
+
+export const groupPriceLabel = (group: PriceGroup) => {
+  const prices = priceList
+    .filter((p) => group.items.includes(p.id))
+    .map((p) => p.priceFrom);
+  return prices.length ? priceFromLabel(Math.min(...prices)) : "na míru";
+};
+
 /** The two lines that close the ceník */
 export const priceTerms = {
   included:
@@ -206,7 +248,7 @@ export const bundles: Bundle[] = [
     ],
     priceFrom: 16000,
     deliveryWeeks: 3,
-    recommended: { label: "Maskot", href: `/#${priceAnchor("maskot")}` },
+    recommended: { label: "Maskot", href: `/sluzby#${priceAnchor("maskot")}` },
     image: "/media/bundles/nova-znacka.jpg",
   },
   {
@@ -223,7 +265,7 @@ export const bundles: Bundle[] = [
     deliveryWeeks: 3,
     recommended: {
       label: "Animované logo",
-      href: `/#${priceAnchor("logo-animace")}`,
+      href: `/sluzby#${priceAnchor("logo-animace")}`,
     },
     image: "/media/bundles/novy-kabat.jpg",
   },
@@ -241,7 +283,7 @@ export const bundles: Bundle[] = [
     deliveryWeeks: 3,
     recommended: {
       label: "Tiskoviny s maskotem: polep, cedule",
-      href: `/#${priceAnchor("print")}`,
+      href: `/sluzby#${priceAnchor("print")}`,
     },
     image: "/media/bundles/znacka-v-pohybu.jpg",
   },

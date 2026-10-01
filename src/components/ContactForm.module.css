@@ -1,17 +1,18 @@
 .form {
   display: flex;
   align-items: center;
-  height: 44px;
-  padding: 0 6px 0 18px;
+  width: 100%;
+  max-width: 400px;
+  height: 46px;
+  padding: 0 5px 0 20px;
+  border: 1px solid var(--line);
   border-radius: var(--pill);
   background: #fff;
   color: var(--fg);
-  max-width: 340px;
 }
 
 .form:focus-within {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
+  border-color: var(--fg);
 }
 
 .input {
@@ -20,7 +21,7 @@
   height: 100%;
   border: 0;
   background: transparent;
-  font-size: 13px;
+  font-size: 12px;
   outline: none;
 }
 
@@ -29,24 +30,29 @@
 }
 
 .submit {
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  height: 34px;
-  padding: 0 12px 0 16px;
-  border-radius: var(--pill);
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   background: var(--fg);
   color: #fff;
-  font-family: var(--font-serif);
-  font-size: 16px;
-  line-height: 1;
-  transition: background-color 0.15s ease;
-}
-
-.submitLabel {
-  padding-bottom: 2px;
+  transition: transform 0.15s ease;
 }
 
 .submit:hover {
-  background: #2c2c2c;
+  transform: translateX(2px);
+}
+
+.submit:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submit {
+    transition: none;
+  }
 }

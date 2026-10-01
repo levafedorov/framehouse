@@ -388,9 +388,15 @@ export const projects: Project[] = [...all].sort(
   (a, b) => kindOrder.indexOf(a.kind) - kindOrder.indexOf(b.kind),
 );
 
-/** Only the rows that have something to show */
-export const workRows = categories
-  .map((c) => ({ ...c, items: projects.filter((p) => p.category === c.id) }))
-  .filter((row) => row.items.length > 0);
+const featuredSlugs = [
+  "hinna",
+  "kismi",
+  "kooperativa",
+  "llama-loca",
+  "koncept-kosmetika",
+  "quality-equals-cost",
+];
 
-export const heroProject = projects[0];
+export const featuredProjects = featuredSlugs
+  .map(projectBySlug)
+  .filter((p): p is Project => Boolean(p));

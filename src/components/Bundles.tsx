@@ -1,7 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
-import Button from "./Button";
-import { ArrowRight } from "./Icons";
+import CircleLink from "./CircleLink";
 import {
   bundleTerms,
   bundles,
@@ -10,65 +8,52 @@ import {
 } from "@/data/pricing";
 import styles from "./Bundles.module.css";
 
-/**
- * Three tall tiles, one per bundle. A full-bleed illustration (generated
- * with GPT Image 2 via Higgsfield, public/media/bundles) fills the tile;
- * the copy sits at the bottom on a dark scrim so it never fights the art.
- * The add-on line points at the service, the button at the form.
- */
+const glue = (text: string) => text.replace(/ ([a-zA-Z]) /g, " $1 ");
+
 export default function Bundles() {
   return (
     <section
-      className={`shell ${styles.section}`}
+      className={styles.section}
       id="bundles"
       aria-labelledby="bundles-title"
     >
-      <div className={styles.head}>
-        <h2 id="bundles-title" className={`eyebrow ${styles.heading}`}>
-          Balíčky
-        </h2>
-      </div>
+      <h2 id="bundles-title" className={`eyebrow rule-label ${styles.label}`}>
+        Balíčky
+      </h2>
 
-      <ul className={styles.grid}>
-        {bundles.map((b) => (
-          <li key={b.id} className={styles.tile}>
-            <Image
-              src={b.image}
-              alt=""
-              fill
-              sizes="(max-width: 900px) 100vw, 33vw"
-              className={styles.img}
-            />
+      <ol className={styles.grid}>
+        {bundles.map((b, i) => (
+          <li key={b.id} className={styles.col}>
+            <span className={styles.num}>{String(i + 1).padStart(2, "0")}</span>
+            <h3 className={styles.name}>{glue(b.name)}</h3>
+            <p className={styles.audience}>{b.forWho}</p>
 
-            <div className={styles.copy}>
-              <h3 className={`serif ${styles.title}`}>{b.name}</h3>
-              <p className={styles.audience}>{b.forWho}</p>
-              <ul className={styles.includes}>
-                {b.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className={`eyebrow ${styles.from}`}>
-                {priceFromLabel(b.priceFrom)} · {weeksLabel(b.deliveryWeeks)}
+            <ul className={styles.includes}>
+              {b.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+
+            <div className={styles.foot}>
+              <p className={styles.from}>
+                {priceFromLabel(b.priceFrom)}
+                <span aria-hidden> · </span>
+                {weeksLabel(b.deliveryWeeks)}
               </p>
               {b.recommended && (
                 <Link href={b.recommended.href} className={styles.recommended}>
                   Doporučujeme k tomu: {b.recommended.label}
-                  <ArrowRight size={12} />
                 </Link>
               )}
-              <Button href="/#contact" variant="light" className={styles.cta}>
-                Nezávazná poptávka
-              </Button>
+              <CircleLink href="/#contact">Nezávazná poptávka</CircleLink>
             </div>
           </li>
         ))}
-      </ul>
+      </ol>
 
-      <div className={styles.terms}>
-        <p className={styles.saving}>{bundleTerms.saving}</p>
-        <p className={`muted ${styles.vat}`}>{bundleTerms.vat}</p>
-      </div>
+      <p className={styles.terms}>
+        {bundleTerms.saving} {bundleTerms.vat}
+      </p>
     </section>
   );
 }

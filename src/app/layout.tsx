@@ -4,8 +4,8 @@ import "./globals.css";
 
 /* the two files every page needs first; the rest arrive on demand via unicode-range */
 const preloadFonts = [
-  "/fonts/dm-sans-latin-wght-normal.woff2",
-  "/fonts/instrument-serif-latin-400-normal.woff2",
+  "/fonts/manrope-latin-wght-normal.woff2",
+  "/fonts/bodoni-moda-latin-opsz-normal.woff2",
 ];
 
 export const metadata: Metadata = {

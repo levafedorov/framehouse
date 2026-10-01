@@ -1,0 +1,53 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: inherit;
+}
+
+.circle {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.link:hover .circle,
+.link:focus-visible .circle {
+  background: var(--dark-fg);
+  color: var(--dark);
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.link:focus-visible .circle {
+  outline: 2px solid var(--dark-fg);
+  outline-offset: 3px;
+}
+
+.caps .label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.plain .label {
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circle {
+    transition: none;
+  }
+}

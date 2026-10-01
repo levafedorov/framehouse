@@ -1,218 +1,58 @@
 .section {
-  padding-top: 34px;
-  padding-bottom: 30px;
-  scroll-margin-top: 80px;
+  padding-top: 64px;
+  padding-bottom: 96px;
+  padding-left: 40px;
+  padding-right: 30px;
+  scroll-margin-top: 64px;
 }
 
-/* heading sits over the media column, like the reference */
 .head {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  padding: 0 4px 22px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 40px;
+  font-weight: inherit;
 }
 
 .title {
-  grid-column: 2;
-  font-size: 40px;
-  line-height: 1.08;
-  max-width: 20ch;
+  font-size: clamp(44px, 6.6vw, 96px);
 }
 
-.title em {
+.sub {
+  margin-top: -0.12em;
+  font-size: clamp(30px, 4vw, 56px);
   font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
-.rows {
-  border-top: 1px solid var(--line);
-}
-
-.row {
+.grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  gap: var(--gap);
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-/* the category name sits in the vertical middle of the row; the arrows
-   stay pinned to its bottom-left corner */
-.aside {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 4px 16px 4px 4px;
-}
-
-.category {
-  font-size: 30px;
-  line-height: 1.1;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  max-width: 12ch;
-}
-
-.arrows {
-  position: absolute;
-  left: 4px;
-  bottom: 4px;
-  display: flex;
-  gap: 6px;
-}
-
-.arrow {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--fg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    opacity 0.15s ease;
-}
-
-.arrow:hover:not(:disabled) {
-  background: var(--fg);
-  color: #fff;
-}
-
-.arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.arrow:focus-visible {
-  outline: 2px solid var(--fg);
-  outline-offset: 2px;
-}
-
-/* the strip's edges fade into the page while there is more to scroll */
-.stripWrap {
-  position: relative;
-  min-width: 0;
-}
-
-.stripWrap::before,
-.stripWrap::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 8px;
-  width: 72px;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.stripWrap::before {
-  left: 0;
-  background: linear-gradient(90deg, var(--bg), rgba(243, 241, 234, 0));
-}
-
-.stripWrap::after {
-  right: 0;
-  background: linear-gradient(270deg, var(--bg), rgba(243, 241, 234, 0));
-}
-
-.morePrev .stripWrap::before,
-.moreNext .stripWrap::after {
-  opacity: 1;
-}
-
-/* three landscape cards in view, the rest scroll sideways with snap */
-.strip {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 8px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
-}
-
-.cell {
-  flex: 0 0 calc((100% - 12px) / 3);
-  min-width: 0;
-  scroll-snap-align: start;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px 12px;
 }
 
 @media (max-width: 900px) {
   .section {
-    padding-top: 30px;
+    padding: 48px 20px 64px;
   }
 
-  .head {
-    grid-template-columns: 1fr;
-  }
-
-  .title {
-    grid-column: 1;
-    font-size: 32px;
-  }
-
-  .row {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .aside {
-    padding: 2px 4px;
-  }
-
-  .category {
-    font-size: 24px;
-    max-width: none;
-  }
-
-  /* touch scrolls; the fade is hint enough */
-  .arrows {
-    display: none;
-  }
-
-  .stripWrap {
-    margin-right: calc(-1 * var(--edge));
-  }
-
-  .stripWrap::before,
-  .stripWrap::after {
-    bottom: 0;
-    width: 40px;
-  }
-
-  /* edge to edge, no scrollbar on touch */
-  .strip {
-    scrollbar-width: none;
-    padding-bottom: 0;
-    padding-right: var(--edge);
-    scroll-padding-right: var(--edge);
-  }
-
-  .strip::-webkit-scrollbar {
-    display: none;
-  }
-
-  .cell {
-    flex-basis: 46%;
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 10px;
   }
 }
 
 @media (max-width: 600px) {
-  .title {
-    font-size: 28px;
+  .section {
+    padding: 40px 16px 56px;
   }
 
-  .cell {
-    flex-basis: 72%;
+  .head {
+    margin-bottom: 28px;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .arrow,
-  .stripWrap::before,
-  .stripWrap::after {
-    transition: none;
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
   }
 }

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "./Button";
-import { ArrowRight, ChevronLeft, ChevronRight, Close, Menu } from "./Icons";
+import { ArrowRight, Close, Menu } from "./Icons";
 import { nav, site } from "@/data/site";
 import styles from "./Header.module.css";
 
@@ -22,75 +22,69 @@ export default function Header() {
   }, [open]);
 
   return (
-    <>
-      <div className={styles.announce} role="note">
-        <ChevronLeft size={12} className={styles.announceChevron} />
-        <span>{site.announcement}</span>
-        <ChevronRight size={12} className={styles.announceChevron} />
+    <header className={styles.header}>
+      <div className={styles.bar}>
+        <Link href="/" className={`serif ${styles.logo}`}>
+          {site.name}
+        </Link>
+
+        <nav className={styles.nav} aria-label="Hlavní">
+          {nav.map((item) => (
+            <Link key={item.href} href={item.href} className={styles.link}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className={styles.right}>
+          <Button
+            href={`mailto:${site.contactEmail}`}
+            variant="light"
+            size="sm"
+            className={styles.cta}
+          >
+            Napište nám
+          </Button>
+          <button
+            type="button"
+            className={styles.burger}
+            aria-label={open ? "Zavřít menu" : "Otevřít menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <Close size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
-      <header className={`shell ${styles.header}`}>
-        <div className={styles.bar}>
-          <Link href="/" className={`serif ${styles.logo}`}>
-            {site.name}
-          </Link>
-
-          <nav className={styles.nav} aria-label="Hlavní">
-            {nav.map((item) => (
-              <Link key={item.href} href={item.href} className={styles.link}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className={styles.right}>
-            <Button
-              href={`mailto:${site.contactEmail}`}
-              size="sm"
-              className={styles.cta}
+      <div
+        id="mobile-menu"
+        className={`${styles.mobile} ${open ? styles.mobileOpen : ""}`}
+        hidden={!open}
+      >
+        <nav className={styles.mobileNav} aria-label="Mobilní">
+          {nav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`serif ${styles.mobileLink}`}
+              onClick={() => setOpen(false)}
             >
-              Napište nám
-            </Button>
-            <button
-              type="button"
-              className={styles.burger}
-              aria-label={open ? "Zavřít menu" : "Otevřít menu"}
-              aria-expanded={open}
-              aria-controls="mobile-menu"
-              onClick={() => setOpen((v) => !v)}
-            >
-              {open ? <Close size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </div>
-
-        <div
-          id="mobile-menu"
-          className={`${styles.mobile} ${open ? styles.mobileOpen : ""}`}
-          hidden={!open}
-        >
-          <nav className={styles.mobileNav} aria-label="Mobilní">
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`serif ${styles.mobileLink}`}
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-                <ArrowRight />
-              </Link>
-            ))}
-            <Button
-              href={`mailto:${site.contactEmail}`}
-              block
-              className={styles.mobileCta}
-            >
-              Napište nám
-            </Button>
-          </nav>
-        </div>
-      </header>
-    </>
+              {item.label}
+              <ArrowRight />
+            </Link>
+          ))}
+          <Button
+            href={`mailto:${site.contactEmail}`}
+            variant="light"
+            block
+            className={styles.mobileCta}
+          >
+            Napište nám
+          </Button>
+        </nav>
+      </div>
+    </header>
   );
 }
