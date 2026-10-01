@@ -10,10 +10,10 @@ export default function Hero() {
       </h1>
       <div className={styles.card}>
         <Image
-          src="/media/hero/profesionalni-pohled.jpg"
+          src="/media/hero/profesionalni-pohled-2.jpg"
           alt="profesionální pohled"
-          width={1910}
-          height={753}
+          width={1900}
+          height={759}
           priority
           fetchPriority="high"
           sizes="(max-width: 600px) 100vw, 1400px"

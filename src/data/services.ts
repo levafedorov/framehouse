@@ -397,24 +397,3 @@ export const serviceExamples = (service: Service): Project[] =>
     .map((slug) => projects.find((p) => p.slug === slug))
     .filter((p): p is Project => p !== undefined)
     .slice(0, 3);
-
-/** Watercolor hero illustration, public/media/services/hero */
-/* file names carry a style suffix: replacing an image must change its URL,
-   because optimized variants are cached for a year. The services that came
-   with the ceník have only a pictogram; their pages show that instead. */
-const withHeroArt = new Set<ServiceId>([
-  "logo",
-  "identity",
-  "icons",
-  "social",
-  "print",
-  "web",
-  "eshop",
-  "video",
-]);
-
-export const serviceHero = (id: ServiceId) =>
-  withHeroArt.has(id) ? `/media/services/hero/${id}-flat.webp` : undefined;
-
-/** White line-art pictogram, public/media/services */
-export const servicePicto = (id: ServiceId) => `/media/services/${id}.png`;
