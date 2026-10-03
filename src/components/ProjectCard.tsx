@@ -9,7 +9,9 @@ export default function ProjectCard({ project }: { project: Project }) {
     <Link
       href={projectPath(project.slug)}
       className={`${styles.card} ${
-        project.category === "logo" ? styles.logo : ""
+        project.category === "logo" && project.kind === "client"
+          ? styles.logo
+          : ""
       }`}
     >
       <span className={styles.media}>

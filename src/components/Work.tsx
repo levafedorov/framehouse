@@ -1,5 +1,6 @@
 import ProjectCard from "./ProjectCard";
-import { featuredProjects } from "@/data/projects";
+import WorkScroller from "./WorkScroller";
+import { homeProjects } from "@/data/projects";
 import styles from "./Work.module.css";
 
 export default function Work() {
@@ -14,13 +15,13 @@ export default function Work() {
         <em className={`serif ${styles.sub}`}>od loga po obaly</em>
       </h2>
 
-      <ul className={styles.grid}>
-        {featuredProjects.map((p) => (
+      <WorkScroller>
+        {homeProjects.map((p) => (
           <li key={p.slug}>
             <ProjectCard project={p} />
           </li>
         ))}
-      </ul>
+      </WorkScroller>
     </section>
   );
 }

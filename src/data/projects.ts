@@ -358,6 +358,11 @@ const featuredSlugs = [
   "quality-equals-cost",
 ];
 
-export const featuredProjects = featuredSlugs
+const featuredProjects = featuredSlugs
   .map(projectBySlug)
   .filter((p): p is Project => Boolean(p));
+
+export const homeProjects = [
+  ...featuredProjects,
+  ...projects.filter((p) => !featuredSlugs.includes(p.slug)),
+];

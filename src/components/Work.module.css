@@ -25,10 +25,103 @@
   letter-spacing: -0.02em;
 }
 
+.viewport {
+  position: relative;
+  container-type: inline-size;
+}
+
+.viewport::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48px;
+  background: linear-gradient(
+    rgba(245, 244, 240, 0),
+    rgba(245, 244, 240, 0.8)
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.more::after {
+  opacity: 1;
+}
+
+.next {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+  color: var(--fg);
+}
+
+.nextCircle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  transform: rotate(90deg);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.2s ease;
+}
+
+.up {
+  transform: rotate(-90deg);
+}
+
+.next:hover .nextCircle,
+.next:focus-visible .nextCircle {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.next:focus-visible {
+  outline: none;
+}
+
+.next:focus-visible .nextCircle {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+
+.nextLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
 .grid {
+  --cols: 3;
+  --gap-x: 12px;
+  --gap-y: 30px;
+  --scrollbar: 12px;
+  --row: calc(
+    (100cqw - var(--scrollbar) - (var(--cols) - 1) * var(--gap-x)) /
+      var(--cols) / 2 + 32px
+  );
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 30px 12px;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-auto-rows: var(--row);
+  gap: var(--gap-y) var(--gap-x);
+  max-height: calc(2 * var(--row) + var(--gap-y));
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  scroll-snap-type: y proximity;
+}
+
+.grid > li {
+  scroll-snap-align: start;
 }
 
 @media (max-width: 900px) {
@@ -37,8 +130,9 @@
   }
 
   .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 10px;
+    --cols: 2;
+    --gap-x: 10px;
+    --gap-y: 24px;
   }
 }
 
@@ -52,7 +146,15 @@
   }
 
   .grid {
-    grid-template-columns: 1fr;
-    gap: 22px;
+    --cols: 1;
+    --gap-y: 22px;
+    --scrollbar: 0px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewport::after,
+  .nextCircle {
+    transition: none;
   }
 }
