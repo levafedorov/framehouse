@@ -41,7 +41,7 @@
 }
 
 .num {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--dark-muted);
 }
 
@@ -49,17 +49,22 @@
   margin-top: 16px;
   font-size: clamp(17px, 1.6vw, 23px);
   font-weight: 800;
-  line-height: 1.02;
+  line-height: 1.1;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   max-width: 9ch;
+  min-height: 2.2em;
 }
 
 .price {
-  margin: 20px 0 28px;
+  margin: 16px 0 28px;
   font-size: 16px;
   font-weight: 300;
   white-space: nowrap;
+}
+
+.more {
+  margin-top: auto;
 }
 
 @media (max-width: 900px) {
@@ -90,6 +95,11 @@
   .price {
     margin: 0;
     max-width: none;
+    min-height: 0;
+  }
+
+  .more {
+    margin-top: 0;
   }
 
   .name {
@@ -137,5 +147,14 @@
 
   .col > a {
     grid-area: link;
+  }
+
+  .more > span:last-child {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 }

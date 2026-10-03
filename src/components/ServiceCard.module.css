@@ -153,7 +153,7 @@
     max-width: calc(100% - 11cqw);
     text-align: right;
     white-space: nowrap;
-    font-size: clamp(9px, 3cqw, 10px);
+    font-size: clamp(11px, 3cqw, 12px);
     opacity: 0.8;
   }
 
@@ -170,7 +170,7 @@
   }
 
   .name {
-    font-size: clamp(11px, 4.1cqw, 14px);
+    font-size: clamp(13px, 4.1cqw, 16px);
   }
 
   .from {
@@ -183,13 +183,13 @@
     right: 5.5cqw;
     bottom: 5.5cqw;
     padding-right: 7em;
-    font-size: clamp(11px, 3.8cqw, 13px);
+    font-size: clamp(13px, 3.8cqw, 15px);
   }
 
   .days {
     right: 5.5cqw;
     bottom: 5.5cqw;
-    font-size: clamp(10px, 3.2cqw, 11px);
+    font-size: clamp(12px, 3.2cqw, 13px);
     opacity: 0.8;
   }
 
@@ -235,7 +235,7 @@
     bottom: 13cqw;
     padding-right: 0;
     text-align: center;
-    font-size: clamp(10px, 3.5cqw, 12px);
+    font-size: clamp(12px, 3.5cqw, 14px);
   }
 
   .oval .days {
@@ -300,13 +300,13 @@
   .name {
     grid-area: name;
     align-self: end;
-    font-size: 12px;
+    font-size: 14px;
     padding-top: 6px;
   }
 
   .badge {
     grid-area: badge;
-    font-size: 9px;
+    font-size: 11px;
     color: var(--muted);
   }
 
@@ -328,7 +328,7 @@
   .days {
     grid-area: days;
     justify-self: end;
-    font-size: 11px;
+    font-size: 13px;
     color: var(--muted);
   }
 }
@@ -367,7 +367,7 @@
   }
 
   .result {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .from {

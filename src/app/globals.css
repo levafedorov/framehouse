@@ -185,7 +185,7 @@ ol {
 
 /* small tracked uppercase label used across the page */
 .eyebrow {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -201,7 +201,7 @@ ol {
 .display {
   font-family: var(--font-sans);
   font-weight: 800;
-  line-height: 0.92;
+  line-height: 1.04;
   letter-spacing: -0.035em;
   text-transform: uppercase;
 }

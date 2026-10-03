@@ -28,7 +28,13 @@ export default function Services() {
             <span className={styles.num}>{String(i + 1).padStart(2, "0")}</span>
             <h3 className={styles.name}>{g.title}</h3>
             <p className={styles.price}>{groupPriceLabel(g)}</p>
-            <CircleLink href={g.href} ariaLabel={g.title} />
+            <CircleLink
+              href={g.href}
+              ariaLabel={`${g.title}: zjistit více`}
+              className={styles.more}
+            >
+              Zjistit více
+            </CircleLink>
           </li>
         ))}
       </ol>

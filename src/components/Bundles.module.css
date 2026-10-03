@@ -30,7 +30,7 @@
 }
 
 .num {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   color: var(--dark-muted);
 }
@@ -39,7 +39,7 @@
   margin-top: 14px;
   font-size: clamp(24px, 2.6vw, 34px);
   font-weight: 800;
-  line-height: 0.98;
+  line-height: 1.08;
   letter-spacing: -0.015em;
   text-transform: uppercase;
   max-width: 8ch;
@@ -50,7 +50,7 @@
 .from,
 .recommended,
 .terms {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 500;
   line-height: 1.6;
   letter-spacing: 0.18em;
@@ -96,7 +96,7 @@
 }
 
 .from {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.14em;
 }
 
@@ -116,7 +116,7 @@
 
 .terms {
   margin-top: 48px;
-  font-size: 8px;
+  font-size: 11px;
   color: var(--dark-muted);
 }
 
@@ -144,7 +144,7 @@
 
   .terms {
     margin-top: 12px;
-    font-size: 9px;
+    font-size: 11px;
   }
 }
 
