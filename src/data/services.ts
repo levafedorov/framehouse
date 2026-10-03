@@ -60,7 +60,7 @@ export const defaultSteps: [Step, Step, Step, Step] = [
   { title: "Předání", text: "Finální soubory a licence." },
 ];
 
-/** The lines every service page repeats (see About) */
+/** The lines every service page repeats */
 export const serviceTerms = {
   payment: "Fixní cena, nebo platba za iteraci — vyberete si.",
   licence:

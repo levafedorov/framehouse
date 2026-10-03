@@ -7,7 +7,7 @@ import Work from "@/components/Work";
 
 /**
  * hero → proof (work) → services with prices → bundles → contact,
- * as planned in issue #21. "How we work" lives on its own page: /jak-pracujeme.
+ * as planned in issue #21.
  */
 export default function Home() {
   return (

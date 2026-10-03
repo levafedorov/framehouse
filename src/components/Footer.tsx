@@ -1,18 +1,19 @@
-import Link from "next/link";
 import ContactForm from "./ContactForm";
-import { footerColumns, site } from "@/data/site";
+import { site } from "@/data/site";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
   return (
     <footer className={styles.footer} id="contact">
       <div className={styles.top}>
-        <div className={styles.contact}>
+        <div>
           <p className={`eyebrow ${styles.label}`}>Napište nám</p>
           <h2 className={styles.title}>
             Buďme
             <br />v kontaktu.
           </h2>
+        </div>
+        <div className={styles.contact}>
           <p className={styles.hint}>
             Nechte nám e-mail, ozveme se Vám do jednoho pracovního dne. Nebo
             pište rovnou na{" "}
@@ -23,22 +24,6 @@ export default function Footer() {
           </p>
           <ContactForm />
         </div>
-
-        {footerColumns.map((col) => (
-          <div key={col.title} className={styles.col}>
-            <p className={`eyebrow ${styles.label}`}>{col.title}</p>
-            <ul className={styles.links}>
-              {col.links.map((l) => (
-                <li key={l.label}>
-                  <Link href={l.href} className={styles.link}>
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-        {/* "Sledujte nás" comes back once site.social has real profiles */}
       </div>
 
       <div className={styles.bottom}>

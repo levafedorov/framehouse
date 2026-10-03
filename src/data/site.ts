@@ -24,36 +24,5 @@ export const nav = [
   { label: "Práce", href: "/#work" },
   { label: "Služby", href: "/#services" },
   { label: "Balíčky", href: "/#bundles" },
-  { label: "Jak pracujeme", href: "/jak-pracujeme" },
   { label: "Kontakt", href: "/#contact" },
-];
-
-export const footerColumns = [
-  {
-    title: "Služby",
-    links: [
-      { label: "Loga a firemní styl", href: "/sluzby/logo" },
-      { label: "Ikony a ilustrace", href: "/sluzby/icons" },
-      { label: "Weby a e-shopy", href: "/sluzby/web" },
-      { label: "Sociální sítě a tisk", href: "/sluzby/social" },
-    ],
-  },
-  {
-    title: "Balíčky",
-    links: [
-      { label: "Nová značka", href: "/#bundles" },
-      { label: "Nový kabát", href: "/#bundles" },
-      { label: "Značka v pohybu", href: "/#bundles" },
-      { label: "Individuální řešení", href: "/#contact" },
-    ],
-  },
-  {
-    title: "Studio",
-    links: [
-      { label: "Naše práce", href: "/#work" },
-      { label: "Jak pracujeme", href: "/jak-pracujeme" },
-      { label: "Ceník", href: "/sluzby" },
-      { label: "Kontakt", href: "/#contact" },
-    ],
-  },
 ];
