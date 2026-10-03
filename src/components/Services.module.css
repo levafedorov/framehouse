@@ -116,6 +116,10 @@
     padding: 28px 16px;
   }
 
+  .title {
+    line-height: 1.2;
+  }
+
   .head {
     align-items: flex-end;
   }

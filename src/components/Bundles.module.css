@@ -152,4 +152,33 @@
   .section {
     padding: 8px 16px 28px;
   }
+
+  .num {
+    font-size: 14px;
+  }
+
+  .name {
+    line-height: 1.18;
+  }
+
+  .audience,
+  .includes,
+  .recommended,
+  .cta > span:last-child {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+  }
+
+  .includes {
+    gap: 8px;
+  }
+
+  .from {
+    font-size: 15px;
+  }
+
+  .terms {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
 }

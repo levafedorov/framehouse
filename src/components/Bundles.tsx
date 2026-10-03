@@ -45,7 +45,9 @@ export default function Bundles() {
                   Doporučujeme k tomu: {b.recommended.label}
                 </Link>
               )}
-              <CircleLink href="/#contact">Nezávazná poptávka</CircleLink>
+              <CircleLink href="/#contact" className={styles.cta}>
+                Nezávazná poptávka
+              </CircleLink>
             </div>
           </li>
         ))}
