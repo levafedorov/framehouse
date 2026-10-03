@@ -4,6 +4,7 @@
 }
 
 .card {
+  position: relative;
   background: #f8f8f6;
   border-radius: 28px;
   overflow: hidden;
@@ -14,12 +15,76 @@
   height: auto;
 }
 
+.jumps {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10%;
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+}
+
+.jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  color: var(--fg);
+  font-size: clamp(13px, 1.1vw, 16px);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: border-color 0.15s ease;
+}
+
+.jumpArrow {
+  transform: rotate(90deg);
+  transition: transform 0.2s ease;
+}
+
+.jump:hover {
+  border-color: currentColor;
+}
+
+.jump:hover .jumpArrow {
+  transform: rotate(90deg) translateX(3px);
+}
+
+.jump:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
 @media (max-width: 600px) {
   .section {
-    padding: 0 8px 12px;
+    padding: 0 8px 16px;
   }
 
   .card {
+    overflow: visible;
+    background: none;
+  }
+
+  .img {
     border-radius: 16px;
+  }
+
+  .jumps {
+    position: static;
+    gap: 32px;
+    padding: 16px 4px 4px;
+  }
+
+  .jump {
+    color: var(--dark-fg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jump,
+  .jumpArrow {
+    transition: none;
   }
 }
