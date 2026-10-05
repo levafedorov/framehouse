@@ -77,10 +77,6 @@ export default async function WorkPage({ params }: Props) {
               {kindLabel[project.kind]}
             </p>
             <h1 className={styles.title}>{project.caption}</h1>
-            {project.brief && <p className={styles.lead}>{project.brief}</p>}
-            {project.solution && (
-              <p className={styles.text}>{project.solution}</p>
-            )}
 
             {facts.length > 0 && (
               <dl className={styles.facts}>
