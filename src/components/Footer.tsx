@@ -28,8 +28,6 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <p className={`serif ${styles.wordmark}`}>{site.name}</p>
-        <span className={styles.dash} aria-hidden />
-        <p className={`serif ${styles.motto}`}>{site.motto}</p>
         <p className={styles.copy}>
           © {new Date().getFullYear()} {site.name}, {site.city}. Všechna práva
           vyhrazena.

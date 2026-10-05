@@ -1,7 +1,6 @@
 export const site = {
   name: "Framehouse",
   tagline: "Brand design pro vaši firmu.",
-  motto: "Design, který má smysl.",
   description:
     "Loga, firemní styl, ikony, tiskoviny a weby pro malé firmy. Ceny od, jasný postup, hotovo v týdnech.",
   announcement: "Ozveme se Vám do jednoho pracovního dne",

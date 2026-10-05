@@ -58,17 +58,6 @@
   letter-spacing: -0.02em;
 }
 
-.dash {
-  width: 56px;
-  border-top: 1px solid var(--muted);
-}
-
-.motto {
-  font-size: 14px;
-  font-style: italic;
-  color: var(--muted);
-}
-
 .copy {
   margin-left: auto;
   font-size: 11px;
