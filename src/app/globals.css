@@ -90,13 +90,6 @@
   --dark-muted: rgba(245, 244, 240, 0.62);
   --dark-line: rgba(245, 244, 240, 0.22);
 
-  /* tile palette */
-  --tile-blue: #6f8ea3;
-  --tile-brown: #4b3f39;
-  --tile-rose: #a17c78;
-  --tile-sage: #8d9b90;
-  --tile-olive: #6b7a52;
-
   --radius: 14px;
   --radius-sm: 8px;
   --pill: 999px;

@@ -151,9 +151,6 @@ export const priceList: PriceItem[] = [
   },
 ];
 
-/** Anchor of a ceník row, so a bundle can point at a service without a page */
-export const priceAnchor = (id: PriceId) => `service-${id}`;
-
 export const priceById = (id: string) => priceList.find((p) => p.id === id);
 
 /** The ceník price of a service, for its own page to repeat without a copy */
@@ -187,7 +184,6 @@ export const priceGroups: PriceGroup[] = [
     items: ["icons", "maskot"],
     href: "/sluzby/icons",
   },
-  { id: "web", title: "Web design", items: [], href: "/sluzby/web" },
   {
     id: "motion",
     title: "Animace & social",
@@ -209,10 +205,7 @@ export const groupPriceLabel = (group: PriceGroup) => {
   return prices.length ? priceFromLabel(Math.min(...prices)) : "na míru";
 };
 
-/** The two lines that close the ceník */
 export const priceTerms = {
-  included:
-    "V ceně: 2 kola korektur, exkluzivní licence, zdrojové soubory. Další korektury a nosiče po domluvě.",
   vat: "Ceny jsou konečné, nejsme plátci DPH.",
 };
 
@@ -248,7 +241,7 @@ export const bundles: Bundle[] = [
     ],
     priceFrom: 16000,
     deliveryWeeks: 3,
-    recommended: { label: "Maskot", href: `/sluzby#${priceAnchor("maskot")}` },
+    recommended: { label: "Maskot", href: "/sluzby/maskot" },
     image: "/media/bundles/nova-znacka.jpg",
   },
   {
@@ -265,7 +258,7 @@ export const bundles: Bundle[] = [
     deliveryWeeks: 3,
     recommended: {
       label: "Animované logo",
-      href: `/sluzby#${priceAnchor("logo-animace")}`,
+      href: "/sluzby/logo-animace",
     },
     image: "/media/bundles/novy-kabat.jpg",
   },
@@ -283,7 +276,7 @@ export const bundles: Bundle[] = [
     deliveryWeeks: 3,
     recommended: {
       label: "Tiskoviny s maskotem: polep, cedule",
-      href: `/sluzby#${priceAnchor("print")}`,
+      href: "/sluzby/print",
     },
     image: "/media/bundles/znacka-v-pohybu.jpg",
   },

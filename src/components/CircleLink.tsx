@@ -7,7 +7,6 @@ type Props = {
   href: string;
   children?: ReactNode;
   ariaLabel?: string;
-  tone?: "caps" | "plain";
   className?: string;
 };
 
@@ -15,14 +14,13 @@ export default function CircleLink({
   href,
   children,
   ariaLabel,
-  tone = "caps",
   className,
 }: Props) {
   return (
     <Link
       href={href}
       aria-label={ariaLabel}
-      className={[styles.link, styles[tone], className ?? ""].join(" ")}
+      className={`${styles.link} ${className ?? ""}`}
     >
       <span className={styles.circle} aria-hidden>
         <ArrowRight size={14} />

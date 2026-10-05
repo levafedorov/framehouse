@@ -15,11 +15,6 @@ export default function Services() {
         <h2 id="services-title" className={`display ${styles.title}`}>
           Co děláme
         </h2>
-        <CircleLink href="/sluzby" tone="plain" className={styles.all}>
-          Všechny
-          <br />
-          služby
-        </CircleLink>
       </div>
 
       <ol className={styles.grid}>

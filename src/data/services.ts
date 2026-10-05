@@ -7,9 +7,7 @@ import {
 import { projects, type Project } from "./projects";
 
 /** Everything in the ceník, plus the pages that are not offered there */
-export type ServiceId = PriceId | "video" | "web" | "eshop";
-
-export type Tone = "blue" | "brown" | "rose" | "sage" | "olive";
+export type ServiceId = PriceId | "video";
 
 export type Step = { title: string; text: string };
 
@@ -22,11 +20,6 @@ export type Service = {
   from: string;
   /** "od X dnů" */
   days: string;
-  /** A real frame from a project; falls back to a coloured tile */
-  image?: string;
-  tone: Tone;
-  /** Oval tile on desktop, like the accent tile in the reference */
-  shape?: "oval";
   /** Set when the service is part of a bundle */
   bundle?: BundleId;
 
@@ -48,8 +41,6 @@ export type Service = {
   examples?: string[];
   /** Serif headline of the closing CTA card */
   ctaTitle: string;
-  /** One extra line with a link, e.g. "Nemáte firemní styl? …" */
-  note?: { text: string; href: string };
 };
 
 /** brief → drafty → doladění → předání, reused where a service has nothing specific */
@@ -67,8 +58,8 @@ export const serviceTerms = {
     "Exkluzivní, časově neomezená licence. White-label +50 %. Podpora po předání za zvláštní cenu.",
 };
 
-// Prices and lead times of the design services live in the ceník
-// (src/data/pricing.ts); web and e-shop are not in it and carry their own.
+// Prices and lead times of the services live in the ceník
+// (src/data/pricing.ts).
 export const services: Service[] = [
   /* Video ads are parked for now — the entry stays for when they are back.
   {
@@ -77,7 +68,6 @@ export const services: Service[] = [
     result: "Krátké video, které lidé dokoukají.",
     from: "od 35 000 Kč",
     days: "od 10 dnů",
-    tone: "blue",
     facts: ["Krátká videa do 30–45 s", "Vzniká bez kamery, z fotek a briefu"],
     deliverables: [
       "Hotové video ve vysoké kvalitě",
@@ -109,8 +99,6 @@ export const services: Service[] = [
     result: "Značka, která funguje na vizitce i na ceduli.",
     from: serviceFrom("logo"),
     days: serviceDays("logo") ?? "",
-    tone: "brown",
-    shape: "oval",
     facts: [
       "Nové logo nebo redesign",
       "Funguje malé i velké, barevně i jednobarevně",
@@ -138,7 +126,6 @@ export const services: Service[] = [
     result: "Vaše logo v současné podobě, bez toho abyste začínali znovu.",
     from: serviceFrom("logo-redesign"),
     days: serviceDays("logo-redesign") ?? "po domluvě",
-    tone: "blue",
     facts: ["Vychází z loga, které máte", "Zachová to, co na vás lidé znají"],
     steps: [
       { title: "Brief", text: "Co na logu drhne a co musí zůstat." },
@@ -156,7 +143,6 @@ export const services: Service[] = [
     result: "Paleta, typografie a nosiče, aby všechno k sobě sedělo.",
     from: serviceFrom("identity"),
     days: serviceDays("identity") ?? "",
-    tone: "rose",
     bundle: "nova-znacka",
     facts: ["Navazuje na vaše logo", "3–4 nosiče podle toho, co používáte"],
     deliverables: [
@@ -183,7 +169,6 @@ export const services: Service[] = [
     result: "Sada ikon ve stylu značky pro web i sociální sítě.",
     from: serviceFrom("icons"),
     days: serviceDays("icons") ?? "od 5 dnů",
-    tone: "sage",
     bundle: "znacka-v-pohybu",
     facts: ["Sada zhruba 8 ikon", "Jednotná mřížka a síla linky"],
     deliverables: [
@@ -210,8 +195,6 @@ export const services: Service[] = [
     result: "Postava, která mluví za vaši značku.",
     from: serviceFrom("maskot"),
     days: serviceDays("maskot") ?? "po domluvě",
-    tone: "olive",
-    shape: "oval",
     bundle: "znacka-v-pohybu",
     facts: ["Postava ve třech pozicích", "Navazuje na vaše logo a barvy"],
     steps: [
@@ -231,7 +214,6 @@ export const services: Service[] = [
     result: "Logo, které se rozhýbe na webu i v prezentaci.",
     from: serviceFrom("logo-animace"),
     days: serviceDays("logo-animace") ?? "po domluvě",
-    tone: "blue",
     bundle: "znacka-v-pohybu",
     facts: ["Krátká animace vašeho loga", "Pro web, prezentace i sítě"],
     steps: [
@@ -245,74 +227,11 @@ export const services: Service[] = [
     ctaTitle: "Pojďme vaše logo rozhýbat.",
   },
   {
-    id: "web",
-    title: "Web a landing page",
-    result: "Stránka, která přivede poptávky.",
-    from: "od 45 000 Kč",
-    days: "od 21 dnů",
-    tone: "olive",
-    facts: ["Vizitka o 1–3 stránkách nebo landing page", "Analytika v ceně"],
-    deliverables: [
-      "Design ve vašem stylu, responzivní",
-      "Formulář, mapa, odkazy na sítě",
-      "Doména a hosting na vaše jméno",
-      "Analytika a návod, jak měnit texty",
-    ],
-    steps: [
-      { title: "Brief", text: "Cíl stránky, obsah a co už máte." },
-      { title: "Návrh", text: "Struktura a design hlavní stránky." },
-      { title: "Doladění", text: "Ostatní stránky, formulář, texty." },
-      { title: "Spuštění", text: "Na vaší doméně, s analytikou a přístupy." },
-    ],
-    priceNote: "Cena závisí na počtu stránek a na tom, zda máte texty a fotky.",
-    termNote: "Běžná doba, když podklady dodáte včas.",
-    excluded: [
-      "Backend, platby a integrace",
-      "Reklama a SEO — nastavíme jen měření",
-      "Správa webu po předání",
-    ],
-    ctaTitle: "Pojďme postavit stránku, která se vyplatí.",
-    note: {
-      text: "Nemáte firemní styl? Navrhneme ho společně s webem.",
-      href: "/#bundles",
-    },
-  },
-  {
-    id: "eshop",
-    title: "Nový vzhled e-shopu",
-    result: "Shoptet nebo Upgates v barvách vaší značky.",
-    from: "od 25 000 Kč",
-    days: "od 14 dnů",
-    tone: "blue",
-    facts: ["Jen vzhled existujícího e-shopu", "Shoptet nebo Upgates"],
-    deliverables: [
-      "Šablona v barvách a písmech značky",
-      "Hlavička, patička, bannery",
-      "Obálky kategorií a produktová karta",
-      "Šablony promo bannerů k úpravě",
-    ],
-    steps: [
-      { title: "Brief", text: "Platforma, kategorie, co prodáváte." },
-      { title: "Návrh", text: "Hlavní stránka a produktová karta." },
-      { title: "Doladění", text: "Bannery, kategorie, detaily." },
-      { title: "Nasazení", text: "Šablona a soubory k nahrání." },
-    ],
-    priceNote: "Cena závisí na platformě a počtu bannerů.",
-    termNote: "Běžná doba, když podklady dodáte včas.",
-    excluded: [
-      "Stavba nového e-shopu",
-      "Backend, platby, sklad",
-      "Produktové fotky a texty",
-    ],
-    ctaTitle: "Pojďme dát vašemu e-shopu nový kabát.",
-  },
-  {
     id: "social",
     title: "Sada pro sociální sítě",
     result: "Avatar, cover a šablony postů, které zvládnete sami.",
     from: serviceFrom("social"),
     days: serviceDays("social") ?? "od 5 dnů",
-    tone: "rose",
     bundle: "nova-znacka",
     facts: ["Navazuje na vaše logo a styl", "Šablony upravíte sami"],
     deliverables: [
@@ -342,7 +261,6 @@ export const services: Service[] = [
     result: "Vizitky, hlavička a polep — včetně tiskových dat.",
     from: serviceFrom("print"),
     days: serviceDays("print") ?? "od 5 dnů",
-    tone: "brown",
     bundle: "novy-kabat",
     facts: ["Tisková data připravená pro tiskárnu", "Navazuje na váš styl"],
     deliverables: [
@@ -369,8 +287,6 @@ export const services: Service[] = [
     result: "Logo, které máte, připravené na tisk i na web.",
     from: serviceFrom("logo-dotazeni"),
     days: serviceDays("logo-dotazeni") ?? "po domluvě",
-    tone: "sage",
-    shape: "oval",
     facts: ["Pro logo, které už máte odjinud", "Převod do vektoru a varianty"],
     steps: [
       { title: "Podklady", text: "Pošlete, co k logu máte." },
@@ -383,11 +299,6 @@ export const services: Service[] = [
     ctaTitle: "Pojďme vaše logo dotáhnout do konce.",
   },
 ];
-
-export const serviceAnchor = (id: ServiceId) => `service-${id}`;
-
-/** Detail page of a service */
-export const servicePath = (id: ServiceId) => `/sluzby/${id}`;
 
 export const serviceById = (id: string) => services.find((s) => s.id === id);
 
