@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Button from "@/components/Button";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import InquiryTrigger from "@/components/InquiryTrigger";
 import { ArrowRight } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
 import {
@@ -38,13 +38,11 @@ function offer(project: Project) {
     return {
       title: `Chcete ${project.service.toLowerCase()} pro svou firmu?`,
       text: `Napište, co děláte. ${site.announcement}.`,
-      subject: project.service,
     };
   }
   return {
     title: "Chcete něco podobného?",
     text: `Napište, co potřebujete. ${site.announcement}.`,
-    subject: `Něco jako ${project.name} — ${project.service}`,
   };
 }
 
@@ -55,9 +53,6 @@ export default async function WorkPage({ params }: Props) {
 
   const others = relatedProjects(project);
   const cta = offer(project);
-  const mailto = `mailto:${site.contactEmail}?subject=${encodeURIComponent(
-    cta.subject,
-  )}`;
   const facts = [
     ...(project.facts ?? []),
     ...(project.context ? [{ label: "Kontext", value: project.context }] : []),
@@ -149,14 +144,13 @@ export default async function WorkPage({ params }: Props) {
         <section className={styles.cta} aria-label="Nabídka">
           <h2 className={styles.ctaTitle}>{cta.title}</h2>
           <p className={styles.ctaText}>{cta.text}</p>
-          <Button
-            href={mailto}
-            variant="outline"
-            arrow={false}
+          <InquiryTrigger
+            request={{ kind: "obecna" }}
+            button={{ variant: "outline", arrow: false }}
             className={styles.pill}
           >
             Popište nám projekt
-          </Button>
+          </InquiryTrigger>
         </section>
       </main>
       <Footer />

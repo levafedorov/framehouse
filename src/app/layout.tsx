@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import InquiryProvider from "@/components/InquiryProvider";
+import { bundles } from "@/data/pricing";
+import { services } from "@/data/services";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -7,6 +10,11 @@ const preloadFonts = [
   "/fonts/manrope-latin-wght-normal.woff2",
   "/fonts/bodoni-moda-latin-opsz-normal.woff2",
 ];
+
+const inquiryOptions = {
+  services: services.map((s) => s.title),
+  bundles: bundles.map((b) => b.name),
+};
 
 export const metadata: Metadata = {
   title: `${site.name} — ${site.tagline}`,
@@ -28,7 +36,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           />
         ))}
       </head>
-      <body>{children}</body>
+      <body>
+        <InquiryProvider options={inquiryOptions}>{children}</InquiryProvider>
+      </body>
     </html>
   );
 }

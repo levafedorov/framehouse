@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Button from "@/components/Button";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import InquiryTrigger from "@/components/InquiryTrigger";
 import { ArrowRight } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
 import { bundleTitle, czk, priceById, priceTerms } from "@/data/pricing";
@@ -47,7 +47,7 @@ export default async function ServicePage({ params }: Props) {
   const includes = price?.includes.length
     ? price.includes
     : (service.deliverables ?? []);
-  const mailto = `mailto:${site.contactEmail}?subject=${encodeURIComponent(service.title)}`;
+  const request = { kind: "sluzba", item: service.title } as const;
 
   return (
     <>
@@ -161,14 +161,13 @@ export default async function ServicePage({ params }: Props) {
                 <ArrowRight size={12} />
               </Link>
             )}
-            <Button
-              href={mailto}
-              variant="outline"
-              arrow={false}
+            <InquiryTrigger
+              request={request}
+              button={{ variant: "outline", arrow: false }}
               className={styles.pill}
             >
               Chci nabídku
-            </Button>
+            </InquiryTrigger>
           </div>
           <div className={`${styles.big} ${styles.light}`}>
             <p className="eyebrow">Dodání</p>
@@ -180,14 +179,13 @@ export default async function ServicePage({ params }: Props) {
 
         <section className={styles.cta} aria-label="Poptávka">
           <h2 className={styles.ctaTitle}>{service.ctaTitle}</h2>
-          <Button
-            href={mailto}
-            variant="outline"
-            arrow={false}
+          <InquiryTrigger
+            request={request}
+            button={{ variant: "outline", arrow: false }}
             className={styles.pill}
           >
             Chci nabídku
-          </Button>
+          </InquiryTrigger>
         </section>
       </main>
       <Footer />

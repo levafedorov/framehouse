@@ -1,0 +1,94 @@
+.dialog {
+  width: min(640px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--fg);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.dialog::backdrop {
+  background: rgba(12, 12, 12, 0.6);
+}
+
+.dialog[open] {
+  animation: rise 0.2s ease;
+}
+
+.panel {
+  position: relative;
+  padding: 32px 36px 36px;
+}
+
+.close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.15s ease;
+}
+
+.close:hover {
+  background: var(--line);
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--fg);
+}
+
+.eyebrow {
+  color: var(--muted);
+}
+
+.title {
+  margin: 10px 48px 24px 0;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (max-width: 600px) {
+  .dialog {
+    width: 100%;
+    max-width: none;
+    max-height: calc(100dvh - 24px);
+    margin: auto 0 0;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+
+  .panel {
+    padding: 24px 16px 28px;
+  }
+
+  .close {
+    top: 12px;
+    right: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog[open] {
+    animation: none;
+  }
+
+  .close {
+    transition: none;
+  }
+}

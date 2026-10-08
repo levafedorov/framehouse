@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CircleLink from "./CircleLink";
+import InquiryTrigger from "./InquiryTrigger";
 import {
   bundleTerms,
   bundles,
@@ -45,9 +45,13 @@ export default function Bundles() {
                   Doporučujeme k tomu: {b.recommended.label}
                 </Link>
               )}
-              <CircleLink href="/#contact" className={styles.cta}>
+              <InquiryTrigger
+                look="circle"
+                request={{ kind: "balicek", item: b.name }}
+                className={styles.cta}
+              >
                 Nezávazná poptávka
-              </CircleLink>
+              </InquiryTrigger>
             </div>
           </li>
         ))}

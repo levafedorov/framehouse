@@ -6,6 +6,7 @@ export const site = {
   announcement: "Ozveme se Vám do jednoho pracovního dne",
   // TODO: replace with the real studio address
   contactEmail: "hello@framehouse.cz",
+  web3formsKey: "f69428f5-ebc1-4bbe-ba9b-c3099ad699e8",
   city: "Praha",
   // TODO: fill in real profiles or remove the ones you don't use
   // TODO: real profiles; the footer does not render the column while these are "#"

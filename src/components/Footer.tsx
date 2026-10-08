@@ -1,4 +1,4 @@
-import ContactForm from "./ContactForm";
+import InlineInquiry from "./InlineInquiry";
 import { site } from "@/data/site";
 import styles from "./Footer.module.css";
 
@@ -12,18 +12,16 @@ export default function Footer() {
             Buďme
             <br />v kontaktu.
           </h2>
-        </div>
-        <div className={styles.contact}>
           <p className={styles.hint}>
-            Nechte nám e-mail, ozveme se Vám do jednoho pracovního dne. Nebo
-            pište rovnou na{" "}
+            Napište, co potřebujete, ozveme se Vám do jednoho pracovního dne.
+            Nebo pište rovnou na{" "}
             <a href={`mailto:${site.contactEmail}`} className={styles.mail}>
               {site.contactEmail}
             </a>
             .
           </p>
-          <ContactForm />
         </div>
+        <InlineInquiry />
       </div>
 
       <div className={styles.bottom}>

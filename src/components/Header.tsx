@@ -4,11 +4,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import { ArrowRight, Close, Menu } from "./Icons";
+import { useInquiry } from "./inquiryContext";
 import { nav, site } from "@/data/site";
 import styles from "./Header.module.css";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const inquiry = useInquiry();
 
   useEffect(() => {
     if (!open) return;
@@ -38,10 +40,10 @@ export default function Header() {
 
         <div className={styles.right}>
           <Button
-            href={`mailto:${site.contactEmail}`}
             variant="light"
             size="sm"
             className={styles.cta}
+            onClick={() => inquiry.open({ kind: "obecna" })}
           >
             Napište nám
           </Button>
@@ -76,10 +78,13 @@ export default function Header() {
             </Link>
           ))}
           <Button
-            href={`mailto:${site.contactEmail}`}
             variant="light"
             block
             className={styles.mobileCta}
+            onClick={() => {
+              setOpen(false);
+              inquiry.open({ kind: "obecna" });
+            }}
           >
             Napište nám
           </Button>
