@@ -1,5 +1,5 @@
 export const site = {
-  name: "Framehouse",
+  name: "Heartflect",
   tagline: "Brand design pro vaši firmu.",
   description:
     "Loga, firemní styl, ikony, tiskoviny a weby pro malé firmy. Ceny od, jasný postup, hotovo v týdnech.",

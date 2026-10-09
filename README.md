@@ -1,6 +1,6 @@
-# Framehouse
+# Heartflect
 
-Landing page for the Framehouse studio — video ads, icons, logos and websites for small businesses.
+Landing page for the Heartflect studio — video ads, icons, logos and websites for small businesses.
 
 Built with Next.js (App Router) + TypeScript + CSS Modules. No UI libraries.
 

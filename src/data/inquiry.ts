@@ -22,4 +22,4 @@ export const attributionKeys = [
   "gclid",
 ] as const;
 
-export const attributionStorageKey = "framehouse-attribution";
+export const attributionStorageKey = "heartflect-attribution";
