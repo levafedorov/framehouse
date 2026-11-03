@@ -16,6 +16,7 @@ import {
   type InquiryOptions,
   type InquiryRequest,
 } from "@/data/inquiry";
+import { track } from "@/lib/analytics";
 import styles from "./InquiryModal.module.css";
 
 export default function InquiryProvider({
@@ -40,6 +41,10 @@ export default function InquiryProvider({
   }, []);
 
   const open = useCallback((next: InquiryRequest) => {
+    track("inquiry_opened", {
+      form_kind: next.kind,
+      form_item: next.item ?? null,
+    });
     setRequest(next);
     setRound((n) => n + 1);
   }, []);
@@ -54,6 +59,12 @@ export default function InquiryProvider({
   }, [request, round]);
 
   const onClose = () => {
+    if (request) {
+      track("inquiry_closed", {
+        form_kind: request.kind,
+        form_item: request.item ?? null,
+      });
+    }
     document.documentElement.style.overflow = "";
     setRequest(null);
   };

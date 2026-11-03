@@ -5,6 +5,23 @@ const nextConfig: NextConfig = {
     // optimized variants of /media/* are content-addressed by their query, safe to keep for a year
     minimumCacheTTL: 31536000,
   },
+  skipTrailingSlashRedirect: true,
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/static/:path*",
+        destination: "https://eu-assets.i.posthog.com/static/:path*",
+      },
+      {
+        source: "/ingest/array/:path*",
+        destination: "https://eu-assets.i.posthog.com/array/:path*",
+      },
+      {
+        source: "/ingest/:path*",
+        destination: "https://eu.i.posthog.com/:path*",
+      },
+    ];
+  },
   async redirects() {
     return [
       // pieces removed or renamed when the portfolio was rebuilt

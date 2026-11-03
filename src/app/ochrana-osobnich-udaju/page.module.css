@@ -1,0 +1,117 @@
+.page {
+  padding: 14px 24px 24px;
+}
+
+.hero {
+  background: var(--dark);
+  color: var(--dark-fg);
+  border-radius: var(--radius);
+  padding: 56px 48px 44px;
+}
+
+.eyebrow {
+  color: var(--dark-muted);
+}
+
+.title {
+  margin-top: 18px;
+  font-size: clamp(36px, 5.4vw, 80px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+
+.updated {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--dark-muted);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 760px;
+  padding: 48px 24px 32px;
+}
+
+.section {
+  min-width: 0;
+}
+
+.section h2 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.section p,
+.section li {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--fg);
+}
+
+.section p + p {
+  margin-top: 10px;
+}
+
+.section ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  padding-left: 18px;
+  list-style: disc;
+}
+
+.section a,
+.inlineButton {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tableWrap {
+  margin-top: 14px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.table th,
+.table td {
+  padding: 10px 12px 10px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.table code {
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 10px var(--edge) var(--edge);
+  }
+
+  .hero {
+    padding: 40px 24px 32px;
+  }
+
+  .body {
+    padding: 36px 8px 24px;
+  }
+}

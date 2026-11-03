@@ -1,4 +1,4 @@
-import { useState, type SubmitEvent } from "react";
+import { useRef, useState, type SubmitEvent } from "react";
 import { ArrowRight, ChevronRight } from "./Icons";
 import { useInquiry } from "./inquiryContext";
 import {
@@ -9,6 +9,7 @@ import {
   type InquiryRequest,
 } from "@/data/inquiry";
 import { site } from "@/data/site";
+import { identify, track } from "@/lib/analytics";
 import styles from "./InquiryForm.module.css";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -37,6 +38,18 @@ export default function InquiryForm({
   const [status, setStatus] = useState<Status>("idle");
   const general = request.kind === "obecna";
   const id = (name: string) => `${idPrefix}-${name}`;
+  const started = useRef(false);
+  const context = {
+    form_kind: request.kind,
+    form_item: request.item ?? null,
+    form_location: idPrefix,
+  };
+
+  const onFocus = () => {
+    if (started.current) return;
+    started.current = true;
+    track("inquiry_started", context);
+  };
 
   const onSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -69,12 +82,25 @@ export default function InquiryForm({
       });
       const result = await response.json();
       if (result.success) {
+        identify(String(data.get("email") ?? ""), {
+          name: String(data.get("name") ?? ""),
+          email: String(data.get("email") ?? ""),
+          phone: String(data.get("Phone") ?? ""),
+        });
+        track("inquiry_submitted", {
+          ...context,
+          need,
+          has_phone: Boolean(data.get("Phone")),
+          has_message: Boolean(data.get("About the project")),
+        });
         setStatus("sent");
         form.reset();
       } else {
+        track("inquiry_failed", { ...context, need, reason: "rejected" });
         setStatus("error");
       }
     } catch {
+      track("inquiry_failed", { ...context, need, reason: "network" });
       setStatus("error");
     }
   };
@@ -94,7 +120,7 @@ export default function InquiryForm({
   }
 
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
+    <form className={styles.form} onSubmit={onSubmit} onFocus={onFocus}>
       {general && (
         <div className={`${styles.field} ${styles.wide}`}>
           <label htmlFor={id("need")} className={styles.label}>

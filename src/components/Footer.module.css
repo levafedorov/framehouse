@@ -52,8 +52,25 @@
   letter-spacing: -0.02em;
 }
 
-.copy {
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
   margin-left: auto;
+}
+
+.legalLink {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.legalLink:hover {
+  color: var(--fg);
+}
+
+.copy {
   font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--muted);
@@ -78,6 +95,7 @@
     padding: 18px 16px 24px;
   }
 
+  .legal,
   .copy {
     flex-basis: 100%;
     margin-left: 0;

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CookieConsent from "@/components/CookieConsent";
 import InquiryProvider from "@/components/InquiryProvider";
 import { bundles } from "@/data/pricing";
 import { services } from "@/data/services";
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body>
         <InquiryProvider options={inquiryOptions}>{children}</InquiryProvider>
+        <CookieConsent />
       </body>
     </html>
   );
