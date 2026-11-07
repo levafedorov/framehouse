@@ -4,8 +4,7 @@ export const site = {
   description:
     "Loga, firemní styl, ikony, tiskoviny a weby pro malé firmy. Ceny od, jasný postup, hotovo v týdnech.",
   announcement: "Ozveme se Vám do jednoho pracovního dne",
-  // TODO: replace with the real studio address
-  contactEmail: "hello@framehouse.cz",
+  contactEmail: "info@heartflect.cz",
   web3formsKey: "f69428f5-ebc1-4bbe-ba9b-c3099ad699e8",
   city: "Praha",
   operator: {
