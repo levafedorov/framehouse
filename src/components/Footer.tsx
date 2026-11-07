@@ -37,6 +37,9 @@ export default function Footer() {
         <p className={styles.copy}>
           © {new Date().getFullYear()} {site.name}, {site.city}. Všechna práva
           vyhrazena.
+          <br />
+          {site.operator.name} · IČO {site.operator.ico} ·{" "}
+          {site.operator.address}
         </p>
       </div>
     </footer>

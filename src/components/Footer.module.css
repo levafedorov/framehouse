@@ -72,6 +72,8 @@
 
 .copy {
   font-size: 11px;
+  line-height: 1.6;
+  text-align: right;
   letter-spacing: 0.04em;
   color: var(--muted);
 }
@@ -82,6 +84,19 @@
     gap: 24px;
     padding: 36px 20px 40px;
   }
+
+  .bottom {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    padding: 18px 20px 24px;
+  }
+
+  .legal,
+  .copy {
+    flex-basis: 100%;
+    margin-left: 0;
+    text-align: left;
+  }
 }
 
 @media (max-width: 600px) {
@@ -90,14 +105,6 @@
   }
 
   .bottom {
-    flex-wrap: wrap;
-    gap: 10px 16px;
     padding: 18px 16px 24px;
-  }
-
-  .legal,
-  .copy {
-    flex-basis: 100%;
-    margin-left: 0;
   }
 }
