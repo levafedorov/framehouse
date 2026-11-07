@@ -9,9 +9,9 @@ export const site = {
   web3formsKey: "f69428f5-ebc1-4bbe-ba9b-c3099ad699e8",
   city: "Praha",
   operator: {
-    name: "",
-    ico: "",
-    address: "",
+    name: "Lev Fedorov",
+    ico: "08157529",
+    address: "Radlická 832/38, 150 00 Praha 5",
   },
   // TODO: fill in real profiles or remove the ones you don't use
   // TODO: real profiles; the footer does not render the column while these are "#"
