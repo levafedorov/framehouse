@@ -98,7 +98,7 @@ export const priceList: PriceItem[] = [
     name: "Sada ikon",
     priceFrom: 5500,
     unit: "za 8 ks",
-    includes: ["Ve stylu vaší značky", "SVG pro web i tisk"],
+    includes: ["Ve stylu vaší značky", "SVG a PNG pro web, tisk i sítě"],
     note: "Další ikona od 700 Kč.",
     service: "icons",
   },

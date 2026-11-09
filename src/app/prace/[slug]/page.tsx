@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 function offer(project: Project) {
   if (project.kind === "concept") {
     return {
-      title: `Chcete ${project.service.toLowerCase()} pro svou firmu?`,
+      title: "Chcete něco podobného pro svou firmu?",
       text: `Napište, co děláte. ${site.announcement}.`,
     };
   }

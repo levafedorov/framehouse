@@ -127,7 +127,7 @@ const all: Project[] = [
       "Sada ikon pojistných produktů pro Kooperativu: cestovní pojištění, vozidla, podnikatelé, majetek a životní pojištění.",
     solution:
       "Pět barevných dlaždic s jednoduchým symbolem, každá s vlastní barvou v CMYK. Ikony pak nesly láhev, visačku pro staff, tašky a tričko na akce.",
-    facts: [fact.service("Ikony a merch"), fact.client("Kooperativa")],
+    facts: [fact.service("Sada ikon a merch"), fact.client("Kooperativa")],
     stills: [
       still("kooperativa", "ikony", "Ikony"),
       still("kooperativa", "visacky", "Visačky"),
@@ -333,7 +333,7 @@ const all: Project[] = [
     brief: "Safari park hledal motivy na plátěné tašky.",
     solution:
       "Nosorožec, žirafa a zebra jako plošné ilustrace v teplé paletě, s vlastním nápisem. Tisk na tašky.",
-    facts: [fact.service("Ilustrace"), fact.industry("Zoo a safari")],
+    facts: [fact.service("Ilustrace a merch"), fact.industry("Zoo a safari")],
     stills: [
       still("koncept-safari-park", "nosorozec", "Nosorožec"),
       still("koncept-safari-park", "zirafa", "Žirafa"),
