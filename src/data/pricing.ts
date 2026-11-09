@@ -56,7 +56,7 @@ export const priceList: PriceItem[] = [
   {
     id: "logo",
     name: "Logo",
-    priceFrom: 6000,
+    priceFrom: 5000,
     includes: [
       "Validace názvu",
       "3 směry, jeden vybraný dopracovaný",
