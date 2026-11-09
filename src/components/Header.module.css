@@ -15,10 +15,12 @@
 }
 
 .logo {
+  --spacing: 0.18em;
   justify-self: start;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing);
+  font-size: 24px;
 }
 
 .mark {
@@ -28,9 +30,8 @@
 }
 
 .name {
-  font-size: 24px;
   line-height: 1;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--spacing);
   text-transform: lowercase;
 }
 
