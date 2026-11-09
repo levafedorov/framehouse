@@ -2,7 +2,7 @@ export const site = {
   name: "Heartflect",
   tagline: "Brand design pro vaši firmu.",
   description:
-    "Loga, firemní styl, ikony, tiskoviny a weby pro malé firmy. Ceny od, jasný postup, hotovo v týdnech.",
+    "Loga, firemní styl, ikony, maskoti, animace a tiskoviny pro malé firmy. Jasné ceny, jasný postup, hotovo v týdnech.",
   announcement: "Ozveme se Vám do jednoho pracovního dne",
   contactEmail: "info@heartflect.cz",
   web3formsKey: "f69428f5-ebc1-4bbe-ba9b-c3099ad699e8",

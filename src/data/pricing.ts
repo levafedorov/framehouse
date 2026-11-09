@@ -192,7 +192,7 @@ export const priceGroups: PriceGroup[] = [
   },
   {
     id: "print",
-    title: "Tisk & obaly",
+    title: "Tiskoviny",
     items: ["print"],
     href: "/sluzby/print",
   },
@@ -287,6 +287,6 @@ export const bundleTitle = (id: BundleId) =>
 
 /** The two lines that close the bundles */
 export const bundleTerms = {
-  saving: "Balíček vyjde o 10–15 % levněji než položky zvlášť.",
+  saving: "Balíček vyjde levněji než stejné služby objednané zvlášť.",
   vat: priceTerms.vat,
 };

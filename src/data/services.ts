@@ -18,7 +18,7 @@ export type Service = {
   result: string;
   /** "od X Kč" */
   from: string;
-  /** "od X dnů" */
+  /** "10 pracovních dnů", "od 5 pracovních dnů" or "po domluvě" */
   days: string;
   /** Set when the service is part of a bundle */
   bundle?: BundleId;
@@ -45,9 +45,9 @@ export type Service = {
 
 /** brief → drafty → doladění → předání, reused where a service has nothing specific */
 export const defaultSteps: [Step, Step, Step, Step] = [
-  { title: "Brief", text: "Co potřebujete, pro koho a kde to bude fungovat." },
-  { title: "Návrh", text: "Dva až tři směry, vyberete jeden." },
-  { title: "Doladění", text: "Úpravy vybraného směru." },
+  { title: "Brief", text: "Co si přejete, pro koho a kde to bude fungovat." },
+  { title: "Návrh", text: "Tři směry, vyberete jeden." },
+  { title: "Doladění", text: "Dvě kola korektur vybraného směru." },
   { title: "Předání", text: "Finální soubory a licence." },
 ];
 
@@ -99,18 +99,13 @@ export const services: Service[] = [
     result: "Značka, která funguje na vizitce i na ceduli.",
     from: serviceFrom("logo"),
     days: serviceDays("logo") ?? "",
+    bundle: "nova-znacka",
     facts: [
-      "Nové logo nebo redesign",
+      "Nové logo od prvního návrhu",
       "Funguje malé i velké, barevně i jednobarevně",
     ],
-    deliverables: [
-      "Logo v SVG, PDF a PNG",
-      "Barevná, jednobarevná a inverzní verze",
-      "Pravidla použití na jednu stranu",
-      "Zdrojové soubory",
-    ],
     steps: defaultSteps,
-    priceNote: "Cena závisí na počtu směrů a na tom, zda jde o redesign.",
+    priceNote: "Cena závisí na složitosti značky a počtu variant.",
     termNote: "Běžná doba při rychlé zpětné vazbě.",
     excluded: [
       "Vymýšlení názvu — jen ho ověříme",
@@ -126,6 +121,7 @@ export const services: Service[] = [
     result: "Vaše logo v současné podobě, bez toho abyste začínali znovu.",
     from: serviceFrom("logo-redesign"),
     days: serviceDays("logo-redesign") ?? "po domluvě",
+    bundle: "novy-kabat",
     facts: ["Vychází z loga, které máte", "Zachová to, co na vás lidé znají"],
     steps: [
       { title: "Brief", text: "Co na logu drhne a co musí zůstat." },
@@ -144,13 +140,7 @@ export const services: Service[] = [
     from: serviceFrom("identity"),
     days: serviceDays("identity") ?? "",
     bundle: "nova-znacka",
-    facts: ["Navazuje na vaše logo", "3–4 nosiče podle toho, co používáte"],
-    deliverables: [
-      "Barevná paleta a typografie",
-      "Vizitka, hlavička, podpis v e-mailu, cedule",
-      "Tisková data k nosičům",
-      "Brandbook na jednu stranu",
-    ],
+    facts: ["Navazuje na vaše logo", "4 nosiče podle toho, co používáte"],
     steps: [
       { title: "Brief", text: "Co máte, co používáte, kde vás lidé vidí." },
       { title: "Návrh", text: "Paleta, písmo a první nosič." },
@@ -158,7 +148,7 @@ export const services: Service[] = [
       { title: "Předání", text: "Tisková data a brandbook." },
     ],
     priceNote: "Cena závisí na počtu nosičů.",
-    termNote: "Běžná doba pro 3–4 nosiče.",
+    termNote: "Běžná doba pro 4 nosiče.",
     excluded: ["Logo — je samostatná služba", "Rozsáhlý brandbook", "Tisk"],
     examples: ["kismi", "koncept-kosmetika", "koncept-autolakovna"],
     ctaTitle: "Pojďme sladit všechno, co od vás lidé vidí.",
@@ -168,15 +158,9 @@ export const services: Service[] = [
     title: "Sada ikon",
     result: "Sada ikon ve stylu značky pro web i sociální sítě.",
     from: serviceFrom("icons"),
-    days: serviceDays("icons") ?? "od 5 dnů",
+    days: serviceDays("icons") ?? "od 5 pracovních dnů",
     bundle: "znacka-v-pohybu",
-    facts: ["Sada zhruba 8 ikon", "Jednotná mřížka a síla linky"],
-    deliverables: [
-      "SVG pro web",
-      "PNG pro sítě a prezentace",
-      "Jednotná mřížka a linka",
-      "Seznam ikon odsouhlasený předem",
-    ],
+    facts: ["Sada 8 ikon, další na přání", "Jednotná mřížka a síla linky"],
     steps: [
       { title: "Brief", text: "Které ikony a kde budou." },
       { title: "Návrh", text: "Styl na dvou až třech ikonách." },
@@ -231,15 +215,9 @@ export const services: Service[] = [
     title: "Sada pro sociální sítě",
     result: "Avatar, cover a šablony postů, které zvládnete sami.",
     from: serviceFrom("social"),
-    days: serviceDays("social") ?? "od 5 dnů",
+    days: serviceDays("social") ?? "od 5 pracovních dnů",
     bundle: "nova-znacka",
     facts: ["Navazuje na vaše logo a styl", "Šablony upravíte sami"],
-    deliverables: [
-      "Avatar pro profily",
-      "Cover pro Facebook, LinkedIn nebo YouTube",
-      "2–3 šablony postů",
-      "Vše v editovatelném formátu",
-    ],
     steps: [
       { title: "Brief", text: "Které sítě a o čem postujete." },
       { title: "Návrh", text: "Avatar, cover a první šablona." },
@@ -260,7 +238,7 @@ export const services: Service[] = [
     title: "Tiskoviny",
     result: "Vizitky, hlavička a polep — včetně tiskových dat.",
     from: serviceFrom("print"),
-    days: serviceDays("print") ?? "od 5 dnů",
+    days: serviceDays("print") ?? "od 5 pracovních dnů",
     bundle: "novy-kabat",
     facts: ["Tisková data připravená pro tiskárnu", "Navazuje na váš styl"],
     deliverables: [
