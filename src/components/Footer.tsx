@@ -16,7 +16,7 @@ export default function Footer() {
             <br />v kontaktu.
           </h2>
           <p className={styles.hint}>
-            Napište, co potřebujete, ozveme se Vám do jednoho pracovního dne.
+            Napište, co si přejete, ozveme se Vám do jednoho pracovního dne.
             Nebo pište rovnou na{" "}
             <a href={`mailto:${site.contactEmail}`} className={styles.mail}>
               {site.contactEmail}

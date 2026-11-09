@@ -42,7 +42,7 @@ function offer(project: Project) {
   }
   return {
     title: "Chcete něco podobného?",
-    text: `Napište, co potřebujete. ${site.announcement}.`,
+    text: `Napište, co si přejete. ${site.announcement}.`,
   };
 }
 

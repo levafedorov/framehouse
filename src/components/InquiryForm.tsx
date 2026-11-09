@@ -124,7 +124,7 @@ export default function InquiryForm({
       {general && (
         <div className={`${styles.field} ${styles.wide}`}>
           <label htmlFor={id("need")} className={styles.label}>
-            Co potřebujete
+            Co si přejete
           </label>
           <span className={styles.selectWrap}>
             <select
