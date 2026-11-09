@@ -46,6 +46,18 @@
   border-top: 1px solid var(--line);
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mark {
+  display: block;
+  width: auto;
+  height: 22px;
+}
+
 .wordmark {
   font-size: 22px;
   line-height: 1;

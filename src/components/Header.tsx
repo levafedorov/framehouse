@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 import { ArrowRight, Close, Menu } from "./Icons";
 import { useInquiry } from "./inquiryContext";
+import Logo from "./Logo";
 import { nav, site } from "@/data/site";
 import styles from "./Header.module.css";
 
@@ -26,8 +27,9 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.bar}>
-        <Link href="/" className={`serif ${styles.logo}`}>
-          {site.name}
+        <Link href="/" className={styles.logo} aria-label={site.name}>
+          <Logo className={styles.mark} />
+          <span className={`serif ${styles.name}`}>{site.name}</span>
         </Link>
 
         <nav className={styles.nav} aria-label="Hlavní">

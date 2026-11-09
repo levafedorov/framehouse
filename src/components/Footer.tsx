@@ -1,6 +1,7 @@
 import Link from "next/link";
 import CookieSettingsButton from "./CookieSettingsButton";
 import InlineInquiry from "./InlineInquiry";
+import Logo from "./Logo";
 import { site } from "@/data/site";
 import styles from "./Footer.module.css";
 
@@ -27,7 +28,10 @@ export default function Footer() {
       </div>
 
       <div className={styles.bottom}>
-        <p className={`serif ${styles.wordmark}`}>{site.name}</p>
+        <p className={styles.brand}>
+          <Logo className={styles.mark} />
+          <span className={`serif ${styles.wordmark}`}>{site.name}</span>
+        </p>
         <nav className={styles.legal} aria-label="Právní informace">
           <Link href="/ochrana-osobnich-udaju" className={styles.legalLink}>
             Ochrana osobních údajů
