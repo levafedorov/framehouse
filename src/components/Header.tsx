@@ -29,7 +29,7 @@ export default function Header() {
       <div className={styles.bar}>
         <Link href="/" className={styles.logo} aria-label={site.name}>
           <Logo className={styles.mark} />
-          <span className={`serif ${styles.name}`}>{site.name}</span>
+          <span className={styles.name}>{site.name}</span>
         </Link>
 
         <nav className={styles.nav} aria-label="Hlavní">
