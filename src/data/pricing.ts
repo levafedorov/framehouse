@@ -70,7 +70,7 @@ export const priceList: PriceItem[] = [
   {
     id: "logo-redesign",
     name: "Redesign loga",
-    priceFrom: 5000,
+    priceFrom: 4000,
     includes: [
       "Modernizace stávajícího loga",
       "2 varianty",
@@ -167,43 +167,37 @@ export const serviceDays = (id: PriceId) => {
 export type PriceGroup = {
   id: string;
   title: string;
-  items: PriceId[];
-  href: string;
+  /** The service page the card opens; the card shows that page's price */
+  page: PriceId;
 };
 
 export const priceGroups: PriceGroup[] = [
   {
     id: "logo",
     title: "Logo & identita",
-    items: ["logo", "logo-redesign", "identity"],
-    href: "/sluzby/logo",
+    page: "logo",
   },
   {
     id: "icons",
     title: "Ikony & ilustrace",
-    items: ["icons", "maskot"],
-    href: "/sluzby/icons",
+    page: "icons",
   },
   {
     id: "motion",
     title: "Animace & social",
-    items: ["logo-animace", "social"],
-    href: "/sluzby/social",
+    page: "social",
   },
   {
     id: "print",
     title: "Tiskoviny",
-    items: ["print"],
-    href: "/sluzby/print",
+    page: "print",
   },
 ];
 
-export const groupPriceLabel = (group: PriceGroup) => {
-  const prices = priceList
-    .filter((p) => group.items.includes(p.id))
-    .map((p) => p.priceFrom);
-  return prices.length ? priceFromLabel(Math.min(...prices)) : "na míru";
-};
+export const groupHref = (group: PriceGroup) => `/sluzby/${group.page}`;
+
+export const groupPriceLabel = (group: PriceGroup) =>
+  serviceFrom(group.page) || "na míru";
 
 export const priceTerms = {
   vat: "Ceny jsou konečné, nejsme plátci DPH.",
@@ -239,7 +233,7 @@ export const bundles: Bundle[] = [
       "Firemní styl: paleta, typografie, 4 nosiče, tisková data",
       "Sada pro sociální sítě",
     ],
-    priceFrom: 16000,
+    priceFrom: 15000,
     deliveryWeeks: 3,
     recommended: { label: "Maskot", href: "/sluzby/maskot" },
     image: "/media/bundles/nova-znacka.jpg",

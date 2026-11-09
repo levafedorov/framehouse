@@ -1,5 +1,5 @@
 import CircleLink from "./CircleLink";
-import { groupPriceLabel, priceGroups } from "@/data/pricing";
+import { groupHref, groupPriceLabel, priceGroups } from "@/data/pricing";
 import styles from "./Services.module.css";
 
 export default function Services() {
@@ -24,7 +24,7 @@ export default function Services() {
             <h3 className={styles.name}>{g.title}</h3>
             <p className={styles.price}>{groupPriceLabel(g)}</p>
             <CircleLink
-              href={g.href}
+              href={groupHref(g)}
               ariaLabel={`${g.title}: zjistit více`}
               className={styles.more}
             >
